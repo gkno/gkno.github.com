@@ -130,6 +130,8 @@ h3 {
    padding: 15px;
    float: right;
    list-style: none;
+   width: 34%;
+   font-size: 14px;
 }
 
 #recent-updates ul {
@@ -184,15 +186,17 @@ h3 {
 
 #tools {
    list-style: none;
+   margin-right: auto;
+   margin-left: auto;
+   width: 100%;
 }
 
 #tools li{
    position: relative;
-   padding: 10px;
-   margin: 0px 30px 25px 30px;
+   margin: 0px 2% 25px 2%;
    height: 240px;
-   width: 220px;
-   float: left;
+   width: 24%;
+   float:left;
    text-align: left;
 }
 
