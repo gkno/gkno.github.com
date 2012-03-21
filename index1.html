@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html lang="en"> 
+
+   <head> 
+      <title>gkno</title>
+      <link rel='stylesheet' href='css/site.css'/>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+      <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700&v2' rel='stylesheet' type='text/css'>
+      
+      <script>
+         $(document).ready(function() {
+           $('#explanation li').click( function(e) {
+              $('#explanation li').removeClass('selected');
+              $(e.currentTarget).addClass('selected');
+           });
+         });
+      </script>
+      
+
+   </head>
+
+   <body>
+      <div id="nav-bar">
+         <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="tools.html">Tools</a></li>
+            <li><a href="pipes.html">Pipes</a></li>
+            <li><a href="tutorials.html">Tutorials</a></li>            
+            <li><a href="people.html">People</a></li>
+            <li><a href="blog.html">Blog</a></li>
+         </ul>
+      </div>
+      
+      <!-- <div id="recent-updates">
+         <div style="font-weight:normal; color: #D4031E;font-size:15px;text-align:left">Recently Updated<span style="color:#00375B;font-size:10px;margin-left:5px">view all on github</span></div>
+         <ul style="color:rgb(110,110,110)">
+            <li><span style="color:#00375B">bamtools</span> Feb 24, 2012 &middot; 34 watchers &middot; 4 forks</li>
+            <li><span style="color:#00375B">mosaik</span> Feb 24, 2012 &middot; 24 watchers &middot; 6 forks</li>
+            <li><span style="color:#00375B">freebayes</span> Feb 24, 2012 &middot; 28 watchers &middot; 10 forks</li>
+         </ul>
+      </div>      --> 
+
+      <!-- <div style="position:absolute;top:210px; right:13%"><a  href="https://twitter.com/share" class="twitter-share-button" data-text="Rover - HTML5 Genome Browser Framework, powered by Scribl Graphics" data-count="horizontal" data-via="chaseallnmiller">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script></div> -->
+      
+      <div id="header">
+         <div id="intro" style="width:555px;margin-left:auto;margin-right:auto;margin-top:10px;height:200px">
+               <div style="float:left">
+                  <img src="images/gkno.png"/>
+               </div>
+            <div style="color:rgb(70,70,70);font-size:30px;float:right;margin-top:83px">
+               <!-- Opensource Genomics<br/> -->
+               <img src="images/opensource_genomics.png" style="height:56px"></img>
+               <!-- <span style="font-size:20px">Tools | Tutorials | Instructions</span> -->
+            </div>
+         </div>
+      </div>
+      
+      <!-- <div class="box"></div> -->
+      <!-- <div id="content"> -->
+         <div id="explanation">
+            <ul>
+               <li class="selected"><a href="#">About</a>
+                  <div class="panel">
+                     <div style="float:left; width:30%; margin-left:18%; text-align:justify; margin-right: 4%">
+                        <div style="font: bold 23px ubuntu; color: rgb(60,60,60)">Who are we?</div>
+                        <div style="font: 18px arial; color: rgb(90,90,90); margin-top: 5px">
+                           We are a group of tool developers from the Marthlab at Boston College. We create software for the analysis of next-generation sequencing data.                   
+                        </div>
+                     </div>
+                     <div style="float:left; width:30%; text-align:justify">
+                        <div style="font: bold 23px ubuntu; color: rgb(60,60,60)">What is this?</div>
+                        <div style="font: 18px arial; color: rgb(90,90,90); margin-top: 5px">
+                           gkno is an effort to create a set of NGS resources to guide users in navigating the sometimes tricky world of cutting edge NGS software. Here you'll find pipelines and tutorials that provide optimal solutions for the analysis of diverse problems in a wide variety of organisms. 
+                        </div>
+                     </div>
+                  </div>
+               </li>
+               <li><a href="#">Get Started</a>
+                  <div class="panel">
+                     
+                  </div>
+               </li>
+               <li><a href="#">Who's using it?</a>
+                  <div class="panel">
+                     
+                  </div>
+               </li>
+               <li><a href="#">Opensource</a>
+                  <div class="panel">
+                     
+                  </div>
+               </li>
+            </ul>
+         </div>
+
+          <div style="clear:both"></div>
+          <div id="blog-tease" class="shadow">
+             <h2 style="color:#00375B"> New Blog Posts </h2>
+          
+             <div>
+                <div style="margin-bottom: 4px"><span style="font-size:22px; font-weight:bold">Lorem Ipsum</span> <span style="font-size:22px">how it affects subtitles</span></div>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <div style="margin-top: 5px; color: black"><a href="#">Read More ...</a></div>
+             </div>
+          
+             <div>
+                <br/>
+                <div style="margin-bottom: 4px"><span style="font-size:22px; font-weight:bold">Lorem Ipsum</span> <span style="font-size:22px">how it affects subtitles</span></div>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <div style="margin-top: 5px; color: black"><a href="#">Read More ...</a></div>
+             </div>
+          
+             <br/>
+             <a href="#">See All Posts</a>
+          
+          </div>
+      <!-- </div>  --><!-- close content -->
+      
+      <!-- <div id="footer">
+         Marthlab<br/>
+         Anything else?
+      </div> -->
+   
+   </body>
+
+</html>
