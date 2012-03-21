@@ -130,7 +130,7 @@ h3 {
    font: 1.8em ubuntu;
    position: relative;
    text-align: center;
-   height: 313px;
+   height: 327px;
 }
 
 #explanation ul { padding: 0px;}
@@ -154,7 +154,7 @@ h3 {
    font-size: 22px;
    position: absolute;
    width: 98%;
-   height: 220px;
+   height: 250px;
    background: rgb(240,240,240);
    border: 1px solid rgb(220,220,220);
    outline: 1px solid white;
@@ -184,17 +184,27 @@ h3 {
 
 #recent-updates {
    float: left;
+   background: rgb(230,230,230);
    list-style: none;
    padding: 5px;
-   margin-left: 25px;
+   margin-top: 20px;
+   margin-left: 0px;
    font-size: 10px;
    border: 2px solid rgb(120,120,120);
-   border-top: none;
-/*   -moz-box-shadow:    0px 0px 5px 1px rgb(210,210,210);
+   border-left: 0px;
+   -moz-box-shadow:    0px 0px 5px 1px rgb(210,210,210);
    -webkit-box-shadow: 0px 0px 5px 1px rgb(210,210,210);
-   box-shadow:         0px 10px 5px 1px rgb(210,210,210);
-   -moz-border-radius: 6px; */  
-   border-radius: 0px 0px 5px 5px;      
+   box-shadow:         2px 2px 8px 1px rgb(200,200,200);
+   -moz-border-radius: 6px;   
+   border-radius: 0px 5px 5px 0px;
+   background: -moz-linear-gradient(top,  #00375B 0%, #00233A 100%); /* FF3.6+ */
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#00375B), color-stop(100%,#00233A)); /* Chrome,Safari4+ */
+   background: -webkit-linear-gradient(top,  rgb(255,255,255) 0%,rgb(240,240,240) 100%); /* Chrome10+,Safari5.1+ */
+   background: -o-linear-gradient(top,  #00375B 0%,#00233A 100%); /* Opera 11.10+ */
+   background: -ms-linear-gradient(top,  #00375B 0%,#00233A 100%); /* IE10+ */
+   background: linear-gradient(top,  #00375B 0%,#00233A 100%); /* W3C */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00375B', endColorstr='#00233A',GradientType=0 ); /* IE6-9 */
+         
 }
 
 #recent-updates ul {
@@ -206,6 +216,10 @@ h3 {
 #blog-tease {
    position: relative;
    margin-top: 20px;
+   width: 80%;
+   margin-left: auto;
+   margin-right: auto;
+   margin: 20px auto 20px auto;
    padding: 15px;
    color: rgb(70,70,70);
    text-align: justify;
@@ -285,6 +299,14 @@ h3 {
    text-align: center;
    color: white;
    margin-top: 40px;
-   height: 70px;
-   background-image: url('/images/bg_texture.png'), -webkit-linear-gradient(top, #00375B, #00233A);
+   height: 40px;
+   background-color: #00375B;
+   background: -moz-linear-gradient(top,  #00375B 0%, #00233A 100%); /* FF3.6+ */
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#00375B), color-stop(100%,#00233A)); /* Chrome,Safari4+ */
+   background: -webkit-linear-gradient(top,  #00375B 0%,#00233A 100%); /* Chrome10+,Safari5.1+ */
+   background: -o-linear-gradient(top,  #00375B 0%,#00233A 100%); /* Opera 11.10+ */
+   background: -ms-linear-gradient(top,  #00375B 0%,#00233A 100%); /* IE10+ */
+   background: linear-gradient(top,  #00375B 0%,#00233A 100%); /* W3C */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00375B', endColorstr='#00233A',GradientType=0 ); /* IE6-9 */
+   
 }
