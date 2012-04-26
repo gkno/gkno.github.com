@@ -1,133 +1,229 @@
-<!DOCTYPE HTML>
-<html lang="en"> 
-
-   <head> 
-      <title>gkno</title>
-      <link rel='stylesheet' href='css/site.css'/>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-      <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700&v2' rel='stylesheet' type='text/css'>
+<!DOCTYPE html>
+<html>
+<head>
+   <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700&v2' rel='stylesheet' type='text/css'>
+   
+   <style type="text/css" media="screen">
+      body {
+         background-image: url('/images/bg_texture1.png');
+/*         padding: 0px 15% 0px 15%;*/
+         width: 800px;
+         margin-left: auto;
+         margin-right: auto;
+         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
       
-      <script>
-         $(document).ready(function() {
-           $('#explanation li').click( function(e) {
-              $('#explanation li').removeClass('selected');
-              $(e.currentTarget).addClass('selected');
-           });
-         });
-      </script>
+      #header {
+         padding: 0px 5% 10px 5%;         
+         height: 130px;
+      }
       
+      #nav-bar {
+        margin-top: 70px;
+        vertical-align: text-bottom;
+        float:right;
+      }
+      
+      #nav-bar ul {
+         list-style: none;
+         display:inline;
+      }
+      #nav-bar li {
+         display:inline;
+         padding: 0px 0px 0px 25px;
+/*         margin-left: -3px;*/
+      }
 
-   </head>
+      #nav-bar li a {text-decoration: none;}
+      #nav-bar li a:link {
+        color: rgb(80,80,80);
+        text-shadow: 0px 1px 0px #fff;
+        text-decoration: none;
+        font-size: 12px;
+      }
+      #nav-bar li a:visited {color: rgb(100,100,100);}
+      #nav-bar li a:hover {color: #88af00;}
+/*      #nav-bar li:nth-child(n+2){border-left: 1px solid rgb(90,90,90);}*/
+      
+      
+      .panel {
+         width: 100%;
+         color: rgb(100,100,100);   
+         font-size: 15px;
+         -moz-border-radius: 5px;   
+         border-radius: 5px;
+         box-shadow: 0px 1px 3px #a7a7a7;
+         -moz-box-shadow: 0px 1px 3px #a7a7a7;
+      }
+      
+      #intro-panel {
+         background-color: rgb(250,250,250);
+         position: relative;
+         background: -webkit-linear-gradient(top, #fbfbfb 0%, #e8e8e8 100%);   
+         
+      }
+      
+      #intro-panel .grid {
+         height: 100%;
+         width: 100%;
+         background: url('images/grid.png') repeat transparent;     
+/*         padding: 10px 10px 10px 40px;*/          
+      }
+      
+      .button {
+         width: 20%;
+         -moz-border-radius: 5px;   
+         border-radius: 5px;
+         background: -webkit-linear-gradient(top, #92BC00 50%, #88af00 51%);
+         text-align: center;
+         position: absolute;
+         font-size: 2.5em;
+         color: white;
+         bottom: 20%;
+         left: 10%;
+         border: 1px solid #88af00;
+         padding: 2px 0px 2px 0px;
+      }
+      
+      .section-header {
+         color:  #88af00;
+         color: rgb(60,60,60);
+         font: 3em ubuntu;
+      }
+      
+      .description {
+         text-align: justify;
+         color: #777;
+         margin: 7px 0px 14px 0px;
+         line-height: 30px;
+         text-shadow: 0px 1px 0px #fff;
+      }
+      
+      #flowchart {
+         width: 100%;
+/*         border: 1px solid rgb(200,200,200);
+         -moz-box-shadow: 0px 1px 3px #a7a7a7;  
+         box-shadow: -1px 4px 4px rgb(200,200,200);
+         -moz-border-radius: 5px;   
+         border-radius: 5px;           
+*/      }
 
-   <body>
+      #content-panel {
+         margin-top: 2em;
+      }
+      
+      .section-left {
+         padding: 10px 10px 10px 40px;
+         background: -webkit-linear-gradient(left, #fbfbfb 0%, #e8e8e8 100%);
+         border-top: 1px solid white;
+         border-bottom: 1px solid rgb(220,220,220);
+      }
+      
+      .section-right {
+         padding: 10px 40px 10px 10px;
+         background: -webkit-linear-gradient(right, #fbfbfb 0%, #e8e8e8 100%);
+         border-top: 1px solid white;
+         border-bottom: 1px solid rgb(220,220,220);
+      }
+      
+      #more-info {
+         border-top: none;
+         border-top-right-radius: 5px;
+      }
+   </style>
+   
+</head>
+
+<body>
+   <div id="header">
+      <img src="images/gkno_logo_large_blue_1.png" height='100%'/>
       <div id="nav-bar">
          <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="tools.html">Tools</a></li>
-            <li><a href="pipes.html">Pipes</a></li>
+            <!-- <li><a href="pipes.html">Pipes</a></li> -->
             <li><a href="tutorials.html">Tutorials</a></li>            
             <li><a href="#">Forum</a></li>            
-            <li><a href="people.html">People</a></li>
+            <!-- <li><a href="people.html">People</a></li> -->
             <li><a href="blog.html">Blog</a></li>
-            <li><a href="blog.html">Publications</a></li>
+            <!-- <li><a href="blog.html">Publications</a></li> -->
          </ul>
+      </div>      
+      <div style="clear:both"></div>
+   </div>
+   <div id="intro-panel" class="panel">
+      <div class="grid">
+         <div style="padding: 10px 10px 10px 40px;">
+           <div style="float:left; width: 45%;">
+              <span class="section-header">NGS Genomic Toolkit</span>
+              <div class="description">
+                 Next Generation Sequencing (NGS) tools, tutorials, and pipelines.
+              </div>
+              <div class="button">Try it</div>
+           </div>
+           <div style="float:right; width: 45%">
+              <img id="flowchart" src="images/gkno_flowchart.png"/>
+           </div>
+           <div style="clear:both"></div>
+        </div>
       </div>
-      
-      <!-- <div id="recent-updates">
-         <div style="font-weight:normal; color: #D4031E;font-size:15px;text-align:left">Recently Updated<span style="color:#00375B;font-size:10px;margin-left:5px">view all on github</span></div>
-         <ul style="color:rgb(110,110,110)">
-            <li><span style="color:#00375B">bamtools</span> Feb 24, 2012 &middot; 34 watchers &middot; 4 forks</li>
-            <li><span style="color:#00375B">mosaik</span> Feb 24, 2012 &middot; 24 watchers &middot; 6 forks</li>
-            <li><span style="color:#00375B">freebayes</span> Feb 24, 2012 &middot; 28 watchers &middot; 10 forks</li>
-         </ul>
-      </div> -->      
-
-      <!-- <div style="position:absolute;top:210px; right:13%"><a  href="https://twitter.com/share" class="twitter-share-button" data-text="Rover - HTML5 Genome Browser Framework, powered by Scribl Graphics" data-count="horizontal" data-via="chaseallnmiller">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script></div> -->
-      
-      <div id="header">
-         <div id="intro" style="width:555px;margin-left:auto;margin-right:auto;margin-top:10px;height:200px">
-               <div style="float:left">
-                  <img src="images/gkno.png"/>
-               </div>
-            <div style="color:rgb(70,70,70);font-size:30px;float:right;margin-top:83px">
-               <!-- Opensource Genomics<br/> -->
-               <img src="images/opensource_genomics.png" style="height:56px"></img>
-               <!-- <span style="font-size:20px">Tools | Tutorials | Instructions</span> -->
+   </div>
+   
+   <div id="content-panel" class="panel">
+      <div id="more-info" class="section-right">
+         <div style="float:left; width:45%">
+            <img src="images/tut_tool_pipe_1.png" style="width:100%">
+         </div>
+         <div style="float:right; width:45%">
+            <span class="section-header" style="color:#597389">gkno</span>
+            <div class="description">
+               gkno is an effort to create a set of NGS resources to guide users in navigating the sometimes tricky world of cutting edge NGS software. Here you'll find tools, pipelines and tutorials that provide optimal solutions for the analysis of diverse problems in a wide variety of organisms.
             </div>
          </div>
+         <div style="clear:both"></div>
       </div>
-      
-      <!-- <div class="box"></div> -->
-      <!-- <div id="content"> -->
-         <div id="explanation">
-            <ul>
-               <li class="selected"><a href="#">About</a>
-                  <div class="panel">
-                     <div style="float:left; width:30%; margin-left:18%; text-align:justify; margin-right: 4%">
-                        <div style="font: bold 23px ubuntu; color: rgb(60,60,60)">Who are we?</div>
-                        <div style="font: 18px arial; color: rgb(90,90,90); margin-top: 5px">
-                           We are a group of tool developers from the Marthlab at Boston College. We create software for the analysis of next-generation sequencing data.                   
-                           <br/><a href="http://bioinformatics.bc.edu/marthlab/Main_Page">More Info</a>
-                        </div>
-                     </div>
-                     <div style="float:left; width:30%; text-align:justify">
-                        <div style="font: bold 23px ubuntu; color: rgb(60,60,60)">What is this?</div>
-                        <div style="font: 18px arial; color: rgb(90,90,90); margin-top: 5px">
-                           gkno is an effort to create a set of NGS resources to guide users in navigating the sometimes tricky world of cutting edge NGS software. Here you'll find pipelines and tutorials that provide optimal solutions for the analysis of diverse problems in a wide variety of organisms. 
-                        </div>
-                     </div>
-                  </div>
-               </li>
-               <li><a href="#">Get Started</a>
-                  <div class="panel">
-                     this will be a little info about a basic tutorial and link to it
-                  </div>
-               </li>
-               <li><a href="#">Who's using it?</a>
-                  <div class="panel">
-                     need a list
-                  </div>
-               </li>
-               <li><a href="#">OpenSource</a>
-                  <div class="panel">
-                     <div style="width:50%; color:rgb(90,90,90); font: 20px arial; text-align:justify; margin:0 auto">
-                     The gkno project itself is an open source effort with all tools, pipelines, instructions, and tutorials forkable and contributable via github. [add instruction here on how to fork a pipeline after we get one up]
-                     <br/>
-                     <br/>
-                     Additionally, gkno makes use of many great open source software in the tutorials and pipelines. [Need more here? A list of software we use?]
-                     </div>
-                  </div>
-               </li>
-            </ul>
+      <div id="get-started" class="section-left">
+         <div style="float:left; width:45%">
+            <span class="section-header" style="color:#597389">get started</span>
+            <div class="description">
+               A good way to start is to clone the first tutorial and follow the instructions here.
+            </div>
+            
          </div>
-
-          <div style="clear:both"></div>
-          <div id="blog-tease">
-             <h2 style="color:#00375B"> New Blog Posts </h2>
-          
-             <div class="shadow">
-                <div style="margin-bottom: 4px"><span style="font-size:22px; font-weight:bold">Lorem Ipsum</span> <span style="font-size:22px">how it affects subtitles</span></div>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                <div style="margin-top: 5px; color: black"><a href="#">Read More ...</a></div>
-             </div>
-          
-             <div class="shadow">
-                <br/>
-                <div style="margin-bottom: 4px"><span style="font-size:22px; font-weight:bold">Lorem Ipsum</span> <span style="font-size:22px">how it affects subtitles</span></div>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                <div style="margin-top: 5px; color: black"><a href="#">Read More ...</a></div>
-             </div>
-          
-             <br/>
-             <a href="#">See All Posts</a>
-          
-          </div>
-      <!-- </div>  --><!-- close content -->
-      
-      <div id="footer">
-         &copy; Marthlab 2012
+         <div style="float:right; width:45%">
+            <div style="width:94%; background: rgb(70,70,70); height: 50%; border-radius: 5px; color:white; padding: 7% 3% 7% 3%; margin-top:10%">
+               <span style="font-size:20px">$ git clone http://git.io/abc123</span>
+            </div>
+         </div>
+         <div style="clear:both"></div>         
       </div>
-   
-   </body>
-
+      <div class="section-right">
+         <div style="float:left; width:45%">
+            <img src="images/opensource.png" style="width:100%">
+         </div>
+         <div style="float:right; width:45%">
+            <span class="section-header" style="color:#597389">opensource</span>
+            <div class="description">
+               The gkno project itself is an open source effort with all tools, pipelines, instructions, and tutorials forkable and contributable via github.
+               Additionally, gkno makes use of many great open source software in the tutorials and pipelines.
+            </div>
+         </div>
+         <div style="clear:both"></div>
+      </div>
+      <div id="get-started" class="section-left">
+         <div style="float:left; width:45%">
+            <span class="section-header" style="color:#597389">about us</span>
+            <div class="description">
+               We are a group of tool developers from the Marthlab at Boston College. We create software for the analysis of next-generation sequencing data.
+            </div>
+            
+         </div>
+         <div style="float:right; width:45%">
+            <img src="images/lab_photo.jpg" style="width:100%"/>
+         </div>
+         <div style="clear:both"></div>         
+      </div>
+      
+   </div>
+</body>
 </html>
