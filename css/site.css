@@ -1,9 +1,6 @@
 body {
-   background-image: url('/images/bg_texture1.png');
-   background-image: url('http://subtlepatterns.com/patterns/bright_squares.png');
-   background-image: url('http://subtlepatterns.com/patterns/whitey.png');
    background-color: rgb(240,240,240);   
-   background-image: url('http://subtlepatterns.com/patterns/square_bg.png');      
+   background-image: url('/images/square_bg.png');      
 /*         padding: 0px 15% 0px 15%;*/
    width: 800px;
    margin-left: auto;
