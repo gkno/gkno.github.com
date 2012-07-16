@@ -1,6 +1,6 @@
 body {
    background-color: rgb(240,240,240);   
-   background-image: url('/images/square_bg.png');      
+   background-image: url('../images/square_bg.png');      
 /*         padding: 0px 15% 0px 15%;*/
    width: 800px;
    margin-left: auto;
