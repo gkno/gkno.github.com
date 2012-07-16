@@ -31,16 +31,25 @@
       function log_me(data) {
          var posts = data.response.posts;
          window.posts = posts;
+         for ( var i=0; i < posts.length; i++) {
+            var html = $("<div>" + posts[i].body + "</div>");
+            html.find('.title-image img').attr('height', '26px').removeAttr('width');
+            posts[i].titleImage = html.find('.title-image').html();
+         }
          populateList(posts);
       }
       
       function populateList(posts) {
          var bullets = "";
-         for (var i=0; i < posts.length; i++)
+         for (var i=0; i < posts.length; i++) {  
+            var img = posts[i].titleImage || "";
             bullets += "<li><a href='"
                         + posts[i]["post-url"]
                         + "'>"+ posts[i]["title"]
-                        + "</a></li>";
+                        + "</a> "
+                        + img
+                        + "</li>";
+         }
          $(".description ul").html(bullets);
       }
       
