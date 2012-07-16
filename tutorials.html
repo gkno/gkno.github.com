@@ -62,7 +62,7 @@
          getPostsByTag('tutorial');
          
          $('.tag').click( function(e){ 
-            var tag = this.getAttribute('data-tag');
+            var tag = $(this).html();
             var filtered = filterByTag(tag, window.posts);
             populateList(filtered);
          });
@@ -92,9 +92,9 @@
          <div style="padding: 10px 10px 10px 40px;">
             <span style="font-size: 3em; color: rgb(60,60,60);">Tutorials</span>
             <ul class="tags">
-            	<li><a data-tag="all" class='tag' href="#">All</a></li>
-            	<li><a data-tag="pipeline" class='tag' href="#pipeline">Pipeline</a></li>
-            	<li><a data-tag="tool" class='tag' href="#tool">Tool</a></li>
+            	<li><a class='tag' href="#">all</a></li>
+            	<li><a class='tag' href="#">pipeline</a></li>
+            	<li><a class='tag' href="#">tool</a></li>
             </ul>
             <div class="description" style="font-family:ubuntu; font-size:28px; line-height: 45px">   
                <ul></ul>            
