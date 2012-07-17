@@ -33,7 +33,7 @@
          window.posts = posts;
          for ( var i=0; i < posts.length; i++) {
             var html = $("<div>" + posts[i].body + "</div>");
-            html.find('.title-image img').attr('height', '100px').removeAttr('width').css('margin-bottom','-1.5em');
+            html.find('.title-image img').attr('height', '100px').removeAttr('width');
             posts[i].titleImage = html.find('.title-image').html();
          }
          populateList(posts);
