@@ -43,8 +43,8 @@
          var bullets = "";
          for (var i=0; i < posts.length; i++) {  
             var img = posts[i].titleImage || "";
-            bullets += "<li style='margin-top:0px'><a href='"
-                        + posts[i]["post-url"]
+            bullets += "<li><a href='"
+                        + posts[i].post_url
                         + "'>"+ posts[i]["title"]
                         + "</a> "
                         + img
