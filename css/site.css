@@ -1,6 +1,6 @@
 body {
-   background-color: rgb(240,240,240);   
-   background-image: url('../images/square_bg.png');      
+   background-color: rgb(240,240,240);
+   background-image: url('../images/T_map_large_cropped_white_no_rail.png');
 /*         padding: 0px 15% 0px 15%;*/
    width: 800px;
    margin-left: auto;
@@ -224,27 +224,11 @@ body {
 }
 
 #footer {
-   margin-top: 40px;
-   height: 40px;
-   text-align: center;
-   position: relative;
-   background: -webkit-linear-gradient(top, #7B9EBD 0%, #597389 100%);;
-   padding: 0px;
+   position:absolute;
+   bottom:0px;
+   height:60px; 
+   left:0px;
+   right:0px;
+   background: -webkit-linear-gradient(top, #5B778F 0%, #2C3B47 100%);;
 }
 
-#footer ul {
-   position: absolute;
-   border: 1px solid red;
-   vertical-align: middle;
-   left: 35%;
-   color: white;
-   font-size: 12px;
-   padding: 0px;
-   list-style: none;
-   display:inline;
-}
-
-#footer ul li {
-   display: inline;
-   padding: 0px 10px 0px 10px;
-}
