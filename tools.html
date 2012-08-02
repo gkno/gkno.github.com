@@ -1,88 +1,93 @@
-<!DOCTYPE HTML>
-<html lang="en"> 
+<!DOCTYPE html>
+<html>
+<head>
+   <link href="css/github_icons.css" media="screen" rel="stylesheet" type="text/css" />
+   <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700&v2' rel='stylesheet' type='text/css'>
+   <link href='css/site.css' rel='stylesheet' type='text/css'>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+   <script src="js/underscore-min.js"></script>
 
-   <head> 
-      <title>gkno</title>
-      <link rel='stylesheet' href='css/site.css'/>
-      <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700&v2' rel='stylesheet' type='text/css'>
-      
+   <script type="text/javascript">
 
-   </head>
+     var _gaq = _gaq || [];
+     _gaq.push(['_setAccount', 'UA-32956625-1']);
+     _gaq.push(['_trackPageview']);
 
-   <body>
-      <div id="nav-bar">
+     (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+
+   </script>      
+   
+   <script>
+      $(document).ready(function(){
+         var gknoGithubUrl = 'https://api.github.com/repos/gkno/';
+         var repos = ['bamtools', 'freebayes', 'mosaik'];
+         for (var i=0; i < repos.length; i++){
+            $.ajax({
+               url: gknoGithubUrl + repos[i],
+               type: 'GET',
+               dataType: 'jsonp'
+            }).done(function(data) {
+               data.data.parent.html_url
+               $('#tools').append(
+                  "<li><span style='color:rgb(60,60,60)'><a style='color:rgb(60,60,60)' href='" + 
+                  data.data.parent.html_url + "'>" + data.data.name + "</a> " + 
+                  "<span class='mini-icon mini-icon-watchers'></span> " + data.data.parent.watchers +
+                  "   <span class='mini-icon mini-icon-fork'></span> " + data.data.parent.forks +
+                  "</span><br/>" + data.data.description + "</li>"
+               );
+            });            
+         }
+         
+      });
+   </script>
+</head>
+
+<body>
+   <div id="header">
+      <img src="images/gkno_logo_large_gray_bg.png" height='100%'/>
+      <div id="nav-bar" class="box-shadow">
+
          <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="tools.html">Tools</a></li>
-            <li><a href="pipes.html">Pipes</a></li>
+            <li><a href="https://github.com/gkno/gkno.github.com/wiki/Documentation">Docs</a></li>
             <li><a href="tutorials.html">Tutorials</a></li>            
-            <li><a href="people.html">People</a></li>
-            <li><a href="blog.html">Blog</a></li>
+            <li><a href="forum.html">Questions</a></li>
+            <!-- <li><a href="people.html">People</a></li> -->
+            <li><a href="http://blog.gkno.me">Blog</a></li>
+            <!-- <li><a href="blog.html">Publications</a></li> -->
          </ul>
-      </div>
+      </div>      
+      <div style="clear:both"></div>
+   </div>
 
-      <!-- <div class="break">.</div> -->
-      
-      <div id="header">
-         <!-- <div style="float:right; margin-top:50px">
-            <a  href="https://twitter.com/share" class="twitter-share-button" data-text="Rover - HTML5 Genome Browser Framework, powered by Scribl Graphics" data-count="horizontal" data-via="chaseallnmiller">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-         </div> -->
-         <div id="intro" style="width:555px;margin-left:auto;margin-right:auto;margin-top:10px;height:200px">
-               <div style="float:left">
-                  <img src="images/gkno_tools_bulb.png" style="padding-left:5px;margin-top: 1px"/>
-               </div>
+   <div id="intro" class="box-shadow">
+      <div class="grid">
+         <div style="padding: 10px 10px 10px 40px;">
+            <span style="font-size: 3em; color: rgb(60,60,60);">Tools</span>
+            <div class="description">
+               <ul id="tools">
+               </ul>
+            </div>
+            
+         </div>         
+         
+         
+         <div style="padding: 10px 10px 10px 40px;">
+            <span style="font-size: 3em; color: rgb(60,60,60);">Custom Tools</span>
+            <div class="description">
+               Custom tools can be added to gkno to allow more complex and custom pipelines. A good point to start is to follow the tutorial here.
+            </div>
+            
          </div>
       </div>
-      
-      <!-- <div class="box"></div> -->
-      
-      <div id="content" class="box">
-         <ul id="tools">
-           <li class="shadow">
-            <div class="title">Mosaik</div>
-            <img style="margin-left:-7px" src="images/gh_watchers.png"/>
-            <div class="desc">Pull description off github</div>
-            <a href="http://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0; height: 80px" src="https://a248.e.akamai.net/assets.github.com/img/e6bef7a091f5f3138b8cd40bc3e114258dd68ddf/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub"></a>
-           </li>
-           <li class="shadow">
-              <div class="title">Bamtools</div>
-              <img style="margin-left:-7px" src="images/gh_watchers.png"/>
-              <div class="desc">Pull description off github</div>
-              <a href="http://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0; height: 80px" src="https://a248.e.akamai.net/assets.github.com/img/71eeaab9d563c2b3c590319b398dd35683265e85/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub"></a>
-           </li>
-           <li class="shadow">
-              <div class="title">Freebayes</div>
-              <img style="margin-left:-7px" src="images/gh_watchers.png"/>
-              <div class="desc">Bayesian haplotype-based polymorphism discovery and genotyping.</div>
-              <a href="http://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0; height: 80px" src="https://a248.e.akamai.net/assets.github.com/img/e6bef7a091f5f3138b8cd40bc3e114258dd68ddf/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub"></a>
-           </li>
-           <li class="shadow">
-            <div class="title">Something</div>
-            <img style="margin-left:-7px" src="images/gh_watchers.png"/>
-            <div class="desc">Pull description off github</div>
-            <a href="http://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0; height: 80px" src="https://a248.e.akamai.net/assets.github.com/img/71eeaab9d563c2b3c590319b398dd35683265e85/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub"></a>
-           </li>
-           <li class="shadow">
-              <div class="title">Something</div>
-              <img style="margin-left:-7px" src="images/gh_watchers.png"/>
-              <div class="desc">Pull description off github</div>
-              <a href="http://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0; height: 80px" src="https://a248.e.akamai.net/assets.github.com/img/e6bef7a091f5f3138b8cd40bc3e114258dd68ddf/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub"></a>
-           </li>
-           <li class="shadow">
-              <div class="title">Something</div>
-              <img style="margin-left:-7px" src="images/gh_watchers.png"/>
-              <div class="desc">Bayesian haplotype-based polymorphism discovery and genotyping.</div>
-              <a href="http://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0; height: 80px" src="https://a248.e.akamai.net/assets.github.com/img/71eeaab9d563c2b3c590319b398dd35683265e85/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub"></a>
-           </li>
-         </ul>
-         <div style="clear:both"></div> <!-- hack to stop float bug -->
-      </div> <!-- close content -->
-      
-      <div id="footer">
-         Marthlab<br/>
-         Anything else?
-      </div>
+   </div>
    
-   </body>
-
+   
+            
+</body>
 </html>
