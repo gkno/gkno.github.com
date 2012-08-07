@@ -91,20 +91,30 @@ body {
    line-height: 30px;
 }
 
+#try-it {
+   text-align: center;
+   position: absolute;
+   bottom: 20%;
+   left: 10%;
+}
+
 .button {
-   width: 20%;
+
    -moz-border-radius: 5px;   
    border-radius: 5px;
    background: -webkit-linear-gradient(top, #92BC00 50%, #88af00 51%);
-   text-align: center;
-   position: absolute;
    font-size: 2.5em;
    font-family: ubuntu;
    color: white;
-   bottom: 20%;
-   left: 10%;
    border: 1px solid #88af00;
-   padding: 0px 0px 5px 0px;
+   padding: 8px 25px 8px 25px;
+}
+
+#download {
+   margin-top: 1px;
+   color:rgb(80,80,80);
+   text-decoration:underline;
+   font-size:0.8em;
 }
 
 #flowchart {
