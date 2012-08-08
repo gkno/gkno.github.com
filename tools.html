@@ -25,23 +25,47 @@
    <script>
       $(document).ready(function(){
          var gknoGithubUrl = 'https://api.github.com/repos/gkno/';
-         var repos = ['bamtools', 'freebayes', 'mosaik'];
-         for (var i=0; i < repos.length; i++){
-            $.ajax({
-               url: gknoGithubUrl + repos[i],
-               type: 'GET',
-               dataType: 'jsonp'
-            }).done(function(data) {
-               data.data.parent.html_url
-               $('#tools').append(
-                  "<li><span style='color:rgb(60,60,60)'><a style='color:rgb(60,60,60)' href='" + 
-                  data.data.parent.html_url + "'>" + data.data.name + "</a> " + 
-                  "<span class='mini-icon mini-icon-watchers'></span> " + data.data.parent.watchers +
-                  "   <span class='mini-icon mini-icon-fork'></span>" + data.data.parent.forks +
-                  "</span><br/>" + data.data.description + "</li>"
-               );
-            });            
-         }
+         var tools = {
+           "Alignment" : ['mosaik'],
+           "Variant Detection" : ['freebayes'],
+           "Utilities" : ['bamtools', 'premo'] 
+         };
+
+
+         $.each(tools, function(category, tools){
+            for (var i=0; i < tools.length; i++) {
+               $.ajax({
+                  url: gknoGithubUrl + tools[i],
+                  type: 'GET',
+                  dataType: 'jsonp'
+               }).done(function(data) {
+                  $('#tools').append(
+                     "<li><span style='color:rgb(60,60,60)'><a style='color:rgb(60,60,60)' href='" + 
+                     data.data.parent.html_url + "'>" + data.data.name + "</a> " + 
+                     "<span class='mini-icon mini-icon-watchers'></span> " + data.data.parent.watchers +
+                     "   <span class='mini-icon mini-icon-fork'></span>" + data.data.parent.forks +
+                     "</span><br/>" + data.data.description + "</li>"
+                  );
+               });                        
+            }            
+         });
+         
+         // for (var i=0; i < repos.length; i++){
+         //    $.ajax({
+         //       url: gknoGithubUrl + repos[i],
+         //       type: 'GET',
+         //       dataType: 'jsonp'
+         //    }).done(function(data) {
+         //       data.data.parent.html_url
+         //       $('#tools').append(
+         //          "<li><span style='color:rgb(60,60,60)'><a style='color:rgb(60,60,60)' href='" + 
+         //          data.data.parent.html_url + "'>" + data.data.name + "</a> " + 
+         //          "<span class='mini-icon mini-icon-watchers'></span> " + data.data.parent.watchers +
+         //          "   <span class='mini-icon mini-icon-fork'></span>" + data.data.parent.forks +
+         //          "</span><br/>" + data.data.description + "</li>"
+         //       );
+         //    });            
+         // }
          
       });
    </script>
@@ -70,13 +94,13 @@
       <div class="grid">
          <div style="padding: 10px 10px 10px 40px;">
             <span style="font-size: 3em; color: rgb(60,60,60);">Tools</span>
+
             <div class="description">
-               <ul id="tools">
+               <ul id="tools">                
                </ul>
             </div>
             
          </div>         
-         
          
          <div style="padding: 10px 10px 10px 40px;">
             <span style="font-size: 3em; color: rgb(60,60,60);">Custom Tools</span>
