@@ -25,6 +25,8 @@
    <script>
       $(document).ready(function(){
          var gknoGithubUrl = 'https://api.github.com/repos/gkno/';
+         
+         // each key is the category and the names in the array refer to a github repo that has been forked to the gkno githup account. e.g https://github.com/gkno/bamtools.
          var tools = {
            "Alignment" : ['mosaik'],
            "Variant Detection" : ['freebayes'],
@@ -33,13 +35,15 @@
 
 
          $.each(tools, function(category, tools){
+            var categoryName = category.replace(/\s+/g, '-');
+            $('#tools').append(category + '<ul class="' + categoryName + '-tools"/>')
             for (var i=0; i < tools.length; i++) {
                $.ajax({
                   url: gknoGithubUrl + tools[i],
                   type: 'GET',
                   dataType: 'jsonp'
                }).done(function(data) {
-                  $('#tools').append(
+                  $('.' + categoryName + '-tools').append(
                      "<li><span style='color:rgb(60,60,60)'><a style='color:rgb(60,60,60)' href='" + 
                      data.data.parent.html_url + "'>" + data.data.name + "</a> " + 
                      "<span class='mini-icon mini-icon-watchers'></span> " + data.data.parent.watchers +
@@ -96,8 +100,8 @@
             <span style="font-size: 3em; color: rgb(60,60,60);">Tools</span>
 
             <div class="description">
-               <ul id="tools">                
-               </ul>
+               <div id="tools">                
+               </div>
             </div>
             
          </div>         
