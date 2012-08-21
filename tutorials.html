@@ -42,16 +42,32 @@
       
       function populateList(posts) {
          var bullets = "";
+         var categories = ['pipeline', 'tool'];
+         var category;
+         
          for (var i=0; i < posts.length; i++) {  
             var img = posts[i].titleImage || "";
-            bullets += "<li><a href='"
+            for (var j=0; j < posts[i].tags.length; j++) {
+               category = undefined;
+               for (var k=0; k < categories.length; k++) {
+                  if (posts[i].tags[j] == categories[k]) {
+                     category = categories[k];
+                     break;
+                  }
+               }
+               if(category)
+                  break;
+            }
+            if (category == undefined)
+            category = 'general'  
+            $("#" + category + "-tuts").append( "<li><a href='"
                         + posts[i].post_url
                         + "'>"+ posts[i]["title"]
                         + "</a> "
                         + img
-                        + "</li>";
+                        + "</li>"
+            );                            
          }
-         $(".description ul").html(bullets);
       }
       
       function filterByTag(tag, posts) {
@@ -69,6 +85,7 @@
    <script>
       $(document).ready( function() {
          window.filter = 'all';
+         window.tags = [];
          getPostsByTag('tutorial');
          
          $('.tag').click( function(e){ 
@@ -76,6 +93,7 @@
             var filtered = filterByTag(tag, window.posts);
             populateList(filtered);
          });
+         
       });
    </script>   
 </head>
@@ -101,14 +119,20 @@
          <div style="padding: 10px 10px 10px 40px;">
             <span style="font-size: 3em; color: rgb(60,60,60);">Tutorials</span>
             <ul class="tags">
-            	<li><a class='tag' href="#">all</a></li>
-            	<li><a class='tag' href="#">pipeline</a></li>
-            	<li><a class='tag' href="#">tool</a></li>
+               <li><a class='tag' href="#">all</a></li>
+               <!-- <li><a class='tag' href="#">pipeline</a></li>
+               <li><a class='tag' href="#">tool</a></li> -->
             </ul>
-            <div class="description" style="font-family:ubuntu; font-size:28px; line-height: 45px">   
-               <ul></ul>            
-            </div>
-            
+             <div class="description">
+                  <div id="tuts"> 
+                     General 
+                     <ul id="general-tuts"> </ul>
+                     Pipeline
+                     <ul id="pipeline-tuts"> </ul>
+                     Tool
+                     <ul id="tool-tuts"> </ul>                                          
+                  </div>
+               </div>            
          </div>
          
       </div>
