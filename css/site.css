@@ -17,7 +17,7 @@ body {
    
 /*         padding: 0px 15% 0px 15%;*/
    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-   margin-top: 43px;
+   margin-top: 10px;
    padding: 0px;
    width: 820px;
    margin-left: auto;
@@ -25,16 +25,18 @@ body {
 }
 
 #brand {
-   -moz-box-shadow:    3px 3px 5px 6px  #ccc;
+/*   -moz-box-shadow:    3px 3px 5px 6px  #ccc;
     -webkit-box-shadow: 3px 3px 5px 6px #ccc;
-    box-shadow:         0px 1px 3px 2px rgb(140,140,140);
+    box-shadow:         0px 1px 3px 2px rgb(100,100,100);*/
     position: fixed;
-    top:0px;
+    bottom:0px;
     left:0px;
     right:0px;
-    height: 30px;
-    background: rgba(50,50,50,.3);
-    padding: 0px 5px 1px 5px;
+    height: 38px;
+/*    background: rgba(50,50,50,.3);*/
+    background: rgb(40,40,40);
+    padding: 0px 625px 1px 625px;
+/*    border-bottom: 1px solid black;*/
     z-index: 10;
 /*    background: rgb;*/    
 }
@@ -127,7 +129,7 @@ body {
 
 #intro #bullets {
    font-size: 15px;
-   line-height: 14px;
+   line-height: 16px;
    list-style-type: none;
 }
 
@@ -135,7 +137,7 @@ body {
    margin-bottom: 0px;
 }
 #intro #bullets li {
-   margin-bottom: 35px;
+   margin-bottom: 30px;
 }
 
 #intro #bullets li:before {
