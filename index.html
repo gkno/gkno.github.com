@@ -21,12 +21,18 @@
 </head>
 
 <body>
+   <div id="brand">
+      <img src="images/boston-college-logo.png" style="float:left; height:100%">
+      <img src="images/black_long.png" style="float:right; height:100%">
+   </div>   
+      
    <div id="header">
-      <img src="images/gkno_logo_large_gray_bg.png" height='100%'/>
+      <img src="images/gkno_logo_large_blue.png" height='100%'/>
       <div id="nav-bar" class="box-shadow">
          <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="tools.html">Tools</a></li>
+            <li><a href="pipelines.html">Pipelines</a></li>
             <li><a href="https://github.com/gkno/gkno.github.com/wiki/Documentation">Docs</a></li>
             <!-- <li><a href="pipes.html">Pipes</a></li> -->
             <li><a href="tutorials.html">Tutorials</a></li>            
@@ -40,31 +46,32 @@
    </div>
    <div id="intro" class="box-shadow">
       <div class="grid">
-         <div style="padding: 10px 10px 40px 40px;">
-           <div style="float:left; width: 45%;">
-              <span style="font-size: 3.2em; color: rgb(60,60,60);">Genomic Toolkit</span>
+         <div style="padding: 10px 24px 10px 35px;">
+           <div style="float:left; width: 49%;">
+              <!-- <span style="font-size: 3.2em; color: rgb(60,60,60);">Genomic Toolkit</span> -->
               <div class="description">
                  <ul id="bullets">
-                    <li> Next Generation Sequencing Analysis </li>
+                    <li> Next Generation Sequencing Analysis</li>
                     <li> Easy to use - tutorials and pipelines to get started  </li>
                     <li> Powerful - battle tested as part of the 1000 Genomes project</li>
                     <li> Framework - tools are linked together via the gkno launcher to create pipelines</li>                 
                     <li> Flexible - design your own pipelines and add your own tools</li>
+                    <li> OpenSource - use, improve, tinker and contribute!</li>
                  </ul>
               </div>
-              <div id='try-it'>
-                 <div class="button">Try It</div>
-                 <div id="download">download v0.1</div>
-              </div>
            </div>
-           <div style="float:right; width: 46%">
-              <img id="flowchart" src="images/gkno_flowchart.png"/>
+           <div style="float:right; width: 44%">
+              <img id="flowchart" src="images/gkno_flowchart_1.png"/>
            </div>
            <div style="clear:both"></div>
+           <div id='try-it'>
+              <a href="http://blog.gkno.me/post/29962850248/getting-started-with-gkno"><div class="button">Try It</div></a>
+              <div id="download">download v0.1</div>
+           </div>
         </div>
       </div>
    </div>
-   
+
    <div id="content" class="box-shadow">
       <div id="top-bar"><div style="background: url('images/grid_1.png') repeat transparent; height:100%">.</div></div>
       <div id="more-info" class="section">
@@ -81,15 +88,15 @@
          <div style="clear:both"></div>
       </div>
       <div id="more-info" class="section">
-         <div style="float:right; text-align:right;padding-right: 20px" class="panel">
-            <img src="images/overview_map.png"/>           
+         <div style="float:right" class="panel">
+            <img width="98%" src="images/overview_map.png"/>           
          </div>
          <div style="float:left" class="panel">
             <span class="header">Pipeline Maps</span>
             <div class="description">
                We took inspiration from our own subway system here in Boston ( the T ) to create pipeline maps. Just as the T map helps you get from point A to point B, the pipeline maps help you take what you have (e.g a fastq file) and get to where you want to go (e.g. a vcf) while clearly illustrating all the stops along the way. Though we only have the red (pipe)line running at the moment, more lines will come online in the future. Click the image for the detailed map.
-               
-               
+            
+            
             </div>
          </div>
          <div style="clear:both"></div>
@@ -112,7 +119,7 @@
             <img src="images/community.png" style="width:45%">
          </div>
          <div style="float:left" class="panel">
-            <span class="header">Community Support</span>
+            <span class="header">Community Forum</span>
             <div class="description">
                gkno uses biostars.org as an open forum to allow all gkno users to provide support and share best practices. <a href="forum.html">More Info</a>
             </div>
@@ -125,22 +132,15 @@
             <div class="description">
                We are a group of tool developers from the Marthlab at Boston College. We create software for the analysis of next-generation sequencing data. You can read more about our work, publications, and research opportunities on our <a href="http://bioinformatics.bc.edu/marthlab/Main_Page">lab homesite</a>.
             </div>
-            
+         
          </div>
          <div style="float:left" class="panel">
 			 <a href="images/lab_photo.jpg"><img src="images/lab_photo_thumbnail.jpg" style="width:100%"/></a>
          </div>
          <div style="clear:both"></div>         
       </div>
-      
-   </div>
    
-   <!-- <div id="footer" class="box-shadow">
-      <ul>
-         <li>link1</li>
-         <li>link2</li>
-         <li>&copy; Marthlab 2012</li>
-      </ul>
-   </div> -->
+   </div>
+
 </body>
 </html>

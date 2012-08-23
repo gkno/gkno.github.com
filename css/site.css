@@ -16,12 +16,36 @@ body {
    background-repeat: repeat;
    
 /*         padding: 0px 15% 0px 15%;*/
-   width: 900px;
+   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   margin-top: 48px;
+   padding: 0px;
+   width: 820px;
    margin-left: auto;
    margin-right: auto;
-   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+#brand {
+   -moz-box-shadow:    3px 3px 5px 6px  #ccc;
+    -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+    box-shadow:         0px 1px 3px 2px rgb(140,140,140);
+    position: fixed;
+    top:0px;
+    left:0px;
+    right:0px;
+    height: 30px;
+    background: rgba(50,50,50,.3);
+    padding: 0px 5px 1px 5px;
+    z-index: 10;
+/*    background: rgb;*/    
+}
+
+/*#all {
+   width: 820px;
+   margin-left: auto;
+   margin-right: auto;
+   padding-top: 10px;
+}
+*/
 #header {
    padding: 0px 0px 10px 5%;         
    height: 130px;
@@ -49,7 +73,7 @@ body {
 }
 #nav-bar li {
    display:inline;
-   padding: 0px 12px 0px 12px;
+   padding: 0px 8px 0px 8px;
 }
 
 #nav-bar li a {text-decoration: none;}
@@ -57,7 +81,7 @@ body {
   color: rgb(80,80,80);
   text-shadow: 0px 1px 0px #fff;
   text-decoration: none;
-  font-size: 12px;
+  font-size: 11px;
 }
 #nav-bar li a:visited {color: rgb(100,100,100);}
 #nav-bar li a:hover {color: #88af00;}
@@ -102,19 +126,37 @@ body {
 
 
 #intro #bullets {
-   line-height: 18px;
+   font-size: 15px;
+   line-height: 14px;
+   list-style-type: none;
 }
 
+#intro #bullets li:last-child {
+   margin-bottom: 0px;
+}
 #intro #bullets li {
-   margin-bottom: 20px;
+   margin-bottom: 35px;
+}
+
+#intro #bullets li:before {
+   content: "*";
+   position: absolute;
+   left: 35px;
+   font-size: 60px;
+   margin-top:10px;
+   font-family: ubuntu;
 }
 
 #try-it {
    text-align: center;
-   width: 39%;
-   margin-top: 35px;
+   width: 170px;
+   margin-top: 0px;
    margin-left: auto;
    margin-right: auto;   
+}
+
+#try-it a {
+   text-decoration: none;
 }
 
 .button {
