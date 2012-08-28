@@ -123,11 +123,11 @@ body {
 }
 
 #intro #bullets li:before {
-   content: "*";
+   content: ".";
    position: absolute;
    left: 35px;
-   font-size: 60px;
-   margin-top:10px;
+   font-size: 80px;
+   margin-top:-16px;
    font-family: ubuntu;
 }
 
