@@ -1,17 +1,7 @@
 
 body {
    background-color: rgb(220,220,220);
-   background-image: url('../images/square_bg.png');
-   background-image: url('../images/background_pipeline.png');
-   background-image: url('../images/T_map_large_cropped_off_white.png');
-/*   background-image: url('../images/T_map_large_cropped_off_white_with_rail.png');*/
-/*   background-image: url('../images/T_map_large_cropped_off_white2_with_rail.png');      */
-/*   background-image: url('../images/T_map_large_cropped_white_no_rail.png');*/
-/*   background-image: url('../images/T_map_large_cropped_white.png');*/
-/*   background-image: url('../images/T_map_large_cropped.png');*/
-   background-image: url('../images/background_pipeline.png');
-/*   background-image: url('../images/T_map_large_cropped_no_rail.png');   */
-   background-image: url('../images/T_map_large_infinite_square.png');   
+   background-image: url('../images/T_map_large_infinite_square_1.png');   
    background-size:200px 200px;
    background-repeat: repeat;
    
