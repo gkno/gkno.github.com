@@ -39,7 +39,7 @@
       </div>      
       <div style="clear:both"></div>
    </div>
-   <div id="intro" class="box-shadow">
+   <div id="intro" class="box-shadow" style="padding-right: 50px">
       <div class="grid">
          <div class="description" style="padding: 10px 10px 10px 40px;">
             <span style="margin-right:20px"><a href="#faq">FAQ</a></span><span style="margin-right:20px"><a href="#questions">Questions</a></span><span><a href="#bugs">Bugs</a></span>
@@ -49,8 +49,18 @@
 
             <a name="faq"><span style="font-size: 3em; color: rgb(60,60,60);">faq</span></a>
             <div class="description">
-               <ul>
-                  <li>questions</li>
+               <ul id="faq">
+                  <li> I run the same pipeline many times and have to change one of the parameters every time.  Can I modify the pipeline, so that it uses default values that are more useful to my work?
+
+                        <br/><br/><i>Yes.  You can create a modified configuration file using your own parameters.  See the <a href="http://blog.gkno.me/post/29495255653/modifying-an-existing-configuration-file">Modifying an existing configuration file</a> tutorial for details.</i></li>
+
+                  <li> Can I force output files to contain pipeline parameters?  I run a pipeline on the same input data, but with different parameters.  I want to make sure that the output files have different names without having to set names on the command line.
+
+                        <br/><br/><i>Yes, you can add a section to the pipeline configuration file describing how you want to construct the output filenames.  See the documentation or the <a href="http://blog.gkno.me/post/29894526420/constructing-output-filenames">Constructing output filenames</a> tutorial for details of how to use this functionality.</i></li>
+
+                  <li> Can I run the same pipeline multiple times, for different input files?
+
+                     <br/><br/><i>Yes, gkno is constructed so that a list of inputs (and other parameters, if desired) can be provided in a json file and a makefile will be generated for each set of inputs and executed (if desired).  See the <a href="http://blog.gkno.me/post/29634954993/performing-multiple-runs-of-a-pipeline">Performing multiple runs of a pipeline</a>.  Note that this feature can be used to run the same pipeline multiple times with the same input files, but different parameters.</i></li>
                </ul>
             </div>
             

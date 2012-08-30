@@ -327,6 +327,11 @@ body {
    border-radius: 4px;
 }
 
+#faq li {
+   text-align: justify;
+   margin: 20px 0px 20px 0px;
+}
+
 #footer {
    position:absolute;
    bottom:0px;
