@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <title>gkno | Next-Gen Sequencing Software</title>
+   <title>gkno glossary | Next-Gen Sequencing Software</title>
    <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700&v2' rel='stylesheet' type='text/css'>
    <link href='css/site.css' rel='stylesheet' type='text/css'>
    <link href='css/dropdown.css' rel='stylesheet' type='text/css'>
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+   <script src="js/underscore-min.js"></script>
 
    <script type="text/javascript">
 
@@ -19,6 +22,83 @@
      })();
 
    </script>      
+
+   <script>
+      function getPostsByTag(tag) {
+         return $.ajax({
+          url: 'http://api.tumblr.com/v2/blog/gkno.tumblr.com/posts?api_key=FG1L5npDZq98PJq9o4aXlvHpEA85vH6noPcFd1encLKEZhH1Uw&jsonp=log_me&tag=' + tag,
+          type: 'GET',
+          dataType: 'jsonp'
+        });
+      }
+      
+      function log_me(data) {
+         var posts = data.response.posts;
+         window.posts = posts;
+         for ( var i=0; i < posts.length; i++) {
+            var html = $("<div>" + posts[i].body + "</div>");
+            html.find('.pipeline-image img').attr('height', '50px').removeAttr('width');
+            posts[i].titleImage = html.find('.pipeline-image').html();
+         }
+         populateList(posts);
+      }
+      
+      function populateList(posts) {
+         var bullets = "";
+         var categories = ['pipeline', 'tool', 'pipeline-management'];
+         var category;
+         
+         for (var i=0; i < posts.length; i++) {  
+            var img = posts[i].titleImage || "";
+            for (var j=0; j < posts[i].tags.length; j++) {
+               category = undefined;
+               for (var k=0; k < categories.length; k++) {
+                  if (posts[i].tags[j] == categories[k]) {
+                     category = categories[k];
+                     break;
+                  }
+               }
+               if(category)
+                  break;
+            }
+            if (category == undefined)
+            category = 'general'  
+            $("#" + category + "-tuts").append( "<li><a href='"
+                        + posts[i].post_url
+                        + "'>"+ posts[i]["title"]
+                        + "</a> "
+                        + img
+                        + "</li>"
+            );                            
+         }
+      }
+      
+      function filterByTag(tag, posts) {
+         if (tag == 'all') return posts;
+         var filtered = [];
+         for (var i=0; i < posts.length; i++) {
+            if (_.include(posts[i].tags,tag))
+               filtered.push(posts[i])
+         }
+         return filtered;
+      }
+      
+   </script>
+   
+   <script>
+      $(document).ready( function() {
+         window.filter = 'all';
+         window.tags = [];
+         getPostsByTag('tutorial');
+         
+         $('.tag').click( function(e){ 
+            var tag = $(this).html();
+            var filtered = filterByTag(tag, window.posts);
+            populateList(filtered);
+         });
+         
+      });
+   </script>
 </head>
 
 <body>

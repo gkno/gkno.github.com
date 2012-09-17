@@ -35,7 +35,7 @@
          window.posts = posts;
          for ( var i=0; i < posts.length; i++) {
             var html = $("<div>" + posts[i].body + "</div>");
-            html.find('.pipeline-image img').attr('height', '50px').removeAttr('width');
+            html.find('.pipeline-image img').attr('height', '75px').removeAttr('width').css('display', 'inline').css('vertical-align', 'middle');
             posts[i].titleImage = html.find('.pipeline-image').html();
          }
          populateList(posts);
