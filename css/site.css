@@ -322,6 +322,22 @@ body {
    margin: 20px 0px 20px 0px;
 }
 
+table.tuts {
+   width: 100%;
+}
+
+table.tuts td {
+   vertical-align: top;
+}
+
+table.tuts td img {
+   margin-top: -15px;
+}
+
+#tuts .sub-header {
+   font-size: 25px;
+}
+
 #footer {
    position:absolute;
    bottom:0px;

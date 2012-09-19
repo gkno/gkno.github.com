@@ -35,8 +35,8 @@
          window.posts = posts;
          for ( var i=0; i < posts.length; i++) {
             var html = $("<div>" + posts[i].body + "</div>");
-            html.find('.pipeline-image img').attr('height', '75px').removeAttr('width').css('display', 'inline').css('vertical-align', 'middle');
-            posts[i].titleImage = html.find('.pipeline-image').html();
+            html.find('.pipeline-title-image img').attr('height', '90px').removeAttr('width').css('display', 'inline').css('vertical-align', 'middle');
+            posts[i].titleImage = html.find('.pipeline-title-image').html();
          }
          populateList(posts);
       }
@@ -61,13 +61,28 @@
             }
             if (category == undefined)
             category = 'general'  
-            $("#" + category + "-tuts").append( "<li><a href='"
+            // $("#" + category + "-tuts").append( "<li><a href='"
+            //             + posts[i].post_url
+            //             + "'>"+ posts[i]["title"]
+            //             + "</a> "
+            //             + img
+            //             + "</li>"
+            // );  
+            // $("#" + category + "-tuts").append( "<tr><td style='width:10px'>&#8226;</td><td style='width:200px'><a href='"
+            //             + posts[i].post_url
+            //             + "'>"+ posts[i]["title"]
+            //             + "</a></td><td style='width:200px;text-align:right'>"
+            //             + img
+            //             + "</td></tr>"
+            // );                          
+            $("#" + category + "-tuts").append( "<tr><td style='width:450px'><ul><li><a href='"
                         + posts[i].post_url
                         + "'>"+ posts[i]["title"]
-                        + "</a> "
+                        + "</a></li></ul></td><td style='text-align:right'>"
                         + img
-                        + "</li>"
-            );                            
+                        + "</td></tr>"
+            );                          
+            
          }
       }
       
@@ -139,16 +154,18 @@
                <li><a class='tag' href="#">pipeline</a></li>
                <li><a class='tag' href="#">tool</a></li>
             </ul> -->
+            <br/>
+            <br/>
              <div class="description">
                   <div id="tuts"> 
-                     General 
-                     <ul id="general-tuts"> </ul>
-                     Pipeline
-                     <ul id="pipeline-tuts"> </ul>
-                     Tool
-                     <ul id="tool-tuts"> </ul>
-                     Pipeline Management
-                     <ul id="pipeline-management-tuts"> </ul>
+                     <span class="sub-header">General</span>
+                     <table class="tuts" id="general-tuts" ></table>
+                     <span class="sub-header">Pipeline</span>
+                     <table class="tuts" id="pipeline-tuts"> </table>
+                     <span class="sub-header">Tool</span>
+                     <table class="tuts" id="tool-tuts"> </table>
+                     <span class="sub-header">Pipeline Management</span>
+                     <table class="tuts" id="pipeline-management-tuts"> </table>
                   </div>
                </div>            
          </div>
