@@ -35,7 +35,7 @@
          window.posts = posts;
          for ( var i=0; i < posts.length; i++) {
             var html = $("<div>" + posts[i].body + "</div>");
-            html.find('.pipeline-title-image img').attr('height', '90px').removeAttr('width').css('display', 'inline').css('vertical-align', 'middle');
+            html.find('.pipeline-title-image img').attr('width', '200px').css('display', 'inline').css('vertical-align', 'middle');
             posts[i].titleImage = html.find('.pipeline-title-image').html();
          }
          populateList(posts);
@@ -147,16 +147,16 @@
    </div>
    <div id="intro" class="box-shadow">
       <div class="grid">
-         <div style="padding: 10px 10px 10px 40px;">
+         <div style="padding: 10px 40px 10px 40px;">
             <span style="font-size: 3em; color: rgb(60,60,60);">Tutorials</span>
+            <img src="images/legend_tuts.png" style="float:right; width:300px; margin-top: 50px"/>
+            <div style="clear:both"></div>
             <!-- <ul class="tags">
                <li><a class='tag' href="#">all</a></li>
                <li><a class='tag' href="#">pipeline</a></li>
                <li><a class='tag' href="#">tool</a></li>
             </ul> -->
-            <br/>
-            <br/>
-             <div class="description">
+             <div class="description" style="margin-top: -50px">
                   <div id="tuts"> 
                      <span class="sub-header">General</span>
                      <table class="tuts" id="general-tuts" ></table>
