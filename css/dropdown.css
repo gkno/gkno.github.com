@@ -23,6 +23,7 @@ ul#navigation {
     background: -ms-linear-gradient(top,  #fbfbfb 0%,#e8e8e8 100%); /* IE10+ */
     background: linear-gradient(to bottom,  #fbfbfb 0%,#e8e8e8 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfbfb', endColorstr='#e8e8e8',GradientType=0 ); /* IE6-9 */    
+    
 }
  
 ul#navigation li {
@@ -31,6 +32,7 @@ ul#navigation li {
     padding:0;
     float:left;
     position:relative;
+    
 }
  
 ul#navigation li a {
@@ -39,6 +41,7 @@ ul#navigation li a {
     text-shadow:1px 1px 0px #fff;
     text-decoration:none;
     display:inline-block;
+    
 /*    border-right:1px solid #fff;
     border-left:1px solid #C2C2C2;
     border-top:1px solid #fff;
@@ -129,6 +132,11 @@ ul#navigation li:hover > ul
 being the ones which make the drop-down to appear on hover */
     visibility:visible;
     opacity:1;
+   -webkit-transition-delay: 0s;
+   -moz-transition-delay:    0s;
+   -ms-transition-delay:     0s;
+   -o-transition-delay:      0s;
+   -transition-delay:        0s;
 }
  
 ul#navigation ul, ul#navigation ul li ul {
@@ -161,7 +169,12 @@ being the ones which make the drop-down to stay hidden */
     -webkit-transition:opacity 0.2s linear, visibility 0.2s linear; 
     -moz-transition:opacity 0.2s linear, visibility 0.2s linear; 
     -o-transition:opacity 0.2s linear, visibility 0.2s linear; 
-    transition:opacity 0.2s linear, visibility 0.2s linear;     
+    transition:opacity 0.2s linear, visibility 0.2s linear;    
+    -webkit-transition-delay: 0.4s;
+    -moz-transition-delay:    0.4s;
+    -ms-transition-delay:     0.4s;
+    -o-transition-delay:      0.4s;
+    -transition-delay:        0.4s; 
 }
  
 ul#navigation ul {
