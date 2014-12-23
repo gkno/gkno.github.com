@@ -163,11 +163,11 @@ a { color:rgb(110,110,110); text-decoration: underline;}
  *
  */
 .footer { position: absolute; bottom: 0px; left:0px;right:0px;}
+.footer a { color:#6e915f }
 .footer .logos {margin: 0px auto 10px auto; width:1000px;text-align:center;position:relative; height: 60px; color:rgb(80,80,80);}
-.footer .developers {background: #123d53; height:60px; padding-top: 10px; color:#2d8fc1; text-align:center;}
-.footer .members {font-size:15px;font-family:quicksand; margin: 5px auto 0px auto; width:800px;text-align:center;}
+.footer .info {background: #005422; height:25px; padding: 10px 100px; color:#6e915f; font-size:15px;font-family:quicksand;}
+.footer .members {  float:right;}
 .footer img { height: 35px; vertical-align: middle}
-.footer .title {font-size:15px;font-family:quicksand; margin: 0px auto 0px auto; width:400px; color:#2d8fc1}
 
 
 
