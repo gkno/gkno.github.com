@@ -148,7 +148,7 @@ a { color:rgb(110,110,110); text-decoration: underline;}
 
 .section#contribute {background:#2d8fc1; height: 420px;}
 .section#contribute a { color:#123d53; }
-.section .section-title { color:#123d53; font-family: Montserrat}
+.section .section-title { color:#005422; font-family: Montserrat}
 .section .section-content { width:600px; margin: 20px auto 0px auto; }
 .section#contribute .title { font-size: 25px; text-align:left; color:white; width: 100%;}
 .section#contribute .description { font-size: 14px; text-align:justify; margin-top:5px; color:white;}
