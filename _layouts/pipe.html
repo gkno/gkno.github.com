@@ -3,26 +3,26 @@ layout: default
 ---
 
 <style>
-#sidebar {border-right: 1px solid rgb(200,200,200); position: absolute; top: 60px; left:0px; bottom:70px; width:150px; padding: 50px 0px 0px 15px;}
-#sidebar .topic { font-size: 26px; color: rgb(80,80,80);}
-#sidebar .items { font-size: 16px; color: rgb(180,180,180);}
-#main #categories { list-style: none; text-align: left}
-#main #categories .description { margin-left: 20px;}
+#sidebar {border-right: 1px solid rgb(200,200,200); position: absolute; top: 60px; left:0px; bottom:70px; width:200px; padding: 50px 0px 0px 15px;}
+#sidebar .topic { font-size: 18px; color: rgb(80,80,80); margin-bottom: 20px;}
+#sidebar .items { font-size: 14px; color: rgb(180,180,180);}
+#main {margin-left: 60px;}
+#main #categories, #main #pipelines { list-style: none; text-align: left}
+#main #categories .description, #main #pipelines .description { margin-left: 20px;}
 </style>
 
 
 <div id='sidebar'>
-  <div id='related' class='topic section-title'>Related
+  {% for categories in site.data.gkno-web-content.categories %}
+  <div id='{{ categories[0] }}' class='topic section-title'>{{ categories[0] }}
   	<div class='items'>
-  		<div><a href="#">- item</a></div>
+      {% for catPipeline in categories[1] %}
+  		<div><a href="pipelines.html#{{ catPipeline }}">{{ catPipeline }}</a></div>
+      {% endfor %}
   	</div>
   </div>
 
-  <div id='category' class='topic section-title'>Category
-  	<div class='items'>
-  		<div><a href="pipelines.html#category1">- item</a></div>
-  	</div>
-  </div>
+  {% endfor %}
 
 </div>
 

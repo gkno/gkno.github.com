@@ -8,35 +8,52 @@ order: 2
 
 
 <div class='section'>
-	<div class='section-title'>Pipelines</div>        
-	<div class="description" style="text-align:center">
-	  Add description here
-	</div>
+	<div class='section-title'>Categories</div>        
+	<ul id="categories">
+		{% for categories in site.data.gkno-web-content.categories %}
+		<li id='{{ categories[0] }}'>
+			<div>{{ categories[0] }}</div>
+			<div>
+				<div class='description'>	
+					<ul class='pipelines'>
+					{% for catPipeline in categories[1] %}
+						<li><a href="#{{ catPipeline }}">{{ catPipeline }}</a>
+						{% assign pipeline = site.data.gkno-web-content.pipelines[catPipeline] %}
+						<span>{{ pipeline.description }}<span>
+						</li>
+					{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</li>
+		{% endfor %}
+	</ul>
 </div>
 
 <div class='section'>
-	<div class='section-title'>Categories</div>        
-	<ul id="categories">
-		<li id="category1">
-			<div>Category 1<span class='description'>Add description</span></div>
-			<div>
-				<div class='description'>	
-					<ul class='pipelines'>
-						<li><a href="#">pipeline 1</a></li>
-						<li><a href="#">pipeline 2</a></li>
-					</ul>
-				</div>
+	<div class='section-title'>Pipelines</div>     
+		<ul id="pipelines">
+		{% for pipelines in site.data.gkno-web-content.pipelines %}
+		  <li id='{{ pipelines[0] }}'>
+		    <div>{{ pipelines[0] }}</div>
+		  	<div class="description">
+				{{pipelines[1].description}}
 			</div>
-		</li>
-		<li id="category2">
-			<div>Category 2<span class='description'>Add description</span></div>
+			<img src="public/images/pipelines/{{ pipelines[0] }}-reduced.png" onError="style.display = 'none';" style="height:600px"/>
+			<div class="description">
+				<br>Arguments
+				<table style="font-size:11px">
+					{% for argument in pipelines[1].arguments %}
+					<tr>
+						<td style="width:30px">{{ argument["short form argument"] }}</td>
+						<td style="width:200px">{{ argument["long form argument"] }}</td>
+						<td>{{ argument["data type"] }}</td>
+						<td>{{ argument["description"] }}</td>
+					</tr>
+					{% endfor %}
+				</table>
 			<div>
-				<div class='description'>	
-					<ul class='pipelines'>
-						<li><a href="#">pipeline 1</a></li>
-					</ul>
-				</div>
-			</div>
-		</li>
-	</ul>
+		  </li>
+		{% endfor %}
+		</ul>
 </div>

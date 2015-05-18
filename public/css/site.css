@@ -52,14 +52,14 @@ a { color:rgb(110,110,110); text-decoration: underline;}
 .masthead-title {
   font-family: quicksand;
    font-size: 37px;
-   color:#6e915f;
+   color:#94CF7A;
    position:absolute;
    top: 8px;
    left: 182px;
-   font-weight: 300;
+   font-weight: 400;
 }
 .masthead-title a {
-  color: #6e915f;
+  color: #94CF7A;
   text-decoration: none;
 }
 .masthead #menu {
