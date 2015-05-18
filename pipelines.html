@@ -17,9 +17,12 @@ order: 2
 				<div class='description'>	
 					<ul class='pipelines'>
 					{% for catPipeline in categories[1] %}
-						<li><a href="#{{ catPipeline }}">{{ catPipeline }}</a>
-						{% assign pipeline = site.data.gkno-web-content.pipelines[catPipeline] %}
-						<span>{{ pipeline.description }}<span>
+						<li style="padding-top:5px;">
+						<div style="display:table">
+							<a style="display:table-cell;width:120px" href="#{{ catPipeline }}">{{ catPipeline }}</a>
+							{% assign pipeline = site.data.gkno-web-content.pipelines[catPipeline] %}
+							<div style="display:table-cell">{{ pipeline.description }}<div>
+							</div>
 						</li>
 					{% endfor %}
 					</ul>
