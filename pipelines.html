@@ -34,12 +34,14 @@ order: 2
 	<div class='section-title'>Pipelines</div>     
 		<ul id="pipelines">
 		{% for pipelines in site.data.gkno-web-content.pipelines %}
-		  <li id='{{ pipelines[0] }}'>
+		  <li id='{{ pipelines[0] }}' style="padding-top:65px">
 		    <div>{{ pipelines[0] }}</div>
 		  	<div class="description">
 				{{pipelines[1].description}}
 			</div>
-			<img src="public/images/pipelines/{{ pipelines[0] }}-reduced.png" onError="style.display = 'none';" style="height:600px"/>
+			<div style="overflow:scroll">
+				<img src="public/images/pipelines/{{ pipelines[0] }}.png" onError="style.display = 'none';" />
+			</div>
 			<div class="description">
 				<br>Arguments
 				<table style="font-size:11px">
