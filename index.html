@@ -5,62 +5,44 @@ group: "navigation"
 order: 1
 ---
 
-<div style="margin: 0px auto; margin-top: 40px; width:1050px; ">
-        <div style="font-size:32px;text-align:left;margin: 10px 0px 30px 0px; float:left; width:455px">          
-          <div style="color:#005422;">
-            
-            A bioinformatics tool and pipeline launcher
-          </div>
-          <div class="description" style="margin-top: 10px;font-size:16px; color:#6e915f">gkno opens the world of complex bioinformatic analysis to people of all level of computational expertise
-          </div>
-        </div>
-        <div style="float:right">
-          <video id="MY_VIDEO_1" class="video-js vjs-default-skin " style="margin: 0 auto;width:554px;" controls
-            preload="auto" width="554" height="312" poster="public/images/animation_still_white_bg_small.png"
-            data-setup="{}">
-            <source src="https://s3.amazonaws.com/iobio/iobio-01-v1.mp4" type='video/mp4'>
-            <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
-          </video>
-        </div>
-        
-        <div style="text-align:center;width: 450px; float:left">
-          <div style="margin-top:40px; ">
-            
-            <link href="http://cdn-images.mailchimp.com/embedcode/classic-081711.css" rel="stylesheet" type="text/css">
-            <style type="text/css">
-              #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
-            
-            </style>
-            <div id="mc_embed_signup">
-            <form action="http://iobio.us9.list-manage.com/subscribe/post?u=ddbe7be3d1ca18356bf5c0404&amp;id=ace369fbec" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate style="padding: 0px">
-                <div id="mc_embed_signup_scroll">
-              <div style="font-size: 14px; color: rgb(110,110,110);margin-bottom: 4px">
-                
-              </div>
-            <div class="mc-field-group" style="width:100%; margin:0px">
-              <label for="mce-EMAIL" style="color:rgb(150,150,150">Sign up to hear about new apps and when you can build your own </label>
-              <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
-            </div>
-              <div id="mce-responses" class="clear">
-                <div class="response" id="mce-error-response" style="display:none"></div>
-                <div class="response" id="mce-success-response" style="display:none"></div>
-              </div>    
-                <div style="position: absolute; left: -5000px;">
-                  <input type="text" name="b_ddbe7be3d1ca18356bf5c0404_ace369fbec" tabindex="-1" value=""></div>
-                  <div class="clear" style=""><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button" style="background: #b70e11"></div>
-                </div>
-            </form>
-            </div>
-            <script type='text/javascript' src='http://s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
-            
-          </div>
-        </div>
-        <div style="clear:both"></div>
+<!-- Describe what gkno is.-->
+<div class='section'>
+  <div class='section-title'>A bioinformatics pipeline launcher</div>
+  <div class='description' style="font-size:16px">
+    gkno opens the world of complex bioinformatic analysis to people of all level of computational expertise. This site contains documentation, tutorials and information
+    on all the tools that comprise gkno.
+  </div>
+</div>
+
+<!-- Provide a link for downloading gkno -->
+<div class="section">
+  <div class='section-title' style="font-size:44px; color:#6e915f"><a href="/install.html">Get gkno</a></div>
+  <div class='description' style="text-align:center; font-size:16px">
+    Learn how to download, install and maintain gkno and get data resources.
+  </div>
+</div>
+
+<!-- Give an example describing variant calling and visualisation -->
+<div class="section">
+  <div class='description' style="font-size:24px; color:#6e915f;">Example: Call and visualize variants</div>
+  <div class='description'>
+    Use the gkno freebayes pipeline to call and filter variants. Easily parallelize calling over multiple regions and generate
+a compressed and indexed vcf file. The <a href="http://iobio.io">iobio</a> project allows visualization and real-time analysis
+of large data sets. Having generated variant calls for your sample, use <a href="http://vcf.iobio.io">vcf.iobio</a> to view
+global summary statistics.
+  </div>
+  <ul id="apps">
+    <li>
+      <div class='app'>
+        <div class='app-title'><a href="/pipelines.html#freebayes">gkno freebayes variant calling pipeline</a></div></br>
+        <a href="/pipelines.html#freebayes"><img src="public/images/pipelines/freebayes.png" style="width:450px; height:100px;"></img></a>
       </div>
-                  
-      <div class="divider" ></div>
-      <div class='section'>
-        <div class='section-title'>Try It</div>
-        
-      </div>                     
-    </div>  
+    </li>
+    <li>
+      <div class='app'>
+        <div class='app-title'><a href="http://vcf.iobio.io">vcf.iobio: real-time variant visualization</a></div>
+        <a href="http://vcf.iobio.io"><img src="public/images/vcf.iobio_wide.png" style="width:450px; height:300px;"></img></a>
+      </div>
+    </li>
+  </ul>
+</div>

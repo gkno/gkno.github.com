@@ -28,6 +28,7 @@ body {
   min-height: 100%;  
 }
 a { color:rgb(110,110,110); text-decoration: underline;}
+b { color:rgb(110,110,110); text-decoration: none;}
 
 
 /*
@@ -128,14 +129,17 @@ a { color:rgb(110,110,110); text-decoration: underline;}
   padding-bottom: 173px
 }
 
+.highlight pre {padding:0px;}
 
 /*
  * Section
  *
  */
-.section { text-align: center; padding: 30px 0px 50px 0px;}
+.section {text-align: center; padding: 30px 0px 50px 0px;}
 .section-title { font-size: 45px;}
 .description { font-size: 14px; text-align:justify; margin-top:5px;}
+.section a { color:#005422; text-decoration: none;}
+.section a:hover { color:#6e915f; text-decoration: underline;}
 
 .section #apps {margin: 0; margin-top: 20px; padding: 0; list-style-type: none; text-align: center; margin-left:-40px;}
 .section #apps li {display: inline; padding-left: 80px;}
