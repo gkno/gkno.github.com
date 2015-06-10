@@ -1,0 +1,50 @@
+---
+layout: default
+---
+
+<style>
+/*
+#page-wrap { 
+  width: 800px; 
+  margin: 15px auto; 
+  position: relative; 
+}
+
+#sidebar { 
+  width: 200px; 
+  position: fixed; 
+  margin-left: 620px; 
+  border-right: 1px solid rgb(200,200,200);
+}
+*/
+
+
+
+#sidebar {border-right: 1px solid rgb(200,200,200); position: fixed; top: 60px; left:0px; bottom:70px; width:200px; padding: 50px 0px 0px 15px; overflow-y: scroll;} 
+#sidebar .topic { font-size: 18px; color: rgb(80,80,80); margin-bottom: 20px;}
+#sidebar .items { font-size: 14px; color: rgb(180,180,180);}
+#main {margin-left: 60px;}
+#main #categories, #main .pipelines { list-style: none; text-align: left}
+#main #categories, #main #pipelines { list-style: none; text-align: left}
+#main #categories .description, #main #pipelines .description { margin-left: 20px;}
+</style>
+
+<div id="page-wrap">
+  <div id='sidebar'>
+    {% for categories in site.data.gkno-web-content.categories %}
+    <div id='{{ categories[0] }}' class='topic section-title'>{{ categories[0] }}
+    	<div class='items'>
+        {% for catPipeline in categories[1] %}
+    		<div><a href="pipelines.html#{{ catPipeline }}">{{ catPipeline }}</a></div>
+        {% endfor %}
+    	</div>
+    </div>
+
+    {% endfor %}
+
+  </div>
+
+  <div id="main">
+  	{{content}}
+  </div>
+</div>

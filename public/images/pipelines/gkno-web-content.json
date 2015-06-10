@@ -1,0 +1,1472 @@
+{
+  "categories": {
+    "Alignment": [
+      "bwa-se", 
+      "bwa", 
+      "glia", 
+      "mosaik"
+    ], 
+    "BAM-processing": [
+      "gatk-gvcf", 
+      "gatk", 
+      "index-bam", 
+      "tangram-bam"
+    ], 
+    "FASTA-processing": [
+      "build-mosaik-reference", 
+      "bwa-index", 
+      "fasta-dictionary"
+    ], 
+    "Reference-free": [
+    ], 
+    "SV-discovery": [
+      "tangram"
+    ], 
+    "Scripts": [
+      "regions-coord", 
+      "regions-dict"
+    ], 
+    "VCF-processing": [
+      "get-indels", 
+      "index-vcf", 
+      "standardize-vcf", 
+      "subset-vcf"
+    ], 
+    "Variant-discovery": [
+      "compress-vcf", 
+      "freebayes", 
+      "gatk-genotype", 
+      "gatk-gvcf", 
+      "gatk-vqsr", 
+      "gatk", 
+      "normalize-vcf", 
+      "tangram"
+    ], 
+    "Variant-graph": [
+      "glia"
+    ], 
+    "Visualisation": [
+      "coverage"
+    ], 
+    "kmer-processing": [
+      "kmer-histogram"
+    ]
+  }, 
+  "pipelines": {
+    "build-mosaik-reference": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "Reference fasta file.", 
+          "long form argument": "--fasta-reference", 
+          "short form argument": "-r"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output fasta reference including the moblist.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The mobile element reference fasta file.", 
+          "long form argument": "--mobile-element-fasta", 
+          "short form argument": "-m"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Record all hashes in the genome of this size. [4 - 32]", 
+          "long form argument": "--hash-size", 
+          "short form argument": "-hs"
+        }
+      ], 
+      "description": "Concatenate reference fasta files and generate a Mosaik reference and jump database."
+    }, 
+    "bwa": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "Read group header line such as '@RG\\tID:foo\\tSM:bar' [null]. The '\\t' in the example will be replaced with tabs in the BAM header.", 
+          "long form argument": "--read-group-header", 
+          "short form argument": "-g"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output BAM file.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The input fastq file (second mate).", 
+          "long form argument": "--fastq2", 
+          "short form argument": "-q2"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "The number of threads for BWA-mem.", 
+          "long form argument": "--threads-bwa", 
+          "short form argument": "-tb"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The input fastq file (first mate).", 
+          "long form argument": "--fastq", 
+          "short form argument": "-q"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The reference FASTA file prefix.", 
+          "long form argument": "--reference-prefix", 
+          "short form argument": "-rp"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The sample id.", 
+          "long form argument": "--sample-id", 
+          "short form argument": "-s"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The platform id (e.g. ILLUMINA).", 
+          "long form argument": "--platform-id", 
+          "short form argument": "-p"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The read group id.", 
+          "long form argument": "--read-group-id", 
+          "short form argument": "-id"
+        }
+      ], 
+      "description": "Align paired-end fastq files using BWA mem, converting the result to BAM."
+    }, 
+    "bwa-index": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "The reference FASTA file.", 
+          "long form argument": "--fasta-reference", 
+          "short form argument": "-r"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output FM index filename stub.", 
+          "long form argument": "--index", 
+          "short form argument": "-x"
+        }, 
+        {
+          "data type": "string", 
+          "description": "BWT construction algorithm: bwtsw or is [auto].", 
+          "long form argument": "--bwt-algorithm", 
+          "short form argument": "-a"
+        }
+      ], 
+      "description": "Generate the FM-index for use with bwa alignment."
+    }, 
+    "bwa-se": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "Read group header line such as '@RG\\tID:foo\\tSM:bar' [null]. The '\\t' in the example will be replaced with tabs in the BAM header.", 
+          "long form argument": "--read-group-header", 
+          "short form argument": "-g"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output BAM file.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "The number of threads for BWA-mem.", 
+          "long form argument": "--threads-bwa", 
+          "short form argument": "-tb"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The input fastq file (first mate).", 
+          "long form argument": "--fastq", 
+          "short form argument": "-q"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The reference FASTA file prefix.", 
+          "long form argument": "--reference-prefix", 
+          "short form argument": "-rp"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The sample id.", 
+          "long form argument": "--sample-id", 
+          "short form argument": "-s"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The platform id (e.g. ILLUMINA).", 
+          "long form argument": "--platform-id", 
+          "short form argument": "-p"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The read group id.", 
+          "long form argument": "--read-group-id", 
+          "short form argument": "-id"
+        }
+      ], 
+      "description": "Align single-end fastq files using BWA mem, converting the result to BAM."
+    }, 
+    "compress-vcf": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "The file to be compressed.", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }
+      ], 
+      "description": "Compress a VCF file using bgzip and index with tabix."
+    }, 
+    "coverage": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "The y axis label for the absolute coverage plot [read count].", 
+          "long form argument": "--y-label-absolute", 
+          "short form argument": "-ya"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "Plot the bin of reads with zero coverage.", 
+          "long form argument": "--include-zero", 
+          "short form argument": "-z"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The y axis label for the proportional coverage plot [read count].", 
+          "long form argument": "--y-label-proportional", 
+          "short form argument": "-yp"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "The maximum value for the x axis for the absolute coverage plot [determined by data, or --combine-max-depth].", 
+          "long form argument": "--x-axis-maximum-proportional", 
+          "short form argument": "-xap"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A sorted list of reference sequences to use when plotting the histogram.", 
+          "long form argument": "--reference-sequences", 
+          "short form argument": "-s"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "The maximum value for the x axis for the absolute coverage plot [determined by data, or --combine-max-depth].", 
+          "long form argument": "--x-axis-maximum-absolute", 
+          "short form argument": "-xaa"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "Normalise the read counts based on the reference sequence length.", 
+          "long form argument": "--normalize", 
+          "short form argument": "-n"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output pdf absolute coverage plot file.", 
+          "long form argument": "--out-absolute", 
+          "short form argument": "-oc"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Plot the tab delimited file with R.", 
+          "long form argument": "--r-script", 
+          "short form argument": "-rs"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The input sorted BAM file.", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "The minimum value for the x axis for the proportional coverage plot [determined by data].", 
+          "long form argument": "--x-axis-minimum-proportional", 
+          "short form argument": "-xip"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "Plot the raw read counts, rather than the percentage of the reads with each coverage.", 
+          "long form argument": "--read-counts", 
+          "short form argument": "-r"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output pdf proportional coverage plot file.", 
+          "long form argument": "--out-proportional", 
+          "short form argument": "-or"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The legend title [reference sequence].", 
+          "long form argument": "--legend", 
+          "short form argument": "-l"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "The minimum value for the x axis for the absolute coverage plot [determined by data].", 
+          "long form argument": "--x-axis-minimum-absolute", 
+          "short form argument": "-xia"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The x axis label for the proportional coverage plot [coverage].", 
+          "long form argument": "--x-label-proportional", 
+          "short form argument": "-xp"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The x axis label for the absolute coverage plot [coverage].", 
+          "long form argument": "--x-label-absolute", 
+          "short form argument": "-xa"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Combine all positions with a depth >= max into a single bin in the histogram.", 
+          "long form argument": "--combine-max-depth", 
+          "short form argument": "-c"
+        }
+      ], 
+      "description": "Calculate the genome coverage across reference sequences (usually chromosomes), generating R-plots."
+    }, 
+    "fasta-dictionary": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "The input reference FASTA file.", 
+          "long form argument": "--fasta-reference", 
+          "short form argument": "-r"
+        }, 
+        {
+          "data type": "string", 
+          "description": "the output sequence dictionary.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }
+      ], 
+      "description": "Generate a dictionary containing all of the sequences in the input reference fasta."
+    }, 
+    "freebayes": {
+      "arguments": [
+        {
+          "data type": "integer", 
+          "description": "To detect interrupted repeats, build across sequence until it has entropy > N bits per bp.  (default: 0, off)", 
+          "long form argument": "--min-repeat-entropy", 
+          "short form argument": "-mre"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "When assembling observations across repeats, require the total repeat length at least this many bp.  (default: 5)", 
+          "long form argument": "--min-repeat-length", 
+          "short form argument": "-mrl"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Require at least this sum of quality of observation supporting an alternate allele within a single individual in order to evaluate the position.  default: 0", 
+          "long form argument": "--min-alternate-qsum", 
+          "short form argument": "-maq"
+        }, 
+        {
+          "data type": "string", 
+          "description": "<chrom>:<start_position>..<end_position>. Limit analysis to the specified region, 0-base coordinates, end_position not included (same as BED format).", 
+          "long form argument": "--region", 
+          "short form argument": "-rg"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "Ignore complex events (composites of other classes).", 
+          "long form argument": "--no-complex", 
+          "short form argument": "-u"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "Ignore multi-nuceotide polymorphisms, MNPs.", 
+          "long form argument": "--no-mnps", 
+          "short form argument": "-X"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A file containing per-sample estimates of contamination, such as those generated by VerifyBamID.  The format should be: sample p(read=R|genotype=AR) p(read=A|genotype=AA). Sample '*' can be used to set default contamination estimates.", 
+          "long form argument": "--contamination-estimates", 
+          "short form argument": "-ce"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Limit posterior integration to samples where the second-best genotype likelihood is no more than log(N) from the highest genotype likelihood for the sample.  default: ~unbounded.", 
+          "long form argument": "--genotype-variant-threshold", 
+          "short form argument": "-S"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Evaluate only the best N SNP alleles, ranked by sum of supporting quality scores.  (Set to 0 to use all; default: all)", 
+          "long form argument": "--use-best-n-alleles", 
+          "short form argument": "-n"
+        }, 
+        {
+          "data type": "string", 
+          "description": "bam index file.", 
+          "long form argument": "--index", 
+          "short form argument": "-x"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output filtered VCF file.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Specifies a filter to apply to the info fields of records, removes alleles which do not pass the filter.", 
+          "long form argument": "--filter-expression", 
+          "short form argument": "-f"
+        }, 
+        {
+          "data type": "float", 
+          "description": "Report sites if the probability that there is a polymorphism at the site is greater than N.  default: 0.0001.", 
+          "long form argument": "--pvar", 
+          "short form argument": "-v"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Exclude alleles from analysis if their supporting base quality is less than Q.  default: 0", 
+          "long form argument": "--min-base-quality", 
+          "short form argument": "-mbq"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Add FILE to the set of BAM files to be analyzed.", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "Use mapping quality of alleles when calculating data likelihoods.", 
+          "long form argument": "--use-mapping-quality", 
+          "short form argument": "-j"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "Ignore insertion and deletion alleles.", 
+          "long form argument": "--no-indels", 
+          "short form argument": "-ni"
+        }, 
+        {
+          "data type": "string", 
+          "description": "When specified, only variant alleles provided in this input VCF will be used for the construction of complex or haplotype alleles.", 
+          "long form argument": "--haplotype-basis-alleles", 
+          "short form argument": "-hba"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The description of the filter to include in the VCF header.", 
+          "long form argument": "--filter-tag-description", 
+          "short form argument": "-fd"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Read a copy number map from the BED file FILE, which has the format: reference sequence, start, end, sample name, copy number ... for each region in each sample which does not have the default copy number as set by --ploidy.", 
+          "long form argument": "--cnv-map", 
+          "short form argument": "-cnv"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Sets the default ploidy for the analysis to N.  default: 2.", 
+          "long form argument": "--ploidy", 
+          "short form argument": "-p"
+        }, 
+        {
+          "data type": "float", 
+          "description": "Require at least this fraction of observations supporting an alternate allele within a single individual in the in order to evaluate the position.  default: 0.2", 
+          "long form argument": "--min-alternate-fraction", 
+          "short form argument": "-maf"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Use variants reported in VCF file as input to the algorithm. Variants in this file will be treated as putative variants even if there is not enough support in the data to pass input filters.", 
+          "long form argument": "--variant-input", 
+          "short form argument": "-v"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "Include duplicate-marked alignments in the analysis. Default: exclude duplicates marked as such in alignments.", 
+          "long form argument": "--use-duplicate-reads", 
+          "short form argument": "-ud"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "Ignore SNP alleles.", 
+          "long form argument": "--no-snps", 
+          "short form argument": "-I"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The text to add to the filter field for each record in the VCF file that satisfies the filter expression.", 
+          "long form argument": "--filter-tag", 
+          "short form argument": "-ft"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Allow complex alleles with contiguous embedded matches of up to this length.", 
+          "long form argument": "--max-complex-gap", 
+          "short form argument": "-E"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Require at least this count of observations supporting an alternate allele within a single individual in order to evaluate the position.  default: 1", 
+          "long form argument": "--min-alternate-count", 
+          "short form argument": "-mac"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Integrate all genotype combinations in our posterior space which include no more than N samples with their Mth best.", 
+          "long form argument": "--posterior-integration-limits", 
+          "short form argument": "-W"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Use FILE as the reference sequence for analysis.", 
+          "long form argument": "--fasta-reference", 
+          "short form argument": "-r"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The FASTA reference index file.", 
+          "long form argument": "--fasta-index", 
+          "short form argument": "-fx"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Limit analysis to targets listed in the BED-format FILE.", 
+          "long form argument": "--targets", 
+          "short form argument": "-t"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Exclude alignments from analysis if they have a mapping quality less than Q.  default: 0", 
+          "long form argument": "--min-mapping-quality", 
+          "short form argument": "-mmq"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Require at least this count of observations supporting an alternate allele within the total population in order to use the allele in analysis.  default: 1", 
+          "long form argument": "--min-alternate-total", 
+          "short form argument": "-mat"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Iterate no more than N times during genotyping step. default: 25.", 
+          "long form argument": "--genotyping-max-iterations", 
+          "short form argument": "-gmi"
+        }
+      ], 
+      "description": "Population call variants using Freebayes, filtering the results with standard filtering methods."
+    }, 
+    "gatk": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "A VCF file(s) containing known variants that will be supplied to the base quality recalibration step alone.", 
+          "long form argument": "--known-recalibration", 
+          "short form argument": "-kr"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A VCF file containing known variant alleles.", 
+          "long form argument": "--known-sites", 
+          "short form argument": "-k"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The joint called VCF file to be recalibrated.", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The reference FASTA file.", 
+          "long form argument": "--fasta-reference", 
+          "short form argument": "-r"
+        }
+      ], 
+      "description": "Prepare the BAM file for the haplotype caller by realigning indels and recalibrating the base qualities and generate gvcf files for each sample."
+    }, 
+    "gatk-genotype": {
+      "arguments": [
+        {
+          "data type": "integer", 
+          "description": "The number of threads.", 
+          "long form argument": "--threads", 
+          "short form argument": "-t"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The reference FASTA index file.", 
+          "long form argument": "--index", 
+          "short form argument": "-x"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The target genomic region.", 
+          "long form argument": "--region", 
+          "short form argument": "-rg"
+        }, 
+        {
+          "data type": "string", 
+          "description": "One or more specific annotations to apply to variant calls.", 
+          "long form argument": "--annotation", 
+          "short form argument": "-n"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The input GVCF file(s).", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The reference FASTA file.", 
+          "long form argument": "--fasta-reference", 
+          "short form argument": "-r"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The type of analysis to run.", 
+          "long form argument": "--analysis-type", 
+          "short form argument": "-a"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The minimum level of logging.", 
+          "long form argument": "--logging-level", 
+          "short form argument": "-l"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The reference FASTA dictionary file.", 
+          "long form argument": "--fasta-dictionary", 
+          "short form argument": "-d"
+        }
+      ], 
+      "description": "Joint call genotypes from a list of GVCF files."
+    }, 
+    "gatk-gvcf": {
+      "arguments": [
+        {
+          "data type": "integer", 
+          "description": "The number of threads to use.", 
+          "long form argument": "--threads", 
+          "short form argument": "-t"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output GVCF file.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The genomic regions to analyze.", 
+          "long form argument": "--region", 
+          "short form argument": "-rg"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A VCF file(s) containing known variants that will be supplied to the base quality recalibration step alone.", 
+          "long form argument": "--known-recalibration", 
+          "short form argument": "-kr"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A VCF file containing known variant alleles.", 
+          "long form argument": "--known-sites", 
+          "short form argument": "-k"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The input bam file(s).", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The FASTA reference.", 
+          "long form argument": "--fasta-reference", 
+          "short form argument": "-r"
+        }
+      ], 
+      "description": "Prepare the BAM file for the haplotype caller by realigning indels and recalibrating the base qualities and generate gvcf files for each sample."
+    }, 
+    "gatk-vqsr": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "The reference FASTA file.", 
+          "long form argument": "--fasta-reference", 
+          "short form argument": "-r"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output tranches file used by ApplyRecalibration for SNPs.", 
+          "long form argument": "--snp-tranches-file", 
+          "short form argument": "-stf"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output filtered and recalibrated VCF file.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output recal file used by ApplyRecalibration for INDELs.", 
+          "long form argument": "--out-indel-recal", 
+          "short form argument": "-oi"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A list of dbsnp sites for which to apply a prior probability of being correct but which aren't used by the algorithm (training and truth sets are required to run).", 
+          "long form argument": "--resource-dbsnp", 
+          "short form argument": "-rd"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A list of omni sites for which to apply a prior probability of being correct but which aren't used by the algorithm (training and truth sets are required to run).", 
+          "long form argument": "--resource-omni", 
+          "short form argument": "-ro"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A list of indel sites for which to apply a prior probability of being correct but which aren't used by the algorithm (training and truth sets are required to run).", 
+          "long form argument": "--resource-indel", 
+          "short form argument": "-ri"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A list of 1000G SNP sites for which to apply a prior probability of being correct but which aren't used by the algorithm (training and truth sets are required to run).", 
+          "long form argument": "--resource-1000g", 
+          "short form argument": "-rs"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Maximum number of Gaussians for the positive model.", 
+          "long form argument": "--max-gaussians", 
+          "short form argument": "-mg"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output recal file used by ApplyRecalibration for SNPs.", 
+          "long form argument": "--out-snp-recal", 
+          "short form argument": "-os"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The joint called VCF file to be recalibrated.", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output filtered and recalibrated VCF file in which each variant is annotated with its VQSLOD value for SNPs.", 
+          "long form argument": "--snp-vcf", 
+          "short form argument": "-sv"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Recalibration mode to employ (SNP|INDEL|BOTH).", 
+          "long form argument": "--snp-mode", 
+          "short form argument": "-sm"
+        }, 
+        {
+          "data type": "float", 
+          "description": "The levels of novel false discovery rate (FDR, implied by ti/tv) at which to slice the data. (in percent, that is 1.0 for 1 percent).", 
+          "long form argument": "--tranche", 
+          "short form argument": "-c"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output tranches file used by ApplyRecalibration for INDELs.", 
+          "long form argument": "--indel-tranches-file", 
+          "short form argument": "-itf"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Recalibration mode to employ (SNP|INDEL|BOTH).", 
+          "long form argument": "--indel-mode", 
+          "short form argument": "-im"
+        }, 
+        {
+          "data type": "string", 
+          "description": "One or more specific annotations to apply to variant calls.", 
+          "long form argument": "--annotation", 
+          "short form argument": "-n"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "The truth sensitivity level at which to start filtering.", 
+          "long form argument": "--truth-sensitivity", 
+          "short form argument": "-s"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A list of hapmap sites for which to apply a prior probability of being correct but which aren't used by the algorithm (training and truth sets are required to run).", 
+          "long form argument": "--resource-hapmap", 
+          "short form argument": "-rh"
+        }
+      ], 
+      "description": "Recalibrate the variant scores. It is recommended that this is performed if there are sufficient variants (one whole exome or at least 30 exomes)."
+    }, 
+    "get-indels": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "The output standardized VCF file including indels only.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The genomic region to analyse.", 
+          "long form argument": "--region", 
+          "short form argument": "-rg"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The filter expression (enclose in quotes on the command line).", 
+          "long form argument": "--filter-expression", 
+          "short form argument": "-f"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The input sorted VCF file.", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The reference FASTA file.", 
+          "long form argument": "--fasta-reference", 
+          "short form argument": "-r"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A text file containing a list of samples on which to subset.", 
+          "long form argument": "--samples-files", 
+          "short form argument": "-s"
+        }
+      ], 
+      "description": "Get all indels from a VCF files and standardize the resulting VCF file."
+    }, 
+    "glia": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "The output recalled, normalized VCF file.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The genomic region for consideration.", 
+          "long form argument": "--region", 
+          "short form argument": "-rg"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "If sum of qualities of soft clipped bases is >= N, realign (default ~inf).", 
+          "long form argument": "--soft-clip-qsum-threshold", 
+          "short form argument": "-s"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "If sum of qualities of mismatched bases is >= N, realign (default ~inf).", 
+          "long form argument": "--mismatch-qsum-threshold", 
+          "short form argument": "-mqt"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Number of bp of window to assemble from VCF for realignment.", 
+          "long form argument": "--realignment-window", 
+          "short form argument": "-rw"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Accept realignment if number of gaps is < N.", 
+          "long form argument": "--gap-count-max", 
+          "short form argument": "-gcm"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The input BAM file(s).", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The FASTA reference genome.", 
+          "long form argument": "--fasta-reference", 
+          "short form argument": "-r"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The genome DAG, BGZIP'ed (.vcf.gz) and tabix-indexed (.tbi).", 
+          "long form argument": "--vcf", 
+          "short form argument": "-v"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "Do not attempt streaming sort of alignments.  This can save memory in high coverage areas, but will require sort of BAM file before it can be used for variant calling.", 
+          "long form argument": "--unsorted-output", 
+          "short form argument": "-u"
+        }
+      ], 
+      "description": "Realign a BAM file against the variant graph with glia and call variants from the realigned BAM. In addition, this pipeline feeds the VCF used for creating the variant graph to Freebayes in the calling step, to force Freebayes to consider all of the alleles when genotyping the new sample."
+    }, 
+    "index-bam": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "The input BAM file.", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The index file.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "create non-standard (depth based) index file (*.bti). Default behaviour is to create standard BAM index (*.bai)", 
+          "long form argument": "--depth-based-index", 
+          "short form argument": "-b"
+        }
+      ], 
+      "description": "Index BAM files."
+    }, 
+    "index-vcf": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "The output index file.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "Overwrite existing index.", 
+          "long form argument": "--force-overwrite", 
+          "short form argument": "-f"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The file to be indexed.", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }
+      ], 
+      "description": "Index VCF files."
+    }, 
+    "kmer-histogram": {
+      "arguments": [
+        {
+          "data type": "integer", 
+          "description": "The number of threads to use for counting kmers.", 
+          "long form argument": "--threads", 
+          "short form argument": "-t"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "Generate a full histogram. Don't skip count 0. (default: true).", 
+          "long form argument": "--full", 
+          "short form argument": "-f"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "Count both strand, canonical representation (default: true).", 
+          "long form argument": "--canonical", 
+          "short form argument": "-c"
+        }, 
+        {
+          "data type": "float", 
+          "description": "Only include bars in histogram if their counts are greated than this percentage of the maximum observed count.", 
+          "long form argument": "--percent", 
+          "short form argument": "-p"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The second mate FASTQ file.", 
+          "long form argument": "--fastq2", 
+          "short form argument": "-q2"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "The kmer length.", 
+          "long form argument": "--kmer", 
+          "short form argument": "-k"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The x axis label [bin].", 
+          "long form argument": "--x-label", 
+          "short form argument": "-x"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The plot title.", 
+          "long form argument": "--title", 
+          "short form argument": "-l"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The first mate FASTQ file.", 
+          "long form argument": "--fastq", 
+          "short form argument": "-q"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "The initial hash size.", 
+          "long form argument": "--size", 
+          "short form argument": "-s"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output file containing the kmer counts (extension: .jf).", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The y axis label [value].", 
+          "long form argument": "--y-label", 
+          "short form argument": "-y"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output histogram plot.", 
+          "long form argument": "--histogram", 
+          "short form argument": "-hs"
+        }
+      ], 
+      "description": "Count the number of occurences of kmers of a specified length and then construct a histogram of the counts."
+    }, 
+    "mosaik": {
+      "arguments": [
+        {
+          "data type": "integer", 
+          "description": "Specifies the number of threads to use for the aligner.", 
+          "long form argument": "--threads", 
+          "short form argument": "-t"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The library name. e.g. g1k-sc-NA18944-JPT-1.", 
+          "long form argument": "--lane", 
+          "short form argument": "-l"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The Mosaik format reference genome (.dat).", 
+          "long form argument": "--mosaik-reference", 
+          "short form argument": "-m"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The input fastq file (second mate).", 
+          "long form argument": "--fastq2", 
+          "short form argument": "-q2"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Specifies the maximum number of hashes for the special reference sequences.", 
+          "long form argument": "--special-reference-hashes", 
+          "short form argument": "-sh"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The sample name. e.g. NA12878.", 
+          "long form argument": "--sample-name", 
+          "short form argument": "-sam"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Sequencing technology: '454', 'helicos', 'illumina', 'illumina_long', 'sanger' or 'solid'.", 
+          "long form argument": "--sequencing-technology", 
+          "short form argument": "-st"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The input Mosaik jump database stub.", 
+          "long form argument": "--jump-database", 
+          "short form argument": "-j"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Neural network file for Mosaik mapping quality scores (single end).", 
+          "long form argument": "--ann-se", 
+          "short form argument": "-as"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The prefix attached to 'special' reference sequences.", 
+          "long form argument": "--special-reference-prefix", 
+          "short form argument": "-s"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Specifies the minimum length of an alignment candidate.", 
+          "long form argument": "--alignment-candidate-threshold", 
+          "short form argument": "-act"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The input fastq file (first mate).", 
+          "long form argument": "--fastq", 
+          "short form argument": "-q"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Neural network file for Mosaik mapping quality scores (paired end).", 
+          "long form argument": "--ann-pe", 
+          "short form argument": "-ap"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The sequencing center name.", 
+          "long form argument": "--center-name", 
+          "short form argument": "-c"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "The hash-size used in Mosaik [4 - 32].", 
+          "long form argument": "--hash-size", 
+          "short form argument": "-hs"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The read group id. e.g. SRR009060.", 
+          "long form argument": "--read-group-id", 
+          "short form argument": "-id"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "The median fragment length.", 
+          "long form argument": "--median-fragment-length", 
+          "short form argument": "-mfl"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output read archive.", 
+          "long form argument": "--read-archive", 
+          "short form argument": "-a"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Specifies the maximum number of positions stored for each hash.", 
+          "long form argument": "--maximum-hashes-per-seed", 
+          "short form argument": "-mhp"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The platform unit. e.g. IL12_490_5.", 
+          "long form argument": "--platform", 
+          "short form argument": "-pu"
+        }
+      ], 
+      "description": "Align fastq files using Mosaik. In this version additional 'special' reference sequences are included (usually mobile element insertions) in the reference."
+    }, 
+    "normalize-vcf": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "The genomic region in which to perform the analysis.", 
+          "long form argument": "--region", 
+          "short form argument": "-rg"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The input VCF file to be normalized.", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The FASTA reference sequence file.", 
+          "long form argument": "--fasta-reference", 
+          "short form argument": "-r"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A file containing list of genomic regions to analyse.", 
+          "long form argument": "--regions-file", 
+          "short form argument": "-rgf"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The FASTA reference index file.", 
+          "long form argument": "--fasta-index", 
+          "short form argument": "-fx"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Window size for local sorting of variants [10000].", 
+          "long form argument": "--window", 
+          "short form argument": "-w"
+        }
+      ], 
+      "description": "Normalize a VCF file using vt and index with tabix."
+    }, 
+    "regions-coord": {
+      "arguments": [
+        {
+          "data type": "integer", 
+          "description": "The value to add to each given coordinate to define the upper value of the window.", 
+          "long form argument": "--maximum", 
+          "short form argument": "-x"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "The chromosome on which the windows are to be applied.", 
+          "long form argument": "--chromosome", 
+          "short form argument": "-c"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A list of region windows.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A file containing a list of genomic positions around which to generate windows (chromosome entered with --chromosome).", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "The value to subtract from each given coordinate to define the lower value of the window.", 
+          "long form argument": "--minimum", 
+          "short form argument": "-m"
+        }
+      ], 
+      "description": "Generate a list of regions based on a list of chromosome coordinates."
+    }, 
+    "regions-dict": {
+      "arguments": [
+        {
+          "data type": "integer", 
+          "description": "The size of the genomic regions.", 
+          "long form argument": "--window-size", 
+          "short form argument": "-w"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A list of genomic regions.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "bool", 
+          "description": "Generate regions only for the reference sequences contained in the file specified with --reference-sequences.", 
+          "long form argument": "--invert-sequences", 
+          "short form argument": "-v"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A reference fasta dictionary.", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Only regions from the reference sequences in this file will be output. If --invert-sequences is also set, the sequences not contained in the file will be output.", 
+          "long form argument": "--reference-sequences", 
+          "short form argument": "-s"
+        }
+      ], 
+      "description": "Generate a list of genomic regions based on a FASTA dictionary file."
+    }, 
+    "standardize-vcf": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "The reference FASTA file.", 
+          "long form argument": "--fasta-reference", 
+          "short form argument": "-r"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A text file containing a list of samples on which to subset.", 
+          "long form argument": "--samples-files", 
+          "short form argument": "-s"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output standardized VCF file.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The genomic region to analyse.", 
+          "long form argument": "--region", 
+          "short form argument": "-rg"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The input sorted VCF file.", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }
+      ], 
+      "description": "Standardize a VCF file. This involves steps including normalization of variants, removing duplicates etc."
+    }, 
+    "subset-vcf": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "The FASTA reference.", 
+          "long form argument": "--fasta-reference", 
+          "short form argument": "-r"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The filter expression (enclose in quotes on the command line).", 
+          "long form argument": "--filter-expression", 
+          "short form argument": "-f"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output subsetted compressed VCF file.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A file containing list of samples on which to subset.", 
+          "long form argument": "--samples-file", 
+          "short form argument": "-s"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The input compressed VCF file.", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }
+      ], 
+      "description": "Subset a compressed VCF file on a list of samples and normalize the records."
+    }, 
+    "tangram": {
+      "arguments": [
+        {
+          "data type": "integer", 
+          "description": "The number of threads to use.", 
+          "long form argument": "--threads", 
+          "short form argument": "-t"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output VCF file containing the MEI calls.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "The minimum number of normal fragments in a library.", 
+          "long form argument": "--minimum-fragments", 
+          "short form argument": "-mf"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The region of interest in the genome.", 
+          "long form argument": "--region", 
+          "short form argument": "-rg"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The mobile element reference FASTA file.", 
+          "long form argument": "--mobile-element-fasta", 
+          "short form argument": "-m"
+        }, 
+        {
+          "data type": "string", 
+          "description": "An input file containing a list of BAM files.", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The reference FASTA file.", 
+          "long form argument": "--fasta-reference", 
+          "short form argument": "-r"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output path for Tangram files.", 
+          "long form argument": "--path", 
+          "short form argument": "-p"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The reference file created by Tangram index.", 
+          "long form argument": "--tangram-reference", 
+          "short form argument": "-a"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Library information file (generated by tangram-scan).", 
+          "long form argument": "--library-file", 
+          "short form argument": "-l"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Fragment length distribution information file (generated by tangram-scan).", 
+          "long form argument": "--histogram-file", 
+          "short form argument": "-ht"
+        }
+      ], 
+      "description": "INCLUDE DESCRIPTION"
+    }, 
+    "tangram-bam": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "The output BAM file.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The mobile element fasta file.", 
+          "long form argument": "--mobile-element-fasta", 
+          "short form argument": "-m"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The genomic region to consider (whole genome or chromosome recommended).", 
+          "long form argument": "--region", 
+          "short form argument": "-rg"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The input BAM file.", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }
+      ], 
+      "description": "Add tags expected by Tangram to BAM files generated by aligners other than Mosaik."
+    }
+  }
+}

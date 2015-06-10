@@ -1,161 +1,48 @@
-<!DOCTYPE html>
-<html>
-<meta http-equiv="X-UA-Compatible" content="IE=9" />
-<head>
-   <title>gkno | Next Generation Sequencing Software Hub</title>
-   <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700&v2' rel='stylesheet' type='text/css'>
-   <link href='css/site.css' rel='stylesheet' type='text/css'>
-   <link href='css/dropdown.css' rel='stylesheet' type='text/css'>
+---
+layout: default
+title: "Home"
+group: "navigation"
+order: 1
+---
 
-   <script type="text/javascript">
+<!-- Describe what gkno is.-->
+<div class='section'>
+  <div class='section-title'>A bioinformatics pipeline launcher</div>
+  <div class='description' style="font-size:16px">
+    gkno opens the world of complex bioinformatic analysis to people of all level of computational expertise. This site contains documentation, tutorials and information
+    on all the tools that comprise gkno.
+  </div>
+</div>
 
-     var _gaq = _gaq || [];
-     _gaq.push(['_setAccount', 'UA-32956625-1']);
-     _gaq.push(['_trackPageview']);
+<!-- Provide a link for downloading gkno -->
+<div class="section">
+  <div class='section-title' style="font-size:44px; color:#6e915f"><a href="/install.html">Get gkno</a></div>
+  <div class='description' style="text-align:center; font-size:16px">
+    Learn how to download, install and maintain gkno and get data resources.
+  </div>
+</div>
 
-     (function() {
-       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-     })();
-
-   </script>  
-
-</head>
-
-<body>
-   
-   <a href="http://bioinformatics.bc.edu/marthlab/wiki/index.php/Main_Page"><img src="images/ribbon.png" class="ribbon"/></a>
-      
-   <div id="header">
-      <a href="/"><img src="images/gkno_logo_medium_me.png" height='104%'/></a>
-   
-      <nav id="nav">
-          <ul id="navigation" class="box-shadow">
-              <li><a href="/" class="first">Home</a></li>
-              <li><a href="#">Software <span style="font-size:0.65em">&#9660;</span></a>
-                  <ul>
-                      <li><a href="tools.html">Tools</a></li>
-                      <li><a href="pipelines.html">Pipelines</a></li>
-                      <li><a href="http://blog.gkno.me/post/32337920940/managing-resources">Resources</a></li>
-                      <li><a href="https://github.com/gkno/gkno_launcher/wiki/Documentation#wiki-installing">Download</a></li>
-                  </ul>
-              </li>
-              <li><a href="tutorials.html">Tutorials</a></li>
-              <li><a href="#">Support <span style="font-size:0.65em;">&#9660;</span></a>
-
-                  <ul>
-                      <li><a href="forum.html">Forum</a></li>
-                      <li><a href="faq.html">FAQ</a></li>
-                      <li><a href="bugs.html">Bugs</a></li>
-                      <li><a href="https://github.com/gkno/gkno_launcher/wiki/Documentation">Docs</a></li>
-                      <li><a href="glossary.html">Glossary</a></li>
-                  </ul>                     
-               </li>
-              <li><a class="last" href="http://blog.gkno.me">Blog</a></li>
-          </ul>
-      </nav>
-      
-      <div style="clear:both"></div>
-   </div>
-   <div id="intro" class="box-shadow">
-      <div class="grid">
-         <div style="padding: 10px 24px 10px 35px;">
-           <div style="float:left; width: 49%;">
-              <!-- <span style="font-size: 3.2em; color: rgb(60,60,60);">Genomic Toolkit</span> -->
-              <div class="description">
-                 <ul id="bullets">
-                    <li> Genome sequence analysis software hub from the Marth Lab at Boston College</li>
-                    <li> Powerful - battle-tested as part of the 1000 Genomes project</li>
-                    <li> Easy to use - tutorials and pipelines to get started  </li>                    
-                    <li> Framework - tools are linked together via the gkno launcher to create pipelines</li>                 
-                    <li> Flexible - design your own pipelines and add your own tools</li>
-                    <li> OpenSource - use, improve, tinker and contribute!</li>
-                 </ul>
-              </div>
-           </div>
-           <div style="float:right; width: 44%">
-              <img id="flowchart" src="images/gkno_flowchart_1.png"/>
-           </div>
-           <div style="clear:both"></div>
-           <div id='try-it'>
-              <a href="http://blog.gkno.me/post/29962850248/getting-started-with-gkno"><div class="button">Try It</div></a>
-              <!-- <div id="download"><a href="https://github.com/gkno/gkno.github.com/wiki/Documentation#wiki-installing">download v0.1</a></div> -->
-           </div>
-           <br/>
-        </div>
+<!-- Give an example describing variant calling and visualisation -->
+<div class="section">
+  <div class='description' style="font-size:24px; color:#6e915f;">Example: Call and visualize variants</div>
+  <div class='description'>
+    Use the gkno freebayes pipeline to call and filter variants. Easily parallelize calling over multiple regions and generate
+a compressed and indexed vcf file. The <a href="http://iobio.io">iobio</a> project allows visualization and real-time analysis
+of large data sets. Having generated variant calls for your sample, use <a href="http://vcf.iobio.io">vcf.iobio</a> to view
+global summary statistics.
+  </div>
+  <ul id="apps">
+    <li>
+      <div class='app'>
+        <div class='app-title'><a href="/pipelines.html#freebayes">gkno freebayes variant calling pipeline</a></div></br>
+        <a href="/pipelines.html#freebayes"><img src="public/images/pipelines/freebayes.png" style="width:450px; height:100px;"></img></a>
       </div>
-   </div>
-
-   <div id="content" class="box-shadow">
-      <div id="top-bar"><div style="background: url('images/grid_1.png') repeat transparent; height:100%">.</div></div>
-      <div id="more-info" class="section">
-         <div style="float:left; text-align:center" class="panel">
-            <!-- <img src="images/tut_tool_pipe_1.png" style="width:100%"> -->
-            <img src="images/paper_icon.png" style="width:38%"/>
-         </div>
-         <div style="float:right" class="panel">
-            <span class="header">About</span>
-            <div class="description">
-               Initially, gkno grew out of an internal need to share pipelines (and knowledge) between lab members while working on the 1000 Genomes project. gkno is a set of tools and a framework to link tools together into analyses pipelines. It includes pipelines that we have developed during our daily work on large scale sequencing projects. Additionally, documentation and tutorials are provided to allow users of any experience level to utilize these resources. 
-            </div>
-         </div>
-         <div style="clear:both"></div>
+    </li>
+    <li>
+      <div class='app'>
+        <div class='app-title'><a href="http://vcf.iobio.io">vcf.iobio: real-time variant visualization</a></div>
+        <a href="http://vcf.iobio.io"><img src="public/images/vcf.iobio_wide.png" style="width:450px; height:300px;"></img></a>
       </div>
-      <div class="section">
-         <div style="float:right" class="panel">
-            <a href="pipelines.html"><img width="98%" src="images/overview_map.png"/></a>
-         </div>
-         <div style="float:left" class="panel">
-            <span class="header">Pipeline Maps</span>
-            <div class="description">
-               We took inspiration from our own subway system here in Boston ( the T ) to create pipeline maps. Just as the T map helps you get from point A to point B, the pipeline maps help you take what you have (e.g a fastq file) and get to where you want to go (e.g. a vcf) while clearly illustrating all the stops along the way.
-            
-            
-            </div>
-         </div>
-         <div style="clear:both"></div>
-      </div>
-      <div class="section">
-         <div style="float:left; text-align:center" class="panel">
-            <img src="images/gears-multi.png"/ style="width:45%">
-         </div>
-         <div style="float:right" class="panel">
-            <span class="header">It's All About The Settings!</span>
-            <div class="description">
-               Choosing the correct settings for your data is often overlooked, but it's one of the trickiest aspects of generating meaningful results. To help, we have created some guidelines and tutorials to better utilize your software. We highly recommend reading <a href="analysis_101.html">analysis 101</a>.
-            </div>
-         </div>
-         <div style="clear:both"></div>
-      </div>
-
-      <div class="section">
-         <div style="float:right; text-align:center" class="panel">
-            <img src="images/community.png" style="width:45%">
-         </div>
-         <div style="float:left" class="panel">
-            <span class="header">Community Forum</span>
-            <div class="description">
-               gkno uses biostars.org as an open forum to allow all gkno users to provide support and share best practices. <a href="forum.html">More Info</a>
-            </div>
-         </div>
-         <div style="clear:both"></div>
-      </div>
-      <div id="get-started" class="section">
-         <div style="float:right" class="panel">
-            <span class="header">Who we are</span>
-            <div class="description">
-               We are a group of tool developers from the Marthlab at Boston College. We create software for the analysis of next-generation sequencing data. You can read more about our work, publications, and research opportunities on our <a href="http://bioinformatics.bc.edu/marthlab/Main_Page">lab homesite</a>.
-            </div>
-         
-         </div>
-         <div style="float:left" class="panel">
-            <img id="lab-photo" src="images/lab_photo_thumbnail.jpg"/></a>
-         </div>
-         <div style="clear:both"></div>         
-      </div>
-   
-   </div>
-
-</body>
-</html>
+    </li>
+  </ul>
+</div>
