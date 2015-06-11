@@ -1,49 +1,49 @@
 {
+  "__gkno__": {
+    "commit": "bc26a4f92b0fc4d36555f3c73c441031d9baef7c", 
+    "date": "June 2015", 
+    "version": "2.12.0"
+  }, 
   "categories": {
     "Alignment": [
-      "bwa-se", 
       "bwa", 
-      "glia", 
+      "bwa-se", 
       "mosaik"
     ], 
     "BAM-processing": [
-      "gatk-gvcf", 
+      "tangram-bam", 
       "gatk", 
-      "index-bam", 
-      "tangram-bam"
+      "gatk-gvcf", 
+      "index-bam"
     ], 
     "FASTA-processing": [
-      "build-mosaik-reference", 
       "bwa-index", 
-      "fasta-dictionary"
-    ], 
-    "Reference-free": [
+      "fasta-dictionary", 
+      "index-fasta", 
+      "build-mosaik-reference"
     ], 
     "SV-discovery": [
       "tangram"
     ], 
     "Scripts": [
-      "regions-coord", 
-      "regions-dict"
+      "regions-dict", 
+      "regions-coord"
     ], 
     "VCF-processing": [
-      "get-indels", 
-      "index-vcf", 
       "standardize-vcf", 
-      "subset-vcf"
+      "get-indels", 
+      "subset-vcf", 
+      "index-vcf"
     ], 
     "Variant-discovery": [
-      "compress-vcf", 
-      "freebayes", 
-      "gatk-genotype", 
-      "gatk-gvcf", 
       "gatk-vqsr", 
+      "gatk-genotype", 
+      "compress-vcf", 
       "gatk", 
-      "normalize-vcf", 
-      "tangram"
-    ], 
-    "Variant-graph": [
-      "glia"
+      "gatk-gvcf", 
+      "tangram", 
+      "freebayes", 
+      "normalize-vcf"
     ], 
     "Visualisation": [
       "coverage"
@@ -868,71 +868,6 @@
       ], 
       "description": "Get all indels from a VCF files and standardize the resulting VCF file."
     }, 
-    "glia": {
-      "arguments": [
-        {
-          "data type": "string", 
-          "description": "The output recalled, normalized VCF file.", 
-          "long form argument": "--out", 
-          "short form argument": "-o"
-        }, 
-        {
-          "data type": "string", 
-          "description": "The genomic region for consideration.", 
-          "long form argument": "--region", 
-          "short form argument": "-rg"
-        }, 
-        {
-          "data type": "integer", 
-          "description": "If sum of qualities of soft clipped bases is >= N, realign (default ~inf).", 
-          "long form argument": "--soft-clip-qsum-threshold", 
-          "short form argument": "-s"
-        }, 
-        {
-          "data type": "integer", 
-          "description": "If sum of qualities of mismatched bases is >= N, realign (default ~inf).", 
-          "long form argument": "--mismatch-qsum-threshold", 
-          "short form argument": "-mqt"
-        }, 
-        {
-          "data type": "integer", 
-          "description": "Number of bp of window to assemble from VCF for realignment.", 
-          "long form argument": "--realignment-window", 
-          "short form argument": "-rw"
-        }, 
-        {
-          "data type": "integer", 
-          "description": "Accept realignment if number of gaps is < N.", 
-          "long form argument": "--gap-count-max", 
-          "short form argument": "-gcm"
-        }, 
-        {
-          "data type": "string", 
-          "description": "The input BAM file(s).", 
-          "long form argument": "--in", 
-          "short form argument": "-i"
-        }, 
-        {
-          "data type": "string", 
-          "description": "The FASTA reference genome.", 
-          "long form argument": "--fasta-reference", 
-          "short form argument": "-r"
-        }, 
-        {
-          "data type": "string", 
-          "description": "The genome DAG, BGZIP'ed (.vcf.gz) and tabix-indexed (.tbi).", 
-          "long form argument": "--vcf", 
-          "short form argument": "-v"
-        }, 
-        {
-          "data type": "flag", 
-          "description": "Do not attempt streaming sort of alignments.  This can save memory in high coverage areas, but will require sort of BAM file before it can be used for variant calling.", 
-          "long form argument": "--unsorted-output", 
-          "short form argument": "-u"
-        }
-      ], 
-      "description": "Realign a BAM file against the variant graph with glia and call variants from the realigned BAM. In addition, this pipeline feeds the VCF used for creating the variant graph to Freebayes in the calling step, to force Freebayes to consider all of the alleles when genotyping the new sample."
-    }, 
     "index-bam": {
       "arguments": [
         {
@@ -955,6 +890,23 @@
         }
       ], 
       "description": "Index BAM files."
+    }, 
+    "index-fasta": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "The input FASTA file.", 
+          "long form argument": "--fasta-reference", 
+          "short form argument": "-r"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output FASTA index file.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }
+      ], 
+      "description": "Index a FASTA file."
     }, 
     "index-vcf": {
       "arguments": [
@@ -1467,6 +1419,53 @@
         }
       ], 
       "description": "Add tags expected by Tangram to BAM files generated by aligners other than Mosaik."
+    }
+  }, 
+  "resources": {}, 
+  "tools": {
+    "freebayes": {
+      "authors": [
+        "Erik Garrison"
+      ], 
+      "citations": [
+        "Garrison E, Marth G. Haplotype-based variant detection from short-read sequencing. arXiv preprint arXiv:1207.3907 [q-bio.GN] 2012"
+      ], 
+      "emails": [
+        "erik.garrison@gmail.com"
+      ], 
+      "papers": [
+        "http://arxiv.org/abs/1207.3907"
+      ], 
+      "web pages": [
+        "https://github.com/ekg/freebayes"
+      ]
+    }, 
+    "laser": {
+      "authors": [
+        "Chaolong Wang", 
+        "Xiaowei Zhan"
+      ], 
+      "emails": [
+        "chaolong@umich.edu"
+      ], 
+      "papers": [
+        "C Wang, X Zhan, J Bragg-Gresham, HM Kang, D Stambolian, E Chew, K Branham, J Heckenlively, The FUSION Study, RS Fulton, RK Wilson, ER Mardis, X Lin, A Swaroop, S Z\u00f6llner, GR Abecasis (2014) Ancestry estimation and control of population stratification for sequence-based association studies. Nature Genetics, 46: 409-415", 
+        "C Wang, X Zhan, L Liang, GR Abecasis, X Lin (2015) Improved Ancestry Estimation for both Genotyping and Sequencing Data using Projection Procrustes Analysis and Genotype Imputation. The American Journal of Human Genetics, Volume 96, Issue 6, 926-937"
+      ], 
+      "web pages": [
+        "http://csg.sph.umich.edu/chaolong/LASER/"
+      ]
+    }, 
+    "vt": {
+      "authors": [
+        "Adrian Tan"
+      ], 
+      "papers": [
+        "Unified representation of genetic variants, Adrian Tan, Goncalo R. Abecasis and Hyun Min Kang, Bioinformatics, 2015, 1-3, doi: 10.1093/bioinformatics/btv112"
+      ], 
+      "web pages": [
+        "http://genome.sph.umich.edu/wiki/Vt"
+      ]
     }
   }
 }
