@@ -1,49 +1,47 @@
 {
   "__gkno__": {
-    "commit": "bc26a4f92b0fc4d36555f3c73c441031d9baef7c", 
+    "commit": "d69853dea28d16362ac6b2103742d2f242c33d75", 
     "date": "June 2015", 
-    "version": "2.12.0"
+    "version": "2.14.2"
   }, 
   "categories": {
     "Alignment": [
-      "bwa", 
       "bwa-se", 
+      "bwa", 
       "mosaik"
     ], 
     "BAM-processing": [
-      "tangram-bam", 
-      "gatk", 
       "gatk-gvcf", 
-      "index-bam"
+      "index-bam", 
+      "tangram-bam"
     ], 
     "FASTA-processing": [
+      "build-mosaik-reference", 
       "bwa-index", 
       "fasta-dictionary", 
-      "index-fasta", 
-      "build-mosaik-reference"
+      "index-fasta"
     ], 
     "SV-discovery": [
       "tangram"
     ], 
     "Scripts": [
-      "regions-dict", 
-      "regions-coord"
+      "regions-coord", 
+      "regions-dict"
     ], 
     "VCF-processing": [
-      "standardize-vcf", 
       "get-indels", 
-      "subset-vcf", 
-      "index-vcf"
+      "index-vcf", 
+      "standardize-vcf", 
+      "subset-vcf"
     ], 
     "Variant-discovery": [
-      "gatk-vqsr", 
-      "gatk-genotype", 
       "compress-vcf", 
-      "gatk", 
-      "gatk-gvcf", 
-      "tangram", 
       "freebayes", 
-      "normalize-vcf"
+      "gatk-genotype", 
+      "gatk-gvcf", 
+      "gatk-vqsr", 
+      "normalize-vcf", 
+      "tangram"
     ], 
     "Visualisation": [
       "coverage"
@@ -572,35 +570,6 @@
         }
       ], 
       "description": "Population call variants using Freebayes, filtering the results with standard filtering methods."
-    }, 
-    "gatk": {
-      "arguments": [
-        {
-          "data type": "string", 
-          "description": "A VCF file(s) containing known variants that will be supplied to the base quality recalibration step alone.", 
-          "long form argument": "--known-recalibration", 
-          "short form argument": "-kr"
-        }, 
-        {
-          "data type": "string", 
-          "description": "A VCF file containing known variant alleles.", 
-          "long form argument": "--known-sites", 
-          "short form argument": "-k"
-        }, 
-        {
-          "data type": "string", 
-          "description": "The joint called VCF file to be recalibrated.", 
-          "long form argument": "--in", 
-          "short form argument": "-i"
-        }, 
-        {
-          "data type": "string", 
-          "description": "The reference FASTA file.", 
-          "long form argument": "--fasta-reference", 
-          "short form argument": "-r"
-        }
-      ], 
-      "description": "Prepare the BAM file for the haplotype caller by realigning indels and recalibrating the base qualities and generate gvcf files for each sample."
     }, 
     "gatk-genotype": {
       "arguments": [
@@ -1289,21 +1258,21 @@
       "arguments": [
         {
           "data type": "string", 
-          "description": "The FASTA reference.", 
-          "long form argument": "--fasta-reference", 
-          "short form argument": "-r"
+          "description": "The output subsetted compressed VCF file.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The genomic region in which to perform the analysis.", 
+          "long form argument": "--region", 
+          "short form argument": "-rg"
         }, 
         {
           "data type": "string", 
           "description": "The filter expression (enclose in quotes on the command line).", 
           "long form argument": "--filter-expression", 
           "short form argument": "-f"
-        }, 
-        {
-          "data type": "string", 
-          "description": "The output subsetted compressed VCF file.", 
-          "long form argument": "--out", 
-          "short form argument": "-o"
         }, 
         {
           "data type": "string", 
@@ -1316,6 +1285,18 @@
           "description": "The input compressed VCF file.", 
           "long form argument": "--in", 
           "short form argument": "-i"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The FASTA reference.", 
+          "long form argument": "--fasta-reference", 
+          "short form argument": "-r"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A file containing a list of genomic regions to analyse.", 
+          "long form argument": "--regions-file", 
+          "short form argument": "-rgf"
         }
       ], 
       "description": "Subset a compressed VCF file on a list of samples and normalize the records."
