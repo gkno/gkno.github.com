@@ -85,12 +85,6 @@
       "arguments": [
         {
           "data type": "string", 
-          "description": "Read group header line such as '@RG\\tID:foo\\tSM:bar' [null]. The '\\t' in the example will be replaced with tabs in the BAM header.", 
-          "long form argument": "--read-group-header", 
-          "short form argument": "-g"
-        }, 
-        {
-          "data type": "string", 
           "description": "The output BAM file.", 
           "long form argument": "--out", 
           "short form argument": "-o"
@@ -167,12 +161,6 @@
       "arguments": [
         {
           "data type": "string", 
-          "description": "Read group header line such as '@RG\\tID:foo\\tSM:bar' [null]. The '\\t' in the example will be replaced with tabs in the BAM header.", 
-          "long form argument": "--read-group-header", 
-          "short form argument": "-g"
-        }, 
-        {
-          "data type": "string", 
           "description": "The output BAM file.", 
           "long form argument": "--out", 
           "short form argument": "-o"
@@ -236,22 +224,10 @@
           "short form argument": "-os"
         }, 
         {
-          "data type": "string", 
-          "description": "The y axis label for the absolute coverage plot [read count].", 
-          "long form argument": "--y-label-absolute", 
-          "short form argument": "-ya"
-        }, 
-        {
           "data type": "flag", 
           "description": "Plot the bin of reads with zero coverage.", 
           "long form argument": "--include-zero", 
           "short form argument": "-z"
-        }, 
-        {
-          "data type": "string", 
-          "description": "The y axis label for the proportional coverage plot [read count].", 
-          "long form argument": "--y-label-proportional", 
-          "short form argument": "-yp"
         }, 
         {
           "data type": "string", 
@@ -261,21 +237,9 @@
         }, 
         {
           "data type": "string", 
-          "description": "Plot the tab delimited file with R.", 
-          "long form argument": "--r-script", 
-          "short form argument": "-rs"
-        }, 
-        {
-          "data type": "string", 
           "description": "The input sorted BAM file.", 
           "long form argument": "--in", 
           "short form argument": "-i"
-        }, 
-        {
-          "data type": "integer", 
-          "description": "The maximum value for the x axis for the absolute coverage plot [determined by data, or --combine-max-depth].", 
-          "long form argument": "--x-axis-maximum", 
-          "short form argument": "-xmax"
         }, 
         {
           "data type": "string", 
@@ -284,22 +248,10 @@
           "short form argument": "-or"
         }, 
         {
-          "data type": "string", 
-          "description": "The legend title [reference sequence].", 
-          "long form argument": "--legend", 
-          "short form argument": "-l"
-        }, 
-        {
           "data type": "flag", 
           "description": "Plot the raw read counts, rather than the percentage of the reads with each coverage.", 
           "long form argument": "--read-counts", 
           "short form argument": "-r"
-        }, 
-        {
-          "data type": "integer", 
-          "description": "The minimum value for the x axis for the absolute coverage plot [determined by data].", 
-          "long form argument": "--x-axis-minimum", 
-          "short form argument": "-xmin"
         }, 
         {
           "data type": "string", 
@@ -318,12 +270,6 @@
           "description": "A sorted list of reference sequences to use when plotting the histogram.", 
           "long form argument": "--reference-sequences", 
           "short form argument": "-s"
-        }, 
-        {
-          "data type": "string", 
-          "description": "The x axis label for the coverage plots [Coverage].", 
-          "long form argument": "--x-label", 
-          "short form argument": "-x"
         }
       ], 
       "description": "Calculate the genome coverage across reference sequences (usually chromosomes), generating R-plots."
@@ -747,12 +693,6 @@
           "short form argument": "-sv"
         }, 
         {
-          "data type": "string", 
-          "description": "Recalibration mode to employ (SNP|INDEL|BOTH).", 
-          "long form argument": "--snp-mode", 
-          "short form argument": "-sm"
-        }, 
-        {
           "data type": "float", 
           "description": "The levels of novel false discovery rate (FDR, implied by ti/tv) at which to slice the data. (in percent, that is 1.0 for 1 percent).", 
           "long form argument": "--tranche", 
@@ -763,12 +703,6 @@
           "description": "The output tranches file used by ApplyRecalibration for INDELs.", 
           "long form argument": "--indel-tranches-file", 
           "short form argument": "-itf"
-        }, 
-        {
-          "data type": "string", 
-          "description": "Recalibration mode to employ (SNP|INDEL|BOTH).", 
-          "long form argument": "--indel-mode", 
-          "short form argument": "-im"
         }, 
         {
           "data type": "string", 
