@@ -1,8 +1,8 @@
 {
   "__gkno__": {
-    "commit": "d69853dea28d16362ac6b2103742d2f242c33d75", 
-    "date": "June 2015", 
-    "version": "2.14.2"
+    "commit": "83d95b99d493176922c24150923a1f8c2cb522c0", 
+    "date": "July 2015", 
+    "version": "2.19.0"
   }, 
   "categories": {
     "Alignment": [
@@ -13,6 +13,7 @@
     "BAM-processing": [
       "gatk-gvcf", 
       "index-bam", 
+      "merge-bam", 
       "tangram-bam"
     ], 
     "FASTA-processing": [
@@ -230,6 +231,12 @@
       "arguments": [
         {
           "data type": "string", 
+          "description": "The output pdf absolute coverage plot file with zero coverage bases removed.", 
+          "long form argument": "--out-scaled", 
+          "short form argument": "-os"
+        }, 
+        {
+          "data type": "string", 
           "description": "The y axis label for the absolute coverage plot [read count].", 
           "long form argument": "--y-label-absolute", 
           "short form argument": "-ya"
@@ -245,30 +252,6 @@
           "description": "The y axis label for the proportional coverage plot [read count].", 
           "long form argument": "--y-label-proportional", 
           "short form argument": "-yp"
-        }, 
-        {
-          "data type": "integer", 
-          "description": "The maximum value for the x axis for the absolute coverage plot [determined by data, or --combine-max-depth].", 
-          "long form argument": "--x-axis-maximum-proportional", 
-          "short form argument": "-xap"
-        }, 
-        {
-          "data type": "string", 
-          "description": "A sorted list of reference sequences to use when plotting the histogram.", 
-          "long form argument": "--reference-sequences", 
-          "short form argument": "-s"
-        }, 
-        {
-          "data type": "integer", 
-          "description": "The maximum value for the x axis for the absolute coverage plot [determined by data, or --combine-max-depth].", 
-          "long form argument": "--x-axis-maximum-absolute", 
-          "short form argument": "-xaa"
-        }, 
-        {
-          "data type": "flag", 
-          "description": "Normalise the read counts based on the reference sequence length.", 
-          "long form argument": "--normalize", 
-          "short form argument": "-n"
         }, 
         {
           "data type": "string", 
@@ -290,15 +273,9 @@
         }, 
         {
           "data type": "integer", 
-          "description": "The minimum value for the x axis for the proportional coverage plot [determined by data].", 
-          "long form argument": "--x-axis-minimum-proportional", 
-          "short form argument": "-xip"
-        }, 
-        {
-          "data type": "flag", 
-          "description": "Plot the raw read counts, rather than the percentage of the reads with each coverage.", 
-          "long form argument": "--read-counts", 
-          "short form argument": "-r"
+          "description": "The maximum value for the x axis for the absolute coverage plot [determined by data, or --combine-max-depth].", 
+          "long form argument": "--x-axis-maximum", 
+          "short form argument": "-xmax"
         }, 
         {
           "data type": "string", 
@@ -313,28 +290,40 @@
           "short form argument": "-l"
         }, 
         {
+          "data type": "flag", 
+          "description": "Plot the raw read counts, rather than the percentage of the reads with each coverage.", 
+          "long form argument": "--read-counts", 
+          "short form argument": "-r"
+        }, 
+        {
           "data type": "integer", 
           "description": "The minimum value for the x axis for the absolute coverage plot [determined by data].", 
-          "long form argument": "--x-axis-minimum-absolute", 
-          "short form argument": "-xia"
+          "long form argument": "--x-axis-minimum", 
+          "short form argument": "-xmin"
         }, 
         {
           "data type": "string", 
-          "description": "The x axis label for the proportional coverage plot [coverage].", 
-          "long form argument": "--x-label-proportional", 
-          "short form argument": "-xp"
-        }, 
-        {
-          "data type": "string", 
-          "description": "The x axis label for the absolute coverage plot [coverage].", 
-          "long form argument": "--x-label-absolute", 
-          "short form argument": "-xa"
+          "description": "The output pdf scaled proportional coverage plot file.", 
+          "long form argument": "--out-proportional-scaled", 
+          "short form argument": "-ops"
         }, 
         {
           "data type": "integer", 
           "description": "Combine all positions with a depth >= max into a single bin in the histogram.", 
           "long form argument": "--combine-max-depth", 
           "short form argument": "-c"
+        }, 
+        {
+          "data type": "string", 
+          "description": "A sorted list of reference sequences to use when plotting the histogram.", 
+          "long form argument": "--reference-sequences", 
+          "short form argument": "-s"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The x axis label for the coverage plots [Coverage].", 
+          "long form argument": "--x-label", 
+          "short form argument": "-x"
         }
       ], 
       "description": "Calculate the genome coverage across reference sequences (usually chromosomes), generating R-plots."
@@ -634,9 +623,9 @@
       "arguments": [
         {
           "data type": "integer", 
-          "description": "The number of threads to use.", 
-          "long form argument": "--threads", 
-          "short form argument": "-t"
+          "description": "The number of data threads. Each data thread uses the full amount of memory normally given to a single run. For example, if a run typically uses 2Gb, using 2 data threads will require 4Gb of memory.", 
+          "long form argument": "--data-threads", 
+          "short form argument": "-dt"
         }, 
         {
           "data type": "string", 
@@ -649,6 +638,12 @@
           "description": "The genomic regions to analyze.", 
           "long form argument": "--region", 
           "short form argument": "-rg"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "The number of CPU threads allocated to each data thread. CPU threads share the memory allocated to the data thread, so increasing this value does not effect the memory usage.", 
+          "long form argument": "--cpu-threads", 
+          "short form argument": "-t"
         }, 
         {
           "data type": "string", 
@@ -982,6 +977,35 @@
         }
       ], 
       "description": "Count the number of occurences of kmers of a specified length and then construct a histogram of the counts."
+    }, 
+    "merge-bam": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "The BAM index file(s).", 
+          "long form argument": "--index", 
+          "short form argument": "-x"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output merged BAM file.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "string", 
+          "description": "only read data from this genomic region.", 
+          "long form argument": "--region", 
+          "short form argument": "-rg"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The input BAM file(s).", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }
+      ], 
+      "description": "Merge a set of BAM files."
     }, 
     "mosaik": {
       "arguments": [
