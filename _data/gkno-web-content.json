@@ -1,8 +1,8 @@
 {
   "__gkno__": {
-    "commit": "77571cdd3129ccadc79e3d7620499e2cbd442da2", 
+    "commit": "a767d1bae7f8895218fd4b335fae0fa4d93feac3", 
     "date": "July 2015", 
-    "version": "2.20.2"
+    "version": "2.20.3"
   }, 
   "categories": {
     "Alignment": [
@@ -13,6 +13,7 @@
     "BAM-processing": [
       "bedtools-coverage", 
       "gatk-gvcf", 
+      "get-region-coverage", 
       "index-bam", 
       "merge-bam", 
       "tangram-bam"
@@ -46,7 +47,6 @@
       "gatk-genotype", 
       "gatk-gvcf", 
       "gatk-vqsr", 
-      "get-region-coverage", 
       "normalize-vcf", 
       "tangram"
     ], 
