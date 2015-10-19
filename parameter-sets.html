@@ -1,0 +1,43 @@
+---
+layout: page
+permalink: parameter-sets.html
+---
+
+<!-- -->
+<div class='section'>
+  <div class='section-title'>What are parameter sets?</div>
+  <div class='description' style="font-size:18px;">
+    Parameter sets are predefined data sets that can be applied to a pipeline. These are particularly useful for specifying arguments that typically have the same values every time a pipeline is executed. This includes things like reference FASTA files that tend to remain unchanged for a particular species.
+  </div>
+
+  <div class='description' style="font-size:18px; text-indent:20px;">
+    In addition, there are often particular values applied to pipeline arguments depending on the experiment being undertaken. For example, when variant calling, the parameters change depending on whether the input data is whole genome data or exome data. Also, if the experiment is attempting to discover somatic mutations in cancer samples, the argumenti values will change. It is often the case that standard sets of arguments are used for these different experiments.
+  </div>
+
+  <div class='section-title' style='padding-top:20px;'>Available parameter sets</div>
+  <div class='description' style="font-size:18px;">
+    The parameter sets available for a pipeline can be found by requesting help on the pipeline, using the command line:
+  </div>
+  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
+    <span class="c1">
+      gkno &ltpipeline&gt -h (--help)
+    </span></pre></code>
+  </div>
+
+  <div class='description' style="font-size:18px;">
+    More information on help messages can be found <a href="help.html">here</a>. In the help message, under the title 'Parameter sets', all of the parameter sets for the pipeline are displayed with a short description.
+  </div>
+
+  <div class='section-title' style='padding-top:20px;'>Using parameter sets</div>
+  <div class='description' style="font-size:18px;">
+    To use a parameter set, all that is required is for the parameter set name to be specified using the --parameter-set (-ps) argument:
+  </div>
+  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
+    <span class="c1">
+      gkno &ltpipeline&gt -ps &ltparameter set name&gt
+    </span></pre></code>
+  </div>
+  <div class='description' style="font-size:18px;">
+    If help is requested for the pipeline (using -h) once the parameter set is specified, the values defined in the parameter set are displayed at the end of the help message.
+  </div>
+</div>
