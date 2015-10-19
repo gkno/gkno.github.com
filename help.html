@@ -1,0 +1,88 @@
+---
+layout: page
+permalink: help.html
+---
+
+<!-- -->
+<div class='section'>
+  <div class='section-title'>Pipeline help</div>
+  <div class='description' style="font-size:18px;">
+    There are a number of ways of getting help with gkno. Typing the command:
+  </div>
+
+  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
+    <span class="c1">gkno</span></pre></code>
+  </div>
+
+  <div class='description' style="font-size:18px;">
+    will summarize the actions that can be taken with gkno, including different ways of getting help. These help functions are summarized on this page. Note that help on all available pipelines is also available <a href="pipelines.html">here</a>.
+  </div>
+
+  <div class='section-title' style='padding-top:20px;'>Available pipelines</div>
+  <div class='description' style="font-size:18px;">
+    To see a list of all available pipelines, type:
+  </div>
+  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
+    <span class="c1">
+      gkno -api (--all-pipelines)
+    </span></pre></code>
+  </div>
+
+  <div class='description' style="font-size:18px;">
+    The flag in parentheses is the long-form of the argument. Both -api and --all-pipelines perform the same action. Executing this command will generate a list of all the different pipelines available in gkno.
+  </div>
+
+  <div class='section-title' style='padding-top:20px;'>Categories</div>
+  <div class='description' style="font-size:18px;">
+    To narrow down the list, we can limit ourselves to viewing only those pipelines associated with a particular category (these categories are mirrored on the website pipeline help page). To see a list of all available categories, type:
+  </div>
+  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
+    <span class="c1">
+      gkno -cat (--categories)
+    </span></pre></code>
+  </div>
+  <div class='description' style="font-size:18px;">
+    Then, to see all of the pipelines associated with a particular category, type:
+  </div>
+  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
+    <span class="c1">
+      gkno -cat &ltcategory&gt
+    </span></pre></code>
+  </div>
+  <div class='description' style="font-size:18px;">
+    Note that pipelines may appear in multiple categories. It is not necessary to type the full category name; gkno will list the pipelines associated with the category closest to what was typed. For example:
+  </div>
+  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
+    <span class="c1">
+      gkno -cat vcf-pr
+    </span></pre></code>
+  </div>
+  <div class='description' style="font-size:18px;">
+    will result in a list of all pipelines associated with the category VCF-Processing. A warning is provided to indicate that the category being displayed is not exactly what was typed (since there is no category of that name).
+  </div>
+
+  <div class='section-title' style='padding-top:20px;'>Individual pipeline help</div>
+  <div class='description' style="font-size:18px;">
+    Finally, help for individual pipelines can be sought. For example:
+  </div>
+  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
+    <span class="c1">
+      gkno bwa -h (--help)
+    </span></pre></code>
+  </div>
+  <div class='description' style="font-size:18px;">This displays the following items:</div>
+  <div class='description' style="font-size:18px; padding-left:40px;">1. A brief description of the pipeline.</div>
+  <div class='description' style="font-size:18px; padding-left:40px;">
+    2. The pipeline workflow (i.e. the ordered list of performed tasks) and the tools that are used in these tasks. 
+  </div>
+  <div class='description' style="font-size:18px; padding-left:40px;">
+    3. Available parameter sets for the pipeline (see the help on parameter sets for an explanation of these).
+  </div>
+  <div class='description' style="font-size:18px; padding-left:40px;">
+  <div class='divider'></div>
+    4. A list of all the available arguments along with the expected data type and an brief description.
+  </div>
+  <div class='description' style="font-size:18px; padding-left:40px;">
+    5. All of the values assigned to arguments from parameter sets.
+  </div>
+</div>
