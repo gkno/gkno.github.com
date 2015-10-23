@@ -10,7 +10,7 @@ permalink: parameter-sets.html
     Parameter sets are predefined data sets that can be applied to a pipeline. These are particularly useful for specifying arguments that typically have the same values every time a pipeline is executed. This includes things like reference FASTA files that tend to remain unchanged for a particular species.
   </div>
 
-  <div class='description' style="font-size:18px; text-indent:20px;">
+  <div class='description' style="font-size:18px">
     In addition, there are often particular values applied to pipeline arguments depending on the experiment being undertaken. For example, when variant calling, the parameters change depending on whether the input data is whole genome data or exome data. Also, if the experiment is attempting to discover somatic mutations in cancer samples, the argumenti values will change. It is often the case that standard sets of arguments are used for these different experiments.
   </div>
 
@@ -28,6 +28,7 @@ permalink: parameter-sets.html
     More information on help messages can be found <a href="help.html">here</a>. In the help message, under the title 'Parameter sets', all of the parameter sets for the pipeline are displayed with a short description.
   </div>
 
+  <!-- Using parameter sets -->
   <div class='section-title' style='padding-top:20px;'>Using parameter sets</div>
   <div class='description' style="font-size:18px;">
     To use a parameter set, all that is required is for the parameter set name to be specified using the --parameter-set (-ps) argument:
@@ -39,5 +40,29 @@ permalink: parameter-sets.html
   </div>
   <div class='description' style="font-size:18px;">
     If help is requested for the pipeline (using -h) once the parameter set is specified, the values defined in the parameter set are displayed at the end of the help message.
+  </div>
+
+  <!-- Special parameter sets -->
+  <div class='section-title' style='padding-top:20px;'>Special parameter sets</div>
+  <div class='description' style="font-size:18px;">
+    Most of the pipelines come with three special parameter sets. The functions of these three pipelines are described below.
+  </div>
+
+  <!-- The default parameter set -->
+  <div class='section-title' style='text-align:left;font-size:24px;padding-top:20px;'>The <b style='color:#005422;'><i>default</i></b> parameter set</div>
+  <div class='description' style="font-size:18px;">
+    A lot of pipelines and their constituent tools have certain parameters with recommended values for normal use. The default parameter set is included to set all of the values that should be used in a 'default' running of the pipeline. This might include simple things like setting titles on graph axes, or standard filtering rules for variant call files (VCF) etc.
+  </div>
+
+  <!-- The none parameter set -->
+  <div class='section-title' style='text-align:left;font-size:24px;padding-top:20px;'>The <b style='color:#005422;'><i>none</i></b> parameter set</div>
+  <div class='description' style="font-size:18px;">
+    There are times (creating your own parameter set might be one of these) where you would prefer that the default parameter set is not used. If this is the case, set the parameter set as 'none' and all parameter set information will be ignored.
+  </div>
+
+  <!-- The test parameter set -->
+  <div class='section-title' style='text-align:left;font-size:24px;padding-top:20px;'>The <b style='color:#005422;'><i>test</i></b> parameter set</div>
+  <div class='description' style="font-size:18px;">
+    Finally, the 'test' parameter set is included to allow the pipeline to be tested. Using this pipeline is discussed <a href="test-parameter-sets.html">here</a>.
   </div>
 </div>
