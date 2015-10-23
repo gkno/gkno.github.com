@@ -17,7 +17,7 @@ order: 4
       <div style="display:table">
         <a style="display:table-cell;width:240px; text-align:left; padding-left:40px; font-size:24px;">Authors:</a>
         {% for author in site.data.gkno-web-content.tools[tool].authors %}
-          <ul style="list-style-type:circle; font-size:24px;"><div style="display:table-cell">{{ author }}</div></ul>
+          <ul style="list-style-type:circle; font-size:18px;"><div style="display:table-cell">{{ author }}</div></ul>
         {% endfor %}
       </div>
 
@@ -25,7 +25,7 @@ order: 4
       <div style="display:table">
         <a style="display:table-cell;width:240px; text-align:left; padding-left:40px; font-size:24px;">Contact:</a>
         {% for email in site.data.gkno-web-content.tools[tool].emails %}
-          <ul style="list-style-type:circle; font-size:24px;"><div style="display:table-cell">{{ email }}</div></ul>
+          <ul style="list-style-type:circle; font-size:18px;"><div style="display:table-cell">{{ email }}</div></ul>
         {% endfor %}
       </div>
 
@@ -33,7 +33,9 @@ order: 4
       <div style="display:table">
         <a style="display:table-cell;width:240px; text-align:left; padding-left:40px; font-size:24px;">Web pages:</a>
         {% for webPage in site.data.gkno-web-content.tools[tool].web_pages %}
-          <ul style="list-style-type:circle; font-size:24px;"><div style="display:table-cell">{{ webPage }}</div></ul>
+          <ul style="list-style-type:circle; font-size:18px;"><div style="display:table-cell">
+            <a href="{{ webPage }}">{{ webPage }}</a>
+        </div></ul>
         {% endfor %}
       </div>
 
@@ -41,7 +43,7 @@ order: 4
       <div style="display:table">
         <a style="display:table-cell;width:240px; text-align:left; padding-left:40px; font-size:24px;">Papers:</a>
         {% for paper in site.data.gkno-web-content.tools[tool].papers %}
-          <ul style="list-style-type:circle; font-size:18px;"><div style="display:table-cell">{{ paper }}</div></ul>
+          <ul style="list-style-type:circle; font-size:18px; text-align:left;"><div style="display:table-cell">{{ paper }}</div></ul>
         {% endfor %}
       </div>
       <hr>
