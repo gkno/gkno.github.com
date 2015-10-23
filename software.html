@@ -7,7 +7,44 @@ order: 4
 ---
 
 <div class='section'>
-  <div class='section-title'>Coming Soon</div>
-  <div class="description">             
-  </div>
+  <div class='section-title'>Software tools</div>
+  <ul id="tools">
+    {% for tools in site.data.gkno-web-content.tools %}
+      {% assign tool = tools[0] %}
+      <div style="text-align:left;">{{ tool }}</div>
+
+      <!-- Display authors -->
+      <div style="display:table">
+        <a style="display:table-cell;width:240px; text-align:left; padding-left:40px; font-size:24px;">Authors:</a>
+        {% for author in site.data.gkno-web-content.tools[tool].authors %}
+          <ul style="list-style-type:circle; font-size:24px;"><div style="display:table-cell">{{ author }}</div></ul>
+        {% endfor %}
+      </div>
+
+      <!-- Display emails -->
+      <div style="display:table">
+        <a style="display:table-cell;width:240px; text-align:left; padding-left:40px; font-size:24px;">Contact:</a>
+        {% for email in site.data.gkno-web-content.tools[tool].emails %}
+          <ul style="list-style-type:circle; font-size:24px;"><div style="display:table-cell">{{ email }}</div></ul>
+        {% endfor %}
+      </div>
+
+      <!-- Display web pages -->
+      <div style="display:table">
+        <a style="display:table-cell;width:240px; text-align:left; padding-left:40px; font-size:24px;">Web pages:</a>
+        {% for webPage in site.data.gkno-web-content.tools[tool].web_pages %}
+          <ul style="list-style-type:circle; font-size:24px;"><div style="display:table-cell">{{ webPage }}</div></ul>
+        {% endfor %}
+      </div>
+
+      <!-- Display papers -->
+      <div style="display:table">
+        <a style="display:table-cell;width:240px; text-align:left; padding-left:40px; font-size:24px;">Papers:</a>
+        {% for paper in site.data.gkno-web-content.tools[tool].papers %}
+          <ul style="list-style-type:circle; font-size:18px;"><div style="display:table-cell">{{ paper }}</div></ul>
+        {% endfor %}
+      </div>
+      <hr>
+    {% endfor %}
+  </ul>
 </div>

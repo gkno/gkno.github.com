@@ -39,7 +39,8 @@ b { color:rgb(110,110,110); text-decoration: none;}
 
 .masthead {  
   position: fixed;
-  background: #005422;
+  /*background: #005422;*/
+  background: #FFFFFF;
   top:0px;
   left:0px;
   right:0px;   
@@ -83,7 +84,7 @@ b { color:rgb(110,110,110); text-decoration: none;}
 }
 
 .masthead #menu li a {
-  color:white;
+  color:#005422;
    padding-bottom:3px;
    text-decoration: none;
    border: none;
