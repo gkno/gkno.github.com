@@ -1,0 +1,93 @@
+---
+layout: page
+permalink: tool-arguments.html
+---
+
+<!-- -->
+<div class='section'>
+
+  <!-- Intro -->
+  <div class='section-title'>Tool arguments</div>
+  <div class='description' style="font-size:18px;">
+    The <i>arguments</i> section of the tool configuration file is used to describe all of the arguments that can be set for the tool along with describing the behaviour of the arguments. All of the arguments are grouped under different titles. <strong>All input files must be assigned to the <i>Inputs</i> group and all output files to the <i>Outputs</i> group.</strong> All other arguments can appear under any user defined titles. Each group consists of a list of arguments, each supplied with a set of attributes as shown in the example at the end of this page. Following is a list of All of the required and optional attributes.
+  </div>
+
+  <!-- All required argument attributes -->
+  <div class='section-title'>Required argument attributes</div>
+
+  <!-- Command line argument -->
+  <div class='section-title' style='text-align:left;font-size:24px;padding-top:20px;'>command line argument</div>
+  <div class='description' style="font-size:18px;">
+    The long and short form arguments are used to specify the argument expected by gkno and the <i>command line argument</i> attribute is the argument expected by the tool. For example, the command line for the tool might expect the argument <i>--bam</i> to describe an input <i>bam</i> file, but to be consistent with other tools, the gkno long and short form arguments for specifying this input file are <i>--in</i> and <i>-i</i>. The <i>command line argument</i> attribute will ensure that when constructing the command line for this tool, the input files are specified using the argument <i>--bam</i> as expected by the tool.
+  </div>
+  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
+    <span class="c1">
+      "command line argument" : "ARGUMENT"
+    </span></pre></code>
+  </div>
+
+  <!-- Description -->
+  <div class='section-title' style='text-align:left;font-size:24px;padding-top:20px;'>description</div>
+  <div class='description' style="font-size:18px;">
+    Each of the tool arguments is provided with a description of what function the argument performs. This ensures that the configuration file is human-readable, but also, these descriptions can be imported into pipelines and appear in the help messages for pipelines. As such, these descriptions should be as clear and descriptive as possible.
+  </div>
+  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
+    <span class="c1">
+      "description" : "ARGUMENT DESCRIPTION"
+    </span></pre></code>
+  </div>
+
+  <!-- Long and short form arguments -->
+  <div class='section-title' style='text-align:left;font-size:24px;padding-top:20px;'>long form argument</div>
+  <div class='description' style="font-size:18px;">
+    Each gkno argument has two forms; a long and a short form. The long form argument is preceded by '--' and is descriptive of what the argument does. The long and short form arguments do not have to be related to the argument expected by the tool. Recommended practice is to keep gkno arguments consistent across tools.
+  </div>
+  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
+    <span class="c1">
+      "long form argument" : "--LONG"
+    </span></pre></code>
+  </div>
+  <div class='section-title' style='text-align:left;font-size:24px;padding-top:20px;'>short form argument</div>
+  <div class='description' style="font-size:18px;">
+    The short form argument is preceded by a single dash '-' and is generally not descriptive of what the argument does, but is quick to type and so is typically the form used by the user.
+  </div>
+  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
+    <span class="c1">
+      "short form argument" : "--SHORT"
+    </span></pre></code>
+  </div>
+
+  <!-- All optional argument attributes -->
+  <div class='section-title'>Optional argument attributes</div>
+
+  <!-- Example of an argument -->
+  <div class='section-title' style='text-align:left;font-size:24px;padding-top:20px;'>Example</div>
+  <div class='description' style="font-size:18px;">
+    Below is an example of an input file argument in the <i>Inputs</i> argument group.
+  </div>
+  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
+    <span class="c1">
+      "arguments" : {
+        "Inputs" : [
+          {
+            "description" : "ARGUMENT DESCRIPTION",
+            "long form argument" : "--ARGUMENT",
+            "short form argument" : "-A",
+            "command line argument" : "ARGUMENT EXPECTED BY THE TOOL",
+            "required" : true,
+            "data type" : "TYPE",
+            "extensions" : [LIST OF ALLOWED EXTENSIONS],
+            "modify argument" : "MODIFIER",
+            "modify value" : "REPLACE ARGUMENT WITH THIS VALUE",
+            "if input is stream" : {
+              "default" : {
+                "argument" : "ARGUMENT",
+                "value" : "VALUE"
+              }
+            }
+          }
+        ]
+      }
+    </span></pre></code>
+  </div>
+</div>
