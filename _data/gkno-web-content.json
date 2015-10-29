@@ -1,8 +1,8 @@
 {
   "__gkno__": {
-    "commit": "14583f619e564e77f8cd37f9259321f912d88330", 
+    "commit": "e31a0c5741ee3a9b41e07cb805fae9647c45e683", 
     "date": "October 2015", 
-    "version": "2.35.1"
+    "version": "2.36.0"
   }, 
   "categories": {
     "Alignment": [
@@ -12,6 +12,7 @@
     ], 
     "BAM-processing": [
       "add-read-group", 
+      "bam-to-fastq", 
       "bedtools-coverage", 
       "gatk-gvcf", 
       "get-region-coverage", 
@@ -104,6 +105,77 @@
         }
       ], 
       "description": "Add or remove sample and read group information to a BAM file."
+    }, 
+    "bam-to-fastq": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "Base output name for generated output files.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Read name extension to use for first read in a pair default is '/1'.", 
+          "long form argument": "--first-mate-extension", 
+          "short form argument": "-f"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "Add the read name/extension to the '+' line of the fastq records.", 
+          "long form argument": "--add-name-to-plus", 
+          "short form argument": "-a"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The input SAM / BAM file to convert.", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Reference file for converting '=' in the sequence to the actual base if '=' are found and the refFile is not specified, 'N' is written to the FASTQ.", 
+          "long form argument": "--fasta-reference", 
+          "short form argument": "-r"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "Print the parameter settings to stderr.", 
+          "long form argument": "--params", 
+          "short form argument": "-p"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "Process the BAM as readName sorted instead of coordinate if the header does not indicate a sort order.", 
+          "long form argument": "--read-name", 
+          "short form argument": "-n"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "Do not reverse complement reads marked as reverse", 
+          "long form argument": "--no-reverse", 
+          "short form argument": "-v"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "Generate 1 interleaved (merged) FASTQ for paired-ends (unpaired in a separate file) use firstOut to override the filename of the interleaved file.", 
+          "long form argument": "--merge", 
+          "short form argument": "-m"
+        }, 
+        {
+          "data type": "flag", 
+          "description": "Do not expect an EOF block on a bam file.", 
+          "long form argument": "--no-eof", 
+          "short form argument": "-e"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Read name extension to use for second read in a pair default is '/2'.", 
+          "long form argument": "--second-mate-extension", 
+          "short form argument": "-s"
+        }
+      ], 
+      "description": "Convert a BAM file back into a FASTQ file."
     }, 
     "bedtools-coverage": {
       "arguments": [
@@ -612,7 +684,7 @@
           "data type": "float", 
           "description": "Report sites if the probability that there is a polymorphism at the site is greater than N.  default: 0.0001.", 
           "long form argument": "--pvar", 
-          "short form argument": "-v"
+          "short form argument": "-pv"
         }, 
         {
           "data type": "float", 
@@ -1824,6 +1896,18 @@
     }
   }, 
   "tools": {
+    "bamutil": {
+      "authors": [
+        "Mary Kate Wing"
+      ], 
+      "commit": "9b9097ea7dd9bb6efa6fde99d495338e9c189813", 
+      "emails": [
+        "mktrost@umich.edu"
+      ], 
+      "web_pages": [
+        "git clone https://github.com/statgen/bamUtil.git"
+      ]
+    }, 
     "freebayes": {
       "authors": [
         "Erik Garrison"
