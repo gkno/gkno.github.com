@@ -26,6 +26,24 @@ permalink: tool-arguments.html
     </span></pre></code>
   </div>
 
+  <!-- Data type -->
+  <div class='section-title' style='text-align:left;font-size:24px;padding-top:20px;'>data type</div>
+  <div class='description' style="font-size:18px;">
+    The argument can be accompanied by a value of a particular type or is a flag and does not expect a value. The <i>data type</i> attribute informs gkno what the expected type is so that any supplied values can be checked.
+  </div>
+  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
+    <span class="c1">
+      "data type" : "TYPE"
+    </span></pre></code>
+  </div>
+  <div class='description' style="font-size:18px;">
+    where <i>TYPE</i> can take any of the following values:
+  </div>
+  <div class='description' style="font-size:18px;"><strong>flag:   </strong> no value is allowed with the argument.</div>
+  <div class='description' style="font-size:18px;"><strong>float:  </strong> a floating point number.</div>
+  <div class='description' style="font-size:18px;"><strong>integer:</strong> an integer.</div>
+  <div class='description' style="font-size:18px;"><strong>string: </strong> a string.</div>
+
   <!-- Description -->
   <div class='section-title' style='text-align:left;font-size:24px;padding-top:20px;'>description</div>
   <div class='description' style="font-size:18px;">
@@ -59,6 +77,17 @@ permalink: tool-arguments.html
 
   <!-- All optional argument attributes -->
   <div class='section-title'>Optional argument attributes</div>
+
+  <!-- Allow multiple values -->
+  <div class='section-title' style='text-align:left;font-size:24px;padding-top:20px;'>allow multiple values</div>
+  <div class='description' style="font-size:18px;">
+    By default, a non-flag argument can be given a single value. If a tool is a part of a pipeline and multiple values are supplied for an argument, gkno will assume that the pipeline is to be run multiple times, each subsequent execution using one of the supplied values. There are many occasions where the argument can legitimately by supplied with multiple values for a single execution. The manner in which this occurs is discussed with the pipeline descriptions, but it is only possible if the tool argument is known to allow multiple values to be supplied. The <i>allow multiple values</i> attribute is a Boolean and instructs gkno that the argument can or cannot accept multiple values. Since this is optional and <i>false</i> by default, it is generally only included to indicate that an argument can accept multiple values.
+  </div>
+  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
+    <span class="c1">
+      "allow multiple values" : true / false
+    </span></pre></code>
+  </div>
 
   <!-- Example of an argument -->
   <div class='section-title' style='text-align:left;font-size:24px;padding-top:20px;'>Example</div>

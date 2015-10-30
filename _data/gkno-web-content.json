@@ -1,8 +1,8 @@
 {
   "__gkno__": {
-    "commit": "e31a0c5741ee3a9b41e07cb805fae9647c45e683", 
+    "commit": "15fc46918603f46dbeed639293ea0e6339370704", 
     "date": "October 2015", 
-    "version": "2.36.0"
+    "version": "2.37.2"
   }, 
   "categories": {
     "Alignment": [
@@ -14,6 +14,7 @@
       "add-read-group", 
       "bam-to-fastq", 
       "bedtools-coverage", 
+      "filter-bam", 
       "gatk-gvcf", 
       "get-region-coverage", 
       "index-bam", 
@@ -522,6 +523,149 @@
         }
       ], 
       "description": "Generate a dictionary containing all of the sequences in the input reference fasta."
+    }, 
+    "filter-bam": {
+      "arguments": [
+        {
+          "data type": "bool", 
+          "description": "Keep only alignments with mate on reverese strand?", 
+          "long form argument": "--is-mate-reverse-strand", 
+          "short form argument": "-imr"
+        }, 
+        {
+          "data type": "string", 
+          "description": "only read data from this genomic region.", 
+          "long form argument": "--region", 
+          "short form argument": "-rg"
+        }, 
+        {
+          "data type": "bool", 
+          "description": "Keep only alignments with mates that mapped.", 
+          "long form argument": "--is-mate-mapped", 
+          "short form argument": "-imm"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Keep reads with length that matches pattern.", 
+          "long form argument": "--length", 
+          "short form argument": "-g"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Keep reads with this key=>value pair.", 
+          "long form argument": "--tag", 
+          "short form argument": "-t"
+        }, 
+        {
+          "data type": "bool", 
+          "description": "Keep only alignments marked as second mate?", 
+          "long form argument": "--is-second-mate", 
+          "short form argument": "-ism"
+        }, 
+        {
+          "data type": "bool", 
+          "description": "Keep only singletons?", 
+          "long form argument": "--is-singleton", 
+          "short form argument": "-isi"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output filtered and merged BAM file.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The input BAM file.", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }, 
+        {
+          "data type": "bool", 
+          "description": "Keep only alignments that are marked as duplicate?", 
+          "long form argument": "--is-duplicate", 
+          "short form argument": "-id"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Keep reads with name that matches pattern.", 
+          "long form argument": "--name", 
+          "short form argument": "-n"
+        }, 
+        {
+          "data type": "bool", 
+          "description": "Keep only alignments that were sequenced as paired?", 
+          "long form argument": "--is-paired", 
+          "short form argument": "-ipr"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Keep reads with mapping qualities that match pattern.", 
+          "long form argument": "--mapping-quality", 
+          "short form argument": "-mq"
+        }, 
+        {
+          "data type": "integer", 
+          "description": "Keep reads with this *exact* alignment flag (for more detailed queries, see 'Alignment flag filters').", 
+          "long form argument": "--alignment-flag", 
+          "short form argument": "-a"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Keep reads with motif that matches pattern.", 
+          "long form argument": "--query-bases", 
+          "short form argument": "-q"
+        }, 
+        {
+          "data type": "string", 
+          "description": "Keep reads with insert size that matches pattern.", 
+          "long form argument": "--insert-size", 
+          "short form argument": "-z"
+        }, 
+        {
+          "data type": "bool", 
+          "description": "Keep only alignments that were mapped?", 
+          "long form argument": "--is-mapped", 
+          "short form argument": "-im"
+        }, 
+        {
+          "data type": "bool", 
+          "description": "Keep only alignments that failed QC?", 
+          "long form argument": "--is-failed-qc", 
+          "short form argument": "-if"
+        }, 
+        {
+          "data type": "bool", 
+          "description": "Keep only alignments on reverse strand?", 
+          "long form argument": "--is-reverse-strand", 
+          "short form argument": "-ir"
+        }, 
+        {
+          "data type": "string", 
+          "description": "the filter script file (see bamtools documentation for more information).", 
+          "long form argument": "--script", 
+          "short form argument": "-s"
+        }, 
+        {
+          "data type": "bool", 
+          "description": "Keep only alignments marked as first mate?", 
+          "long form argument": "--is-first-mate", 
+          "short form argument": "-ifm"
+        }, 
+        {
+          "data type": "bool", 
+          "description": "Keep only alignments marked as primary?", 
+          "long form argument": "--is-primary-alignment", 
+          "short form argument": "-ipa"
+        }, 
+        {
+          "data type": "bool", 
+          "description": "Keep only alignments that passed PE resolution?", 
+          "long form argument": "--is-proper-pair", 
+          "short form argument": "-ipp"
+        }
+      ], 
+      "description": "Filter a set of BAM files."
     }, 
     "find-cds": {
       "arguments": [
@@ -1896,6 +2040,21 @@
     }
   }, 
   "tools": {
+    "bamtools": {
+      "authors": [
+        "Derek Barnett"
+      ], 
+      "commit": "7f8b301e2f43d4d50a79f6184f1c132c9e33d324", 
+      "emails": [
+        "derekwbarnett@gmail.com"
+      ], 
+      "papers": [
+        "Barnett D. W., et al. BamTools: a C++ API and toolkit for analyzing and managing BAM files. Bioinformatics 2011;27:1691-1692."
+      ], 
+      "web_pages": [
+        "https://github.com/pezmaster31/bamtools"
+      ]
+    }, 
     "bamutil": {
       "authors": [
         "Mary Kate Wing"
