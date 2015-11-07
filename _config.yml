@@ -10,7 +10,7 @@ relative_permalinks: true
 
 # Setup
 title:               gkno
-tagline:             'tagline'
+tagline:             'Genomic pipelines'
 description:         'A reserved <a href="http://jekyllrb.com" target="_blank">Jekyll</a> theme that places the utmost gravity on content with a hidden drawer. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.'
 url:                 http://gkno.me
 baseurl:             /
@@ -18,9 +18,9 @@ paginate:            5
 
 # About/contact
 author:
-  name:              Chase Miller
-  url:               https://twitter.com/ChaseAllnMiller
-  email:             chmille4@gmail.com
+  name:              Alistair Ward
+  url:               https://twitter.com/AlistairNWard
+  email:             AlistairNWard@gmail.com
 
 # Custom vars
 version:             1.0.0
