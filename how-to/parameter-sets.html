@@ -1,0 +1,68 @@
+---
+layout: page
+permalink: parameter-sets.html
+---
+
+<!-- -->
+<div class='section'>
+  <div class='section-title'>What are parameter sets?</div>
+  <div class='description'>
+    Parameter sets are predefined data sets that can be applied to a pipeline. These are particularly useful for specifying arguments that typically have the same values every time a pipeline is executed. This includes things like reference FASTA files that tend to remain unchanged for a particular species.
+  </div>
+
+  <div class='description'>
+    In addition, there are often particular values applied to pipeline arguments depending on the experiment being undertaken. For example, when variant calling, the parameters change depending on whether the input data is whole genome data or exome data. Also, if the experiment is attempting to discover somatic mutations in cancer samples, the argumenti values will change. It is often the case that standard sets of arguments are used for these different experiments.
+  </div>
+
+  <div class='section-title'>Available parameter sets</div>
+  <div class='description'>
+    The parameter sets available for a pipeline can be found by requesting help on the pipeline, using the command line:
+  </div>
+  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
+    <span class="c1">
+      gkno &ltpipeline&gt -h (--help)
+    </span></pre></code>
+  </div>
+
+  <div class='description'>
+    More information on help messages can be found <a href="/how-to/help.html">here</a>. In the help message, under the title 'Parameter sets', all of the parameter sets for the pipeline are displayed with a short description.
+  </div>
+
+  <!-- Using parameter sets -->
+  <div class='section-title'>Using parameter sets</div>
+  <div class='description'>
+    To use a parameter set, all that is required is for the parameter set name to be specified using the --parameter-set (-ps) argument:
+  </div>
+  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
+    <span class="c1">
+      gkno &ltpipeline&gt -ps &ltparameter set name&gt
+    </span></pre></code>
+  </div>
+  <div class='description'>
+    If help is requested for the pipeline (using -h) once the parameter set is specified, the values defined in the parameter set are displayed at the end of the help message.
+  </div>
+
+  <!-- Special parameter sets -->
+  <div class='section-title'>Special parameter sets</div>
+  <div class='description'>
+    Most of the pipelines come with three special parameter sets. The functions of these three pipelines are described below.
+  </div>
+
+  <!-- The default parameter set -->
+  <div class='section-subtitle'>The <i>default</i> parameter set</div>
+  <div class='description'>
+    A lot of pipelines and their constituent tools have certain parameters with recommended values for normal use. The default parameter set is included to set all of the values that should be used in a 'default' running of the pipeline. This might include simple things like setting titles on graph axes, or standard filtering rules for variant call files (VCF) etc.
+  </div>
+
+  <!-- The none parameter set -->
+  <div class='section-subtitle'>The <i>none</i> parameter set</div>
+  <div class='description'>
+    There are times (creating your own parameter set might be one of these) where you would prefer that the default parameter set is not used. If this is the case, set the parameter set as 'none' and all parameter set information will be ignored.
+  </div>
+
+  <!-- The test parameter set -->
+  <div class='section-subtitle'>The <i>test</i> parameter set</div>
+  <div class='description'>
+    Finally, the 'test' parameter set is included to allow the pipeline to be tested. Using this pipeline is discussed <a href="/how-to/test-parameter-sets.html">here</a>.
+  </div>
+</div>

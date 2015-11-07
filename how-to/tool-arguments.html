@@ -1,0 +1,190 @@
+---
+layout: page
+permalink: tool-arguments.html
+---
+
+<!-- -->
+<div class='panel-group'>
+
+  <!-- Intro -->
+  <div class="panel panel-info">
+    <div class='panel-heading' style="font-size:45px;">Tool arguments</div>
+    <div class='panel-body' style="font-size:18px; text-align:left; text-indent:40px;">
+      The <i>arguments</i> section of the tool configuration file is used to describe all of the arguments that can be set for the tool along with describing the behaviour of the arguments. All of the arguments are grouped under different titles. <strong>All input files must be assigned to the <i>Inputs</i> group and all output files to the <i>Outputs</i> group.</strong> All other arguments can appear under any user defined titles. Each group consists of a list of arguments, each supplied with a set of attributes as shown in the example at the end of this page. Following is a list of All of the required and optional attributes.
+    </div>
+  </div>
+</div>
+
+<!-- Required attributes -->
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-success">
+    <div class='panel-heading' style="font-size:45px;">Required argument attributes</div>
+
+    <!-- command line argument -->
+    <div class="list-group-item" style='text-align:left;font-size:24px;padding-top:20px;'>command line argument</div>
+    <div class='list-group-item' style="font-size:18px; text-align:left; text-indent:40px;">
+      The long and short form arguments are used to specify the argument expected by gkno and the <i>command line argument</i> attribute is the argument expected by the tool. For example, the command line for the tool might expect the argument <i>--bam</i> to describe an input <i>bam</i> file, but to be consistent with other tools, the gkno long and short form arguments for specifying this input file are <i>--in</i> and <i>-i</i>. The <i>command line argument</i> attribute will ensure that when constructing the command line for this tool, the input files are specified using the argument <i>--bam</i> as expected by the tool.
+    </div>
+    <div class="panel-heading" role="tab" id="headingCoLiAr">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#coLiAr" aria-expanded="false" aria-controls="coLiAr">
+          Example
+        </a>
+      </h4>
+    </div>
+    <div id="coLiAr" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingCoLiAr">
+      <div class='list-group-item highlight' style="text-align:left; text-indent:40px;"><pre><code class="language-js" data-lang="js">
+        <span class="c1">
+          "command line argument" : "ARGUMENT"
+        </span></pre></code>
+      </div>
+    </div>
+
+    <!-- data type -->
+    <div class="list-group-item" style='text-align:left;font-size:24px;padding-top:20px;'>data type</div>
+    <div class='list-group-item' style="font-size:18px; text-align:left; text-indent:40px;">
+      The argument can be accompanied by a value of a particular type or is a flag and does not expect a value. The <i>data type</i> attribute informs gkno what the expected type is so that any supplied values can be checked.
+    </div>
+    <div class="panel-heading" role="tab" id="headingType">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#dataType" aria-expanded="false" aria-controls="dataType">
+          Example
+        </a>
+      </h4>
+    </div>
+    <div id="dataType" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingType">
+      <div class='list-group-item highlight' style="text-align:left; text-indent:40px;"><pre><code class="language-js" data-lang="js">
+        <span class="c1">
+          "data type" : "TYPE"
+        </span></pre></code>
+      </div>
+      <div style="font-size:18px; text-indent:18px;">where <i>TYPE</i> can take any of the following values:</div>
+      <div style="font-size:18px; text-indent:40px;"><strong>flag:   </strong> no value is allowed with the argument.</div>
+      <div style="font-size:18px; text-indent:40px;"><strong>float:  </strong> a floating point number.</div>
+      <div style="font-size:18px; text-indent:40px;"><strong>integer:</strong> an integer.</div>
+      <div style="font-size:18px; text-indent:40px;"><strong>string: </strong> a string.</div>
+    </div>
+
+    <!-- description -->
+    <div class="list-group-item" style='text-align:left;font-size:24px;padding-top:20px;'>description</div>
+    <div class='list-group-item' style="font-size:18px; text-align:left; text-indent:40px;">
+      Each of the tool arguments is provided with a description of what function the argument performs. This ensures that the configuration file is human-readable, but also, these descriptions can be imported into pipelines and appear in the help messages for pipelines. As such, these descriptions should be as clear and descriptive as possible.
+    </div>
+    <div class="panel-heading" role="tab" id="headingDesc">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#argDescription" aria-expanded="false" aria-controls="argDescription">
+          Example
+        </a>
+      </h4>
+    </div>
+    <div id="argDescription" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingDesc">
+      <div class='list-group-item highlight' style="text-align:left; text-indent:40px;"><pre><code class="language-js" data-lang="js">
+        <span class="c1">
+          "description" : "ARGUMENT DESCRIPTION"
+        </span></pre></code>
+      </div>
+    </div>
+
+    <!-- long form argument -->
+    <div class="list-group-item" style='text-align:left;font-size:24px;padding-top:20px;'>long form argument</div>
+    <div class='list-group-item' style="font-size:18px; text-align:left; text-indent:40px;">
+      Each gkno argument has two forms; a long and a short form. The long form argument is preceded by '--' and is descriptive of what the argument does. The long and short form arguments do not have to be related to the argument expected by the tool. Recommended practice is to keep gkno arguments consistent across tools.
+    </div>
+    <div class="panel-heading" role="tab" id="headingLongForm">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#longForm" aria-expanded="false" aria-controls="longForm">
+          Example
+        </a>
+      </h4>
+    </div>
+    <div id="longForm" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingLongForm">
+      <div class='list-group-item highlight' style="text-align:left; text-indent:40px;"><pre><code class="language-js" data-lang="js">
+        <span class="c1">
+          "long form argument" : "--LONG"
+        </span></pre></code>
+      </div>
+    </div>
+
+    <!-- short form argument -->
+    <div class="list-group-item" style='text-align:left;font-size:24px;padding-top:20px;'>short form argument</div>
+    <div class='list-group-item' style="font-size:18px; text-align:left; text-indent:40px;">
+      The short form argument is preceded by a single dash '-' and is generally not descriptive of what the argument does, but is quick to type and so is typically the form used by the user.
+    </div>
+    <div class="panel-heading" role="tab" id="headingShortForm">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#shortForm" aria-expanded="false" aria-controls="shortForm">
+          Example
+        </a>
+      </h4>
+    </div>
+    <div id="shortForm" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingShortForm">
+      <div class='list-group-item highlight' style="text-align:left; text-indent:40px;"><pre><code class="language-js" data-lang="js">
+        <span class="c1">
+          "short form argument" : "--SHORT"
+        </span></pre></code>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- All optional argument attributes -->
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-success">
+    <div class='panel-heading' style="font-size:45px;">Optional argument attributes</div>
+
+    <!-- short form argument -->
+    <div class="list-group-item" style='text-align:left;font-size:24px;padding-top:20px;'>allow multiple values</div>
+    <div class='list-group-item' style="font-size:18px; text-align:left; text-indent:40px;">
+      By default, a non-flag argument can be given a single value. If a tool is a part of a pipeline and multiple values are supplied for an argument, gkno will assume that the pipeline is to be run multiple times, each subsequent execution using one of the supplied values. There are many occasions where the argument can legitimately by supplied with multiple values for a single execution. The manner in which this occurs is discussed with the pipeline descriptions, but it is only possible if the tool argument is known to allow multiple values to be supplied. The <i>allow multiple values</i> attribute is a Boolean and instructs gkno that the argument can or cannot accept multiple values. Since this is optional and <i>false</i> by default, it is generally only included to indicate that an argument can accept multiple values.
+    </div>
+    <div class="panel-heading" role="tab" id="headingAllowMultiple">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#allowMultiple" aria-expanded="false" aria-controls="allowMultiple">
+          Example
+        </a>
+      </h4>
+    </div>
+    <div id="allowMultiple" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingAllowMultiple">
+      <div class='list-group-item highlight' style="text-align:left; text-indent:40px;"><pre><code class="language-js" data-lang="js">
+        <span class="c1">
+          "allow multiple values" : true / false
+        </span></pre></code>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Example of an argument -->
+<div class="panel panel-success">
+  <div class='panel-heading' style="font-size:45px;">Example</div>
+  <ul class="list-group">
+    <li class='list-group-item' style="font-size:18px; text-align:left; text-indent:40px;">
+      Below is an example of an input file argument in the <i>Inputs</i> argument group.
+    </li>
+    <li class='list-group-item highlight' style="text-align:left; text-indent:40px;"><pre><code class="language-js" data-lang="js">
+      <span class="c1">
+        "arguments" : {
+          "Inputs" : [
+            {
+              "description" : "ARGUMENT DESCRIPTION",
+              "long form argument" : "--ARGUMENT",
+              "short form argument" : "-A",
+              "command line argument" : "ARGUMENT EXPECTED BY THE TOOL",
+              "required" : true,
+              "data type" : "TYPE",
+              "extensions" : [LIST OF ALLOWED EXTENSIONS],
+              "modify argument" : "MODIFIER",
+              "modify value" : "REPLACE ARGUMENT WITH THIS VALUE",
+              "if input is stream" : {
+                "default" : {
+                  "argument" : "ARGUMENT",
+                  "value" : "VALUE"
+                }
+              }
+            }
+          ]
+        }
+      </span></pre></code>
+    </li>
+  </ul>
+</div>

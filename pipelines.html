@@ -8,57 +8,57 @@ order: 2
 
 
 <div class='section'>
-	<div class='section-title'>Categories</div>        
-	<ul id="categories">
-		{% for categories in site.data.gkno-web-content.categories %}
-		<li id='{{ categories[0] }}'>
-			<div>{{ categories[0] }}</div>
-			<div>
-				<div class='description'>	
-					<ul class='pipelines'>
-					{% for catPipeline in categories[1] %}
-						<li style="padding-top:5px;">
-						<div style="display:table">
-							<a style="display:table-cell;width:120px" href="#{{ catPipeline }}">{{ catPipeline }}</a>
-							{% assign pipeline = site.data.gkno-web-content.pipelines[catPipeline] %}
-							<div style="display:table-cell">{{ pipeline.description }}<div>
-							</div>
-						</li>
-					{% endfor %}
-					</ul>
-				</div>
-			</div>
-		</li>
-		{% endfor %}
-	</ul>
+  <div class='section-title'>Categories</div>        
+  <ul id="categories">
+    {% for categories in site.data.gkno-web-content.categories %}
+    <li id='{{ categories[0] }}'>
+      <div>{{ categories[0] }}</div>
+      <div>
+        <div class='description'>  
+          <ul class='pipelines'>
+          {% for catPipeline in categories[1] %}
+            <li style="padding-top:5px;">
+            <div style="display:table">
+              <a style="display:table-cell;width:200px" href="#{{ catPipeline }}">{{ catPipeline }}</a>
+              {% assign pipeline = site.data.gkno-web-content.pipelines[catPipeline] %}
+              <div style="display:table-cell">{{ pipeline.description }}<div>
+              </div>
+            </li>
+          {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
 </div>
 
 <div class='section'>
-	<div class='section-title'>Pipelines</div>     
-		<ul id="pipelines">
-		{% for pipelines in site.data.gkno-web-content.pipelines %}
-		  <li id='{{ pipelines[0] }}' style="padding-top:65px">
-		    <div>{{ pipelines[0] }}</div>
-		  	<div class="description">
-				{{pipelines[1].description}}
-			</div>
-			<div style="overflow:scroll">
-				<img src="public/images/pipelines/{{ pipelines[0] }}.png" onError="style.display = 'none';" />
-			</div>
-			<div class="description">
-				<br>Arguments
-				<table style="font-size:11px">
-					{% for argument in pipelines[1].arguments %}
-					<tr>
-						<td style="width:30px">{{ argument["short form argument"] }}</td>
-						<td style="width:200px">{{ argument["long form argument"] }}</td>
-						<td>{{ argument["data type"] }}</td>
-						<td>{{ argument["description"] }}</td>
-					</tr>
-					{% endfor %}
-				</table>
-			<div>
-		  </li>
-		{% endfor %}
-		</ul>
+  <div class='section-title'>Pipelines</div>     
+    <ul id="pipelines">
+    {% for pipelines in site.data.gkno-web-content.pipelines %}
+      <li id='{{ pipelines[0] }}' style="padding-top:65px">
+        <div>{{ pipelines[0] }}</div>
+        <div class="description">
+        {{pipelines[1].description}}
+      </div>
+      <div style="overflow:scroll">
+        <img src="public/images/pipelines/{{ pipelines[0] }}.png" onError="style.display = 'none';" />
+      </div>
+      <div class="description">
+        <br>Arguments
+        <table style="font-size:11px">
+          {% for argument in pipelines[1].arguments %}
+          <tr>
+            <td style="width:30px">{{ argument["short form argument"] }}</td>
+            <td style="width:200px">{{ argument["long form argument"] }}</td>
+            <td>{{ argument["data type"] }}</td>
+            <td>{{ argument["description"] }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      <div>
+      </li>
+    {% endfor %}
+    </ul>
 </div>

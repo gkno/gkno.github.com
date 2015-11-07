@@ -1,0 +1,50 @@
+---
+layout: page
+permalink: getting-started.html
+---
+
+<!-- Getting started -->
+<div class='section'>
+  <div class='section-title'>Getting started with gkno</div>
+  <div class='description'>
+    See the <a href="/how-to/install.html">instructions</a> on how to download and install <i>gkno</i> and the <a href="/how-to/help.html">instructions</a> to determine how to use the help options in <i>gkno</i> to find the pipeline that is most relevant to your analysis. If no pipelines exist that perform the tasks required, you can either construct your own pipeline using the provided <a href="/how-to/coming-soon.html">instructions</a> or contact me at AlistairNWard@gmail.com or on Twitter at @AlistairNWard.
+  </div>
+
+  <!-- Execute a pipeline -->
+  <div class='section-title'>Executing a pipeline</div>
+  <div class='description'>
+    Executing a pipeline is simple; all we need is to run gkno and tell it the pipeline we want to use. When running a pipeline for the first time, it is a good idea to look at the help information and see exactly what the pipeline does (the workflow), what arguments it accepts, and in particular, what <a href="/how-to/parameter-sets.html">parameter sets</a> are available.
+  </div>
+
+  <!-- Execute a pipeline -->
+  <div class='section-title'><i>gkno</i> arguments</div>
+  <div class='description'>
+    There is a set of arguments that can be applied to any pipeline that perform functions that are pipeline independent. This includes functions such as selecting or creating parameter sets, allowing parallel execution of tasks etc. To see a list of these commands, use the <code>--gkno-arguments (-ga)</code> argument. Click below to see all of the available commands, or a more detailed description is provided <a href="/how-to/coming-soon.html">here</a>.
+  </div>
+
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-info">
+      <div class="panel-heading" role="tab" id="panelHeading">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#gknoArguments" aria-expanded="false" aria-controls="gknoArguments">
+            All available commands
+          </a>
+        </h4>
+      </div>
+
+      <!-- Loop over all the gkno specific arguments. -->
+      <div id="gknoArguments" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panelHeading">
+      {% for gknoArgument in site.data.gkno-web-content.gknoArguments %}
+      {% assign argumentInfo = gknoArgument[1] %}
+        <li style="padding-top:5px;">
+          <div style="display:table">
+            <div class="description" style="display:table-cell; width: 300px" href="#{{ gknoArgument[0] }}">{{ gknoArgument[0] }}</div>
+            <div class="description" style="display:table-cell; width: 100px;">{{ argumentInfo.dataType }}</div>
+            <div class="description" style="display:table-cell">{{ argumentInfo.description }}</div>
+          </div>
+        </li>
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
