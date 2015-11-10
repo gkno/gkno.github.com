@@ -43,7 +43,7 @@ b { color:rgb(110,110,110); text-decoration: none; }
   top:0px;
   left:0px;
   right:0px;   
-  height: 50px;
+  height: 80px;
   z-index: 3;
   border-bottom: #081d27;
   box-shadow: 0px 10px 40px 4px white;
@@ -151,6 +151,24 @@ b { color:rgb(110,110,110); text-decoration: none; }
 
 .highlight pre {padding:0px; font-family: quicksand; font-size: 16px;}
 
+.code-list {
+  list-style-type: none;
+  font-family: quicksand;
+  font-size: 16px;
+  color: #BF616A;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px; 
+}
+
+.code-span {
+  padding-left: 0px; 
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
 /*
  * Section
  *
@@ -190,9 +208,10 @@ b { color:rgb(110,110,110); text-decoration: none; }
  *
  */
 .footer { position: absolute; bottom: 0px; left:0px;right:0px;}
-.footer a { color:#6e915f }
-.footer .logos {margin: 0px auto 10px auto; width:1000px;text-align:center;position:relative; height: 60px; color:rgb(80,80,80);}
-.footer .info {background: #005422; height:25px; padding: 10px 100px; color:#6e915f; font-size:15px;font-family:quicksand;}
+.footer a { color: #526D89; }
+/*.footer a { color:#6e915f }*/
+.footer .logos {margin: 0px auto 10px auto; width:1000px;text-align:center; position:relative; height: 60px; color: white; } /*rgb(80,80,80);}*/
+.footer .info {background: white; height:25px; padding: 10px 100px; font-size:15px;font-family:quicksand; color: #526D89;}
 .footer .members {  float:right;}
 .footer img { height: 35px; vertical-align: middle}
 

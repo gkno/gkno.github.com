@@ -32,21 +32,21 @@ permalink: parameter-sets-config.html
     A list of values that are to be applied to the argument. This list can contain multiple values if the argument is defined as accepting multiple values, otherwise only a single value should be supplied. The value must be of the correct type and have the correct extension as defined in the argument definition.
   </div>
 
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">
-      "parameter sets" : [
-        {
-          "id" : "default",
-          "description" : "Default parameter set requires the users input for all files.",
-          "data" : [
-            {
-              "id" : "UNIQUE ID",
-              "argument" : "VALID TOOL ARGUMENT",
-              "values" : [LIST OF VALID VALUES]
-            }
-          ]
-        }
-      ]
-    </span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>"parameter sets" : [</li>
+      <li>&nbsp;&nbsp;{</li>
+      <li>&nbsp;&nbsp;&nbsp;&nbsp;"id" : "default",</li>
+      <li>&nbsp;&nbsp;&nbsp;&nbsp;"description" : "Default parameter set requires the users input for all files.",</li>
+      <li>&nbsp;&nbsp;&nbsp;&nbsp;"data" : [</li>
+      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</li>
+      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id" : "UNIQUE ID",</li>
+      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"argument" : "VALID TOOL ARGUMENT",</li>
+      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"values" : [LIST OF VALID VALUES]</li>
+      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+      <li>&nbsp;&nbsp;&nbsp;&nbsp;]</li>
+      <li>&nbsp;&nbsp;}</li>
+      <li>]</li>
+    </ul>
   </div>
 </div>

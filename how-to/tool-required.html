@@ -21,10 +21,10 @@ permalink: tool-required.html
   <div class='description'>
     Some tool require that the arguments are supplied on the command line in a specific order. If this is the case, the <i>argument order</i> is used to define the order. If used, this list has to be exhaustive, i.e. all of the arguments that are described in <i>arguments</i> must be included in this list, otherwise gkno will throw an error when any pipeline using the tool is executed.
   </div>
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">
-      "argument order" : ["ARG1", "ARG2", ..., "ARGN"]
-    </span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>"argument order" : ["ARG1", "ARG2", ..., "ARGN"]</li>
+    </ul>
   </div>
 
   <!-- configuration type -->
@@ -32,10 +32,10 @@ permalink: tool-required.html
   <div class='description'>
     gkno recognises two types of configuration files; tool and pipeline. The contents of these two files are different and are subject to different checks by gkno and so the type needs to be specified as <i>tool</i> for all tool configuration files.
   </div>
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">
-      "configuration type" : "tool"
-    </span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>"configuration type" : "tool"</li>
+    </ul>
   </div>
 
   <!-- id -->
@@ -43,10 +43,10 @@ permalink: tool-required.html
   <div class='description'>
     The <i>id</i> is a unique string used to describe the tool. This is usually just the name of the tool.
   </div>
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">
-      "id" : "NAME"
-    </span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>"id" : "NAME"</li>
+    </ul>
   </div>
 
   <!-- description -->
@@ -54,10 +54,10 @@ permalink: tool-required.html
   <div class='description'>
     A simple description of the tool. When the tool is incorporated into a pipeline, this description will appear in the pipeline help message when describing the pipeline workflow.
   </div>
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">
-      "description" : "DESCRIPTION"
-    </span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>"description" : "DESCRIPTION"</li>
+    </ul>
   </div>
 
   <!-- executable -->
@@ -65,10 +65,10 @@ permalink: tool-required.html
   <div class='description'>
     This is the name of the executable file to run the tool.
   </div>
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">
-      "executable" : "EXECUTABLE FILE"
-    </span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>"executable" : "EXECUTABLE FILE"</li>
+    </ul>
   </div>
 
   <!-- modifier -->
@@ -76,10 +76,10 @@ permalink: tool-required.html
   <div class='description'>
     The executable command for some tools includes additional information after the name of the executable file. For example, <strong>bamtools</strong> has a number of different modes of operation; for example <strong>bamtools index</strong> or <strong>bamtools sort</strong>. In these cases, the mode (index or sort) would be specified in the configuration file as a modifier.
   </div>
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">
-      "modifier" : "MODIFIER"
-    </span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>"modifier" : "MODIFIER"</li>
+    </ul>
   </div>
 
   <!-- parameter sets -->
@@ -93,10 +93,10 @@ permalink: tool-required.html
   <div class='description'>
     When gkno runs pipelines, it needs to access all of the tool executables. This attribute provides the path to the executable. This path is relative to the gkno installation directory "tools".
   </div>
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">
-      "path" : "PATH TO EXECUTABLE"
-    </span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>"path" : "PATH TO EXECUTABLE"</li>
+    </ul>
   </div>
 
   <!-- precommand -->
@@ -104,10 +104,10 @@ permalink: tool-required.html
   <div class='description'>
     The <i>precommand</i> provides similar functionality to the <i>modifier</i> command except that its value is included prior to the executable rather than after it. This is often used for tools that use <i>java</i> or <i>python</i> that require inclusion of text (e.g. <i>java -jar</i> or <i>python</i>) before the executable file.
   </div>
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">
-      "precommand" : "PRECOMMAND"
-    </span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>"precommand" : "PRECOMMAND"</li>
+    </ul>
   </div>
 
   <!-- R packages -->
@@ -115,10 +115,10 @@ permalink: tool-required.html
   <div class='description'>
     Some tools use R scripts to perform analyses or generate plots. Prior to executing a pipeline, gkno will check that all R packages that are required are available in the version of R available to it and provide warnings and installation instructions if the packages don't exist. This attribute specifies a list of the packages required by this tool so that the checks can be performed.
   </div>
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">
-      "R packages" : ["PACKAGE NAME, e.g. ggplot2"]
-    </span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>"R packages" : ["PACKAGE NAME, e.g. ggplot2"]</li>
+    </ul>
   </div>
 
   <!-- tools -->
@@ -126,10 +126,10 @@ permalink: tool-required.html
   <div class='description'>
     When gkno is built, a list of compiled tools is stored by gkno so that it knows what tools are available to it. This attribute defines a list of tools that need to be successfully compiled in order for this tool to be run. This is useful for tools whose execution is dependent on a number of tools having been successfully compiled.
   </div>
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">
-      "tools" : ["TOOL"]
-    </span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>"tools" : ["TOOL"]</li>
+    </ul>
   </div>
 
   <!-- web page -->
@@ -137,17 +137,17 @@ permalink: tool-required.html
   <div class='description'>
     The <a href="/Software.html">software</a> page of this website contains information on different tools that are available in gkno. The details on this page are pulled from a <i>json</i> file that is constructed using information from the tool and pipeline configuration files. The <i>web page</i> attribute is used to define the details that will appear on the web page. The format of the attribute is as follows:
   </div>
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">
-      "web page" : {
-        "authors" : ["AUTHOR 1", "AUTHOR2"],
-        "citations" : ["CITATION 1", "CITATION2"],
-        "emails" : ["EMAIL1", "EMAIL2"],
-        "papers" : ["PAPER"],
-        "tool" : "TOOL NAME",
-        "web_pages" : ["WEBPAGE URL"]
-      }
-    </span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>"web page" : {</li>
+      <li>&nbsp;&nbsp;"authors" : ["AUTHOR 1", "AUTHOR2"],</li>
+      <li>&nbsp;&nbsp;"citations" : ["CITATION 1", "CITATION2"],</li>
+      <li>&nbsp;&nbsp;"emails" : ["EMAIL1", "EMAIL2"],</li>
+      <li>&nbsp;&nbsp;"papers" : ["PAPER"],</li>
+      <li>&nbsp;&nbsp;"tool" : "TOOL NAME",</li>
+      <li>&nbsp;&nbsp;"web_pages" : ["WEBPAGE URL"]</li>
+      <li>}</li>
+    </ul>
   </div>
   <div class='description'>
     The <i>tool</i> attribute is required and is the title used for the tool on the <a href="/Software.html">software</a> page. The remaining attributes are all optional lists (enclosed in square brackets) and can contain as many values as desired.

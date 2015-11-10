@@ -50,12 +50,11 @@ order: 4
         {% if site.data.gkno-web-content.tools[tool].web_pages %}
           <div class="section-software">Papers:</div>
           {% for paper in site.data.gkno-web-content.tools[tool].papers %}
-            <ul style="list-style-type:circle; font-size:18px; text-align:left;"><div style="display:table-cell">{{ paper }}</div></ul>
+            <ul style="list-style-type:circle; font-size:18px; text-align:left;"><li style="display:table-cell">{{ paper }}</li></ul>
           {% endfor %}
-        </div>
         {% endif %}
-        <hr>
-      </dic>
+      </div>
+      <hr>
     {% endfor %}
   </ul>
 </div>

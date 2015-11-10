@@ -10,27 +10,31 @@ permalink: install.html
     Downloading and installing gkno is a very simple process, requiring only a few commands. To begin with, get the code using the following command:
   </div>
 
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">git clone https://github.com/gkno/gkno_launcher.git</span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>git clone https://github.com/gkno/gkno_launcher.git</li>
+    </ul>
   </div>
 
   <div class='description'>
     Running this command will download all of the gkno code and link in all of the tools that are part of gkno, but not actually download or compile
 the individual tools. To do this and make gkno operational, type the following command (this step will take a little while!):
   </div>
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">
-      cd gkno_launcher
-      ./gkno build
-    </span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>cd gkno_launcher</li>
+      <li>./gkno build</li>
+    </ul>
   </div>
 
   <div class='description'>
     gkno should now be completely operational. If there were any problems, please see the troubleshooting section at the end of these instructions.
-    <div class='divider'></div>
-    <br/>To test gkno, any of the pipelines can be executed using the test parameter set. For example, type:
-    <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-      <span class="c1">./gkno freebayes -ps test</span></pre></code>
+    <div class="section-subtitle">Test gkno</div>
+    To test gkno, any of the pipelines can be executed using the test parameter set. For example, type:
+    <div class="panel panel-danger">
+      <ul class="code-list">
+        <li>./gkno freebayes -ps test</li>
+      </ul>
     </div>
   </div>
 </div>

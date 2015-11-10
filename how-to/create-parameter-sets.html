@@ -18,18 +18,18 @@ permalink: create-parameter-sets.html
   <div class='description'>
     To demonstrate this, let's do a test. We will create a parameter set for the <i>coverage</i> pipeline. We will generate a new parameter set called <i>example</i> that gives the <i>--reference-sequences (-s)</i> argument the value <i>ref.txt</i>. We will do this with the following command line:
   </div>
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">
-      gkno coverage -s ref.txt -ep example
-    </span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno coverage -s ref.txt -ep example</li>
+    </ul>
   </div>
   <div class='description'>
     The parameter set has now been generated. You are told that it is recommended to check that the parameter set is as expected. We can easily do that by running the pipeline, selecting the parameter set and asking for help.
   </div>
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">
-      gkno coverage -ps example -h
-    </span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno coverage -ps example -h</li>
+    </ul>
   </div>
   <img src="/public/images/create-parameter-set1.png" align="centre" style="width:450px; height:80px;"></img>
   <div class='description'>
@@ -41,18 +41,18 @@ permalink: create-parameter-sets.html
   <div class='description'>
     When we created the example parameter set, the <i>default</i> parameter set was loaded up in addition to the values we set on the command line. This means that the created set included all of the default values, with the <i>--reference-sequences</i> value overridden by the value we set. It is quite possible that we wanted our example parameter set to only include the values we supplied, though. If this is what we need, we need to run the pipeline with no parameter set - not even the <i>default</i> one. We can do that by using the <i>none</i> parameter set.
   </div>
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">
-      gkno coverage -ps none -s ref.txt -ep example2
-    </span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno coverage -ps none -s ref.txt -ep example2</li>
+    </ul>
   </div>
   <div class='description'>
     Now lets check this parameter set:
   </div>
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">
-      gkno coverage -ps example2 -h
-    </span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno coverage -ps example2 -h</li>
+    </ul>
   </div>
   <img src="/public/images/create-parameter-set2.png" align="centre" style="width:450px; height:32px;"></img>
   <div class='description'>
@@ -74,19 +74,19 @@ permalink: create-parameter-sets.html
   <div class='description'>
     Let's get rid of the <i>example</i> parameter set using the <i>--remove-parameter-set (-rp)</i> command.
   </div>
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">
-      gkno coverage -rp example
-    </span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno coverage -rp example</li>
+    </ul>
   </div>
   <div class='description'>
     We can check the help message to ensure that the parameter set is gone. If we also remove the <i>example2</i> parameter set, the file created to hold the parameter sets will be removed. Let's get rid of that parameter set as well.
   </div>
-  <div class="highlight" style="text-align:left;"><pre><code class="language-js" data-lang="js">
-    <span class="c1">
-      gkno coverage -rp example2
-      gkno coverage -h
-    </span></pre></code>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno coverage -rp example2</li>
+      <li>gkno coverage -h</li>
+    </ul>
   </div>
   <div class='description'>
     The last command prints out the available parameter sets and we can see that both of the example sets that we created have been removed.
