@@ -1,0 +1,181 @@
+---
+layout: page
+permalink: cshl15_practical.html
+---
+
+<!-- -->
+<div class='section'>
+  <div class='section-title'>Advanced Sequencing Technologies and Applications course: Variant discovery practical</div>
+  <div class='description'>
+    This tutorial will starts with a set of FASTQ files and a reference genome FASTA file and walks through all necessary steps to generate alignments, variant calls and interrogate those calls. All the necessary files are part of the <i>gkno</i> tutorial resources, so no additional files need to be downloaded.
+  </div>
+
+  <!-- Preparation -->
+  <div class='section-subtitle'>Set up</div>
+  <div class='description'>
+    To begin, create a new directory call 'cshl-practical', create a variable <span class='code-list code-span panel panel-danger'>GKNO</span> and copy the necessary FASTQ files to this directory.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>mkdir cshl-practical</li>
+      <li>cd cshl-practical</li>
+      <li>mkdir fastq</li>
+      <li>mkdir reference</li>
+      <li>mkdir analysis</li>
+      <li>GKNO=&lt;gkno_launcher path&gt;</li>
+      <li>alias gkno="$GKNO/gkno"
+      <li>cp $GKNO/resources/tutorial/current/N*fastq fastq</li>
+      <li>cp $GKNO/resources/tutorial/current/chr20_fragment.fa reference</li>
+      <li>cd reference</li>
+    </ul>
+  </div>
+
+  <!-- Using gkno -->
+  <div class='section-subtitle'>Using gkno</div>
+  <div class='description'>
+    We will be using a number of <i>gkno</i> pipelines to generate the data that we need, so let's familiarise ourselves with how it works. The <a href="/how-to/help.html">help</a> page contains all the information on getting help, but we can look at a couple of options. All pipelines are organised into categories. To see a list of these categories (these are the same as appear on the <a href="/pipelines.html">pipelines</a> page), type:
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno -cat</li>
+    </ul>
+  </div>
+  <div class='description'>
+    If you forget this command, just type <span class="code-list code-span panel panel-danger">gkno</span> and you will be given a list of simple commands to help navigate <i>gkno</i>. If we want to see which pipelines are available within a category, just include the category name.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno -cat VCF-processing</li>
+    </ul>
+  </div>
+  <div class='description'>
+    We will be making use of these help messages as we progress through this tutorial.
+  </div>
+
+  <!-- Prepare the reference sequence -->
+  <div class='section-subtitle'>Prepare the reference sequence</div>
+  <div class='description'>
+    We have the reference FASTA file, but most aligners do not work with this file directly. We will be using <a href="https://github.com/lh3/bwa.git"><i>bwa</i></a> to perform the alignment, so we need to generate the index files required by this software. We will do this using a <i>gkno</i> pipeline. Let's use the help to find the pipeline we need. 
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno -cat</li>
+    </ul>
+  </div>
+  <div class='description'>
+    We are going to preparing the reference FASTA file for <a href="https://github.com/lh3/bwa.git"><i>bwa</i></a>, so let's look in the 'FASTA-processing' category. Note: you don't need to type the full category name, <i>gkno</i> will hopefully figure out what you're looking for!
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno -cat FASTA-p</li>
+    </ul>
+  </div>
+  <div class='description'>
+    Looking through all the available pipelines, we can see that 'bwa-index' does exactly what we need. We can get help on specific pipelines by using the <span class="code-list code-span panel panel-danger">-h</span> argument after specifying the pipeline of choice.
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno bwa-index -h</li>
+    </ul>
+  </div>
+  <div class='description'>
+    This help tells us a number of things about the pipeline. Firstly, the tools that are being run (in this case, there is only a single tool) and then a list of <a href="/how-to/parameter-sets.html">parameter sets</a>. These can be very useful, but will not be used in this tutorial. Finally, we have a list of all of the command line arguments that can be used with this pipeline. For simplicity, <i>gkno</i> tries to use the same arguments for similar uses across all the pipelines (e.g. <span class="code-list code-span panel panel-danger">--fasta-argument (-r)</span> is used across all pipelines when a FASTA reference file is being specified).
+  </div>
+  <div class='description' style='padding-top: 15px;'>
+    In general, output files do not need to be specified. If no value is provided, <i>gkno</i> will generate an output filename based on input filenames. So, to generate the index file we need, we only need to supply the name of the reference FASTA.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno bwa-index -r chr20_fragment.fa</li>
+    </ul>
+  </div>
+  <div class='description'>
+    Now take a look in this directory (<span class="code-list code-span panel panel-danger">ls</span>) and you will see a whole set of new files that will let us use <a href="https://github.com/lh3/bwa.git"><i>bwa</i></a> for aligning our FASTQ files.
+  </div>
+
+  <!-- Align the reads -->
+  <div class='section-subtitle'>Align reads</div>
+  <div class='description'>
+    We will now go ahead and align the reads using <a href="https://github.com/lh3/bwa.git"><i>bwa</i></a>. We will be using the <i>mem</i> option within <a href="https://github.com/lh3/bwa.git"><i>bwa</i></a> to generate split read alignments. We are going to use the full human reference for these alignments, not the reference we just created, so please ensure that you have the human resource bundle downloaded.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>cd ../analysis</li>
+      <li>gkno bwa -h</li>
+    </ul>
+  </div>
+  <div class='description'>
+    Let's start by aligning the sample 'NA12878'. We will use the human parameter set using <span class="code-list code-span panel panel-danger">-ps human</span>. This will pull the human reference from the <i>gkno</i> resources without us having to manually specify it.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno bwa -ps human -p ILLUMINA -s NA12878 -id NA12878 -q ../fastq/NA12878_1_sample.fastq -q2 ../fastq/NA12878_2_sample.fastq</li>
+    </ul>
+  </div>
+  <div class='description'>
+    If we look at what we just created, we can see that the output files have long, cumbersome names. This is because <i>gkno</i> wasn't given any output names so built the names based on the input files and the tasks that were performed. It would be nicer to have more succinct names, so let's redo thie alignment (we can get away with doing this because these files are so small. Don't do this with real files!!!).
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    <strong>IMPORTANT</strong> - We are going to delete all the files, so make sure you are working in the 'analysis' folder that we created. Do not delete all files if you are working in a different directory.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>rm -f *</li>
+      <li>gkno bwa -ps human -p ILLUMINA -s NA12878 -id NA12878 -q ../fastq/NA12878_1_sample.fastq -q2 ../fastq/NA12878_2_sample.fastq -o NA12878.bam</li>
+    </ul>
+  </div>
+  <div class='description'>
+    Now, we have created three different files here. First, we aligned the reads, marked duplicates and sorted the BAM file <span class="code-list code-span panel panel-danger">NA12878.bam</span>. We then indexed this BAM file (<span class="code-list code-span panel panel-danger">NA12878.bam.bai</span>) and generated statistics on the alignments (<span class="code-list code-span panel panel-danger">NA12878.stats</span>). Let's align the other two samples. We will use some bash magic to do both of these with one command.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>for NAME in NA12891 NA12892; do</li>
+      <li>gkno bwa -ps human -p ILLUMINA -s $NAME -id $NAME -q ../fastq/$NAME\_1_sample.fastq -q2 ../fastq/$NAME\_2_sample.fastq -o $NAME.bam</li>
+      <li>done</li>
+    </ul>
+  </div>
+  <div class='description'>
+    What did we just do? The first line created a loop over a list of values (NA12891 and NA12892 in this case). At each step in the loop, the variable <span class="code-list code-span panel panel-danger">NAME</span> is given the current value. The last line (<span class="code-list code-span panel panel-danger">done</span>) terminates this loop. For each value in the loop, we then ran the <i>gkno</i> bwa pipeline using the variable <span class="code-list code-span panel panel-danger">NAME</span> where required. Note that we used the escape character <span class="code-list code-span panel panel-danger">\</span> in the names of the FASTQ files to make it clear where the variable name ends and we needed to prepend the variable <span class="code-list code-span panel panel-danger">NAME</span> with a <span class="code-list code-span panel panel-danger">$</span> to use it.
+  </div>
+
+  <!-- Interrogate the BAM files -->
+  <div class='section-subtitle'>Check the BAM files</div>
+  <div class='description'>
+    The first thing we can do is just look at the alignment statistics that <i>gkno</i> generated.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>more NA12878.stats</li>
+    </ul>
+  </div>
+  <div class='description'>
+    What is far more interesting though, is to use <a href="http://bam.iobio.io"><i>iobio</i></a> to take a look at the alignments. If you are working on a local computer, use the 'choose bam file' button and navigate to the data. You will need to select both the BAM file and its index together. If working on the cloud, you can use the 'choose bam url' to specify the url of one of the BAM files we just created. 
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    Since the BAM files we created are very small and only have coverage in a couple of places in the genome, there aren't enough reads to generate statistics genome-wide. We can use the top 'Read Coverage' panel to select chromosome 20 and the zoom in on the area where alignments exist. We now generate statistics including the percentage of mapped reads etc in the region. Everything looks good!
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    Just for comparison, let's look at a regular whole genome BAM file. Reload the <a href="http://bam.iobio.io"><i>bam.iobio</i></a> web page and click 'choose bam url' and click 'Go' on the default file. This is a 1000 Genomes BAM file for the NA12878 sample. <a href="http://bam.iobio.io"><i>bam.iobio</i></a> is sampling the BAM file in real time and generating the statistics based on this sampling. Instead of waiting for possibly hours to generate these statistics, we have them in seconds. We can get a good sense of important statistics like duplicate rates and quality score distributions immediately using this app.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    We can also use <a href="http://bam.iobio.io"><i>bam.iobio</i></a> to look at exome BAM files. Reload the web page, click 'choose bam url' and add the url <span class="code-list code-span panel panel-danger">https://s3.amazonaws.com/iobio/1000gSV/NA19238.mapped.ILLUMINA.bwa.YRI.exome.20130415.bam</span>, then click 'Go'. We see the same statistics as before, but the 'Read Coverage Distribution' is not that useful. Since the majority of the genome has no coverage from exome sequencing, the distribution is heavily weighted towards very low read counts. To generate statistics only in relevant regions, you can upload a BED file, or just use the default BED supplied. Do this by clicking 'Default Bed' in the upper right corner of the top 'Read Coverage' panel. Now the 'Read Coverage Distribution' looks more like what we'd expect.
+  </div>
+
+  <!-- Variant calls -->
+  <div class='section-subtitle'>Call variants</div>
+  <div class='description'>
+    Now let's use <i>gkno</i> to call variants on our BAM files. We will use the <i>freebayes</i> pipeline to do this.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno freebayes -h</li>
+    </ul>
+  </div>
+  <div class='description'>
+    There are a huge number of commands available for <a href="https://github.com/ekg/freebayes.git"><i>freebayes</i></a>, but we can safely use the default values. We will again use the human parameter set to pull in the human reference genome FASTA file.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno freebayes -ps human -i *bam -o all.vcf.gz</li>
+    </ul>
+  </div>
+</div>
