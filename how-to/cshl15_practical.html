@@ -23,6 +23,7 @@ permalink: cshl15_practical.html
       <li>mkdir reference</li>
       <li>mkdir analysis</li>
       <li>GKNO=&lt;gkno_launcher path&gt;</li>
+      <li>REF=$GKNO/resources/homo_sapiens/current/human_reference_v37_decoys.fa</li>
       <li>alias gkno="$GKNO/gkno"
       <li>cp $GKNO/resources/tutorial/current/N*fastq fastq</li>
       <li>cp $GKNO/resources/tutorial/current/chr20_fragment.fa reference</li>
@@ -148,13 +149,41 @@ permalink: cshl15_practical.html
     </ul>
   </div>
   <div class='description'>
-    What is far more interesting though, is to use <a href="http://bam.iobio.io"><i>iobio</i></a> to take a look at the alignments. If you are working on a local computer, use the 'choose bam file' button and navigate to the data. You will need to select both the BAM file and its index together. If working on the cloud, you can use the 'choose bam url' to specify the url of one of the BAM files we just created. 
+    We can see that the alignments are good! Over 99% of the reads are mapped and roughly evenly between the forward and reverse strand. We also have a very low percentage of duplicate reads, which is definitely good for whole genome sequence data. But what is our average depth? We can use the <i>gkno coverage</i> pipeline to generate plots of the coverage by chromosome. Since the data we are working with only has sequences on chromosomes 17, 20, 21, and 22, we only want our plots to include these sequences, so we will generate a file containing these reference sequences first.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>echo 20 &gt; samples.txt</li>
+      <li>echo 21 &gt;&gt; samples.txt</li>
+      <li>echo 22 &gt;&gt; samples.txt</li>
+      <li>gkno coverage -i NA12878.bam -s samples.txt</li>
+    </ul>
+  </div>
+  <div class='description'>
+    Even for this small amount of data, this command takes quite a long time. But we can get at this data much quicker by using <a href="http://bam.iobio.io" target="_blank"><i>iobio</i></a>. If you are working on a local computer, use the 'choose bam file' button and navigate to the data. You will need to select both the BAM file and its index together. If working on the cloud, you can use the 'choose bam url' to specify the url of one of the BAM files we just created. 
   </div>
   <div class='description' style="padding-top: 15px;">
-    Since the BAM files we created are very small and only have coverage in a couple of places in the genome, there aren't enough reads to generate statistics genome-wide. We can use the top 'Read Coverage' panel to select chromosome 20 and the zoom in on the area where alignments exist. We now generate statistics including the percentage of mapped reads etc in the region. Everything looks good!
+    Since the BAM files we created are very small and only have coverage in a couple of places in the genome, there aren't enough reads to generate statistics genome-wide. We can use the top 'Read Coverage' panel to select chromosome 20 and the zoom in on the area where alignments exist. We now generate statistics including the percentage of mapped reads etc in the region. We can now say that we have an average coverage of ~50X.
   </div>
-  <div class='description' style="padding-top: 15px;">
-    Just for comparison, let's look at a regular whole genome BAM file. Reload the <a href="http://bam.iobio.io"><i>bam.iobio</i></a> web page and click 'choose bam url' and click 'Go' on the default file. This is a 1000 Genomes BAM file for the NA12878 sample. <a href="http://bam.iobio.io"><i>bam.iobio</i></a> is sampling the BAM file in real time and generating the statistics based on this sampling. Instead of waiting for possibly hours to generate these statistics, we have them in seconds. We can get a good sense of important statistics like duplicate rates and quality score distributions immediately using this app.
+
+  <!-- Optional bam.iobio screenshot -->
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-info">
+      <div class="panel-heading" role="tab" id="panelHeading">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#bamIobio" aria-expanded="false" aria-controls="bamIobio">
+            bam.iobio screenshot
+          </a>
+        </h4>
+      </div>
+      <div id="bamIobio" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panelHeading">
+        <img src="/public/images/cshl15/bam.iobio.png" style="width: 1050px; padding-left: 10px; padding-right: 10px;">
+      </div>
+    </div>
+  </div>
+
+  <div class='description'>
+    Just for comparison, let's look at a regular whole genome BAM file. Reload the <a href="http://bam.iobio.io" target="_blank"><i>bam.iobio</i></a> web page and click 'choose bam url' and click 'Go' on the default file. This is a 1000 Genomes BAM file for the NA12878 sample. <a href="http://bam.iobio.io"><i>bam.iobio</i></a> is sampling the BAM file in real time and generating the statistics based on this sampling. Instead of waiting for possibly hours to generate these statistics, we have them in seconds. We can get a good sense of important statistics like duplicate rates and quality score distributions immediately using this app.
   </div>
   <div class='description' style="padding-top: 15px;">
     We can also use <a href="http://bam.iobio.io"><i>bam.iobio</i></a> to look at exome BAM files. Reload the web page, click 'choose bam url' and add the url <span class="code-list code-span panel panel-danger">https://s3.amazonaws.com/iobio/1000gSV/NA19238.mapped.ILLUMINA.bwa.YRI.exome.20130415.bam</span>, then click 'Go'. We see the same statistics as before, but the 'Read Coverage Distribution' is not that useful. Since the majority of the genome has no coverage from exome sequencing, the distribution is heavily weighted towards very low read counts. To generate statistics only in relevant regions, you can upload a BED file, or just use the default BED supplied. Do this by clicking 'Default Bed' in the upper right corner of the top 'Read Coverage' panel. Now the 'Read Coverage Distribution' looks more like what we'd expect.
@@ -177,5 +206,154 @@ permalink: cshl15_practical.html
     <ul class="code-list">
       <li>gkno freebayes -ps human -i *bam -o all.vcf.gz</li>
     </ul>
+  </div>
+  <div class='description'>
+    So that took a little while to generate our results. It would be better if we could do it faster! Let's redo that calculation, but speed it up by parallelising the calling over different chromosomes. All you need to do is tell <i>gkno</i> some genomic regions to look at and it will parallelize the calling over these regions and automatically merge, compress and index the final files.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>rm -f f*</li>
+      <li>rm -f all*</li>
+      <li>gkno freebayes -ps human -i *bam -o all.vcf.gz -rg 17 -rg 20 -rg 21 -rg 22 -nj 4</li>
+    </ul>
+  </div>
+  <div class='description'>
+    The <span class="code-list code-span panel panel-danger">-nj</span> or <span class="code-list code-span panel panel-danger">--number-jobs</span> command tells <i>gkno</i> to keep up to four separate processes running at a time. This time, we saw that the calculation was faster. To review the format of VCF files, click the link below.
+  </div>
+
+  <!-- Optional vcf screenshot -->
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-info">
+      <div class="panel-heading" role="tab" id="vcfHeading">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#vcfFile" aria-expanded="false" aria-controls="vcfFile">
+            vcf file review
+          </a>
+        </h4>
+      </div>
+      <div id="vcfFile" class="panel-collapse collapse" role="tabpanel" aria-labelledby="vcfHeader">
+        <img src="/public/images/cshl15/vcf.png" style="width: 1050px; padding-left: 10px; padding-right: 10px;">
+      </div>
+    </div>
+  </div>
+
+  <!-- Interrogate the VCF files -->
+  <div class='section-subtitle'>Check the VCF files</div>
+  <div class='description'>
+    The quickest way to get a global view of our variant calls is to use <a href="http://vcf.iobio.io" target="_blank"><i>vcf.iobio</i></a>. In your web browser, go to the <a href="http://vcf.iobio.io" target="_blank"><i>vcf.iobio</i></a> website and select 'choose vcf file' (or 'choose vcf url' if your file is on the cloud). Select the compressed VCF file (this will have the extension <span class="code-list code-span panel panel-danger">vcf.gz</span>) and the index file (with extension <span class="code-list code-span panel panel-danger">vcf.gz.tbi</span>) together.
+  </div>
+
+  <!-- Optional vcf.iobio screenshot -->
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-info">
+      <div class="panel-heading" role="tab" id="vcfIobioHeading">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#vcfIobio" aria-expanded="false" aria-controls="vcfIobio">
+            vcf.iobio screenshot
+          </a>
+        </h4>
+      </div>
+      <div id="vcfIobio" class="panel-collapse collapse" role="tabpanel" aria-labelledby="vcfIobioHeading">
+        <img src="/public/images/cshl15/vcf.iobio.png" style="width: 1050px; padding-left: 10px; padding-right: 10px;">
+      </div>
+    </div>
+  </div>
+  <div class='description'>
+    The application shows information only in chromosomes 17, 20, 21, and 22, and also shows that the density of variants is restricted to very small regions. If we knew nothing about this VCF file until now, we get a great deal of information from this simple view of the data. This is a great way to see if the data is what you expected it to be. Is the sample supposed to be female, but has lots of calls on the Y chromosome? Is this supposed to be whole genome data, but large regions of the genome have no variants? The information supplied here gives a quick and easy way to ask these questions.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    To see <a href="http://vcf.iobio.io"><i>vcf.iobio</i></a> showing information on the entire <a href="http://exac.broadinstitute.org/"><i>ExAC</i></a> database, click <a href="http://vcf.iobio.io/?vcf=http://s3.amazonaws.com/vcf.files/ExAC.r0.2.sites.vep.vcf.gz" target="_blank">here</a>. It is clear to see features like the centromere on chromosome 1 where no calls have been made. Also, metrics like allele frequency and the distribution of base changes are available.
+  </div>
+
+  <!-- VCF manipulation -->
+  <div class='section-subtitle'>Manipulate VCF files</div>
+  <div class='description'>
+    We will take a look at two packages that are useful for working with VCF files, <a href="http://genome.sph.umich.edu/wiki/Vt"><i>vt</i></a> and <a href="https://github.com/ekg/vcflib"><i>vcflib</i></a>. Both of these packages can perform all sorts of different actions, so we'll play with just a couple. These tools were actually used in the <i>gkno freebayes</i> pipeline, but we'll use the tools directly here. To being, we'll create an 'alias' for the <a href="http://genome.sph.umich.edu/wiki/Vt"><i>vt</i></a> executable and an environment variable to point to the <a href="https://github.com/ekg/vcflib"><i>vcflib</i></a> directory where it's executables live.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>alias vt="$GKNO/tools/vt/vt"</li>
+      <li>VCFLIB="$GKNO/tools/vcflib/bin"</li>
+    </ul>
+  </div>
+  <div class='description'>
+    First, let's use <a href="http://genome.sph.umich.edu/wiki/Vt"><i>vt</i></a> to view a specific portion of our VCF file and include the header.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>vt view -h -i 17 all.vcf.gz | less -S</li>
+    </ul>
+  </div>
+  <div class='description'>
+    Use the space bar and <span class="code-list code-span panel panel-danger">u</span> to navigate up and down through the VCF file by pages, or the up and down cursor keys to move up and down line by ine. The left and right cursor keys will let you move left and right through the whole VCF records. Let's look at a couple of variants that may need to be modified depending on your analysis goals. First, we can pull out all 'complex' alleles from the VCF file. For more information on filtering rules in <a href="http://genome.sph.umich.edu/wiki/Vt"><i>vt</i></a>, see the <a href="http://genome.sph.umich.edu/wiki/Vt#Filters"><i>help</i></a> provided for the tool.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>vt view -f "INFO.TYPE=='complex'" all.vcf.gz | less -S</li>
+    </ul>
+  </div>
+  <div class='description'>
+    The first variant that we see is 'TGGGT' changing to 'GGGGG'. This is really a combination of two T -&gt; G SNPs, separated by three reference matching G's. When analysing all the reads, <a href="https://github.com/ekg/freebayes.git"><i>freebayes</i></a> considers a genomic window and looks for all observed haplotypes in a window. Instead of reporting this single allele, <a href="https://github.com/ekg/freebayes.git"><i>freebayes</i></a> could have reported the two SNPs, but by reporting this way, we know that the two SNPs are phased, i.e. there are no samples that have only one of the SNPs. Chromosomes either have both alternate alleles, or both reference alleles. There may be times, though, when we want these variants to be written as separate SNPs.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>vt view -h -f "INFO.TYPE=='complex'" all.vcf.gz | $VCFLIB/vcfallelicprimitives | less -S</li>
+    </ul>
+  </div>
+  <div class='description'>
+    Now we can see that the single variant has been replaced with the two SNPs. Let's look at one more record.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>vt view -f "N_ALLELE&gt;2" -i 22:39636944 all.vcf.gz | less -S<li>
+    </ul>
+  </div>
+  <div class='description'>
+    By scrolling to the right, we can see that the three samples have genotypes '1/2', '1/2' and '1/3'. So all of our samples are heterozygous and none of them have the reference allele in any chromosome. '1' refers to the first alternate allele, '2' the second alternate etc. We can break these multi-allelic sites into multiple lines - one for each allele.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>vt decompose -i 22:39636944 all.vcf.gz -o decomposed.vcf.gz</li>
+      <li>less -S decomposed.vcf.gz</li>
+    </ul>
+  </div>
+  <div class='description'>
+    After we ran the decompose command, we get a summary. In this case a single multi-allelic variant was broken down. If we look at the variants in the file <span class="code-list code-span panel panel-danger">decomposed.vcf.gz</span>, we can see that the single variant with three alternate alleles now appears as three different variants at the same genomic coordinate. You may also notice that the prepresentation of the alleles is unusual. The first variant is a deletion, but the second variant is SNP, but the base that is mutated is the last base in a five base sequence. If we perform a comparison between different VCF files, representing a SNP in this way will almost certainly mean that even if the two files being compared share the SNP, the comparison would not fail. It is extremely important that when comparing VCF files, we have a common, unambiguous representation of the alleles. We can <i>normalize</i> the variants to achieve this.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>vt normalize -r $REF decomposed.vcf.gz 2&gt;/dev/null | less -S</li>
+    </ul>
+  </div>
+  <div class='description'>
+    The <span class="code-list code-span panel panel-danger">2&gt;/dev/null</span> is to stop the summary from the tool being written to screen. Now we have a simple deletion and two normal looking SNPs!Normalizing variants is an important step that should not be forgotten!
+  </div>
+
+  <!-- gene.iobio -->
+  <div class='section-subtitle'>Trio analysis</div>
+  <div class='description'>
+    The three BAM files that we have created are actually a family trio. NA12878 is the child, NA12891 is the mother and NA12892, the father. In generating a family trio like this, we can interrogate the variants in the child in an attempt to determine if there are any mutations that could be deleterious to their health. The tool that we are going to use to look into this is called <a href="http://gene.iobio.io" target="_blank"><i>gene.iobio</i></a>.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    There are a number of resources available for understanding <a href="http://gene.iobio.io"><i>gene.iobio</i></a>, in particular, some <a href="http://gene.iobio.io/videos.html"><i>screencasts</i></a> and <a href="http://gene.iobio.io/usecases.html"><i>use cases</i></a>. We will quickly run through some of the more important functions here though.
+  </div>
+
+  <!-- sample cards -->
+  <div class='section-subtitle'>Sample data</div>
+  <div class='description'>
+    In your web browser, open <a href="http://gene.iobio.io" target="_blank"><i>gene.iobio</i></a>. Type and select the gene name 'RAI1' in the gene selection box at the top of the page. We are immediately presented with the canonical gene transcript and a data entry window. Select 'Trio' and then input the BAM and VCF files that we just created for each of the samples. As with the previous applications, be sure to select both the file and its index together.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    We will be selecting the same VCF file for all three samples, <span class="code-list code-span panel panel-danger">all.vcf.gz</span>, since we joint called variants on all three samples simultaneously. When you select the file, you will be prompted to select the sample from the VCF file to be used, so select the correct sample for each member of the trio. Click 'Load' once all the files have been selected.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    Once loaded, we have three cards showing all the data for three samples. These cards show all the variants, with the shapes representing the variant type and the colour, the annotated impact. We can also see the sequencing coverage which will help give us confidence in whether a call could be made.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    The 'Rank Variants' table provides a simple ranking of the Proband's variants, with the furthest left being the most likely to have a functional impact. This ranking is based on membership of ClinVar, the annotated impact from VEP and SnpEff, the inheritance mode, and population allele frequency. We can use the 'Filter' card to filter out variants that we are not interested in. In this gene, we can see that the highest ranked variant is a recessive SNP, annotated by SnpEff as being of high impact. If we click on the variants column in the 'Rank Variants' table, the variant in question is highlighted. We can then hover over the variant to understand more about it.
+  </div>
+  <div class='section-subtitle'>Exome data</div>
+  <div class='description'>
+    Finally, we can look at a <a href="http://gene.iobio.io/?rel0=proband&rel1=mother&rel2=father&gene=BRCA2&name0=NA19240&bam0=https://s3.amazonaws.com/iobio/1000gSV/NA19240.mapped.ILLUMINA.bwa.YRI.exome.20130415.bam&name1=NA19238&bam1=https://s3.amazonaws.com/iobio/1000gSV/NA19238.mapped.ILLUMINA.bwa.YRI.exome.20130415.bam&name2=NA19239&bam2=https://s3.amazonaws.com/iobio/1000gSV/NA19239.mapped.ILLUMINA.bwa.YRI.exome.20130415.bam&vcf0=https://s3.amazonaws.com/iobio/1000gSV/exome-trio.vcf.gz&sample0=NA19240&vcf1=https://s3.amazonaws.com/iobio/1000gSV/exome-trio.vcf.gz&sample1=NA19238&vcf2=https://s3.amazonaws.com/iobio/1000gSV/exome-trio.vcf.gz&sample2=NA19239" target="_blank">trio exome study</a>. It is clear that this is an exome study as you can see the coverage spiking in all of the exomes. Feel free to play with the tools and look at some of the help resources.
   </div>
 </div>

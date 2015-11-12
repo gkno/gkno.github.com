@@ -161,10 +161,12 @@ b { color:rgb(110,110,110); text-decoration: none; }
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 10px; 
+  padding-right: 10px; 
 }
 
 .code-span {
-  padding-left: 0px; 
+  padding-left: 2px; 
+  padding-right: 2px; 
   padding-top: 0px;
   padding-bottom: 0px;
 }
