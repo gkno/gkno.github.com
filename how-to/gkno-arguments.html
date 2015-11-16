@@ -1,0 +1,63 @@
+---
+layout: page
+permalink: gkno-arguments.html
+---
+
+<!-- Getting started -->
+<div class='section'>
+  <div class='section-title'><i>gkno</i> arguments</div>
+  <div class='description'>
+    When requesting help on a specific pipeline, only the arguments for that pipeline are displayed. There is a set of arguments that can be used regardless of the pipeline being used and those are all listed at the end of this page. The majority of these arguments will not be used by most users, so the most important arguments are identified and given a brief description here.
+  </div>
+
+  <!-- Help arguments -->
+  <div class='section-subtitle'>Help arguments</div>
+  <div class='description'>
+    The arguments <span class="code-list code-span panel panel-danger">--all-pipelines (-api)</span>, <span class="code-list code-span panel panel-danger">--categories (-cat)</span>, <span class="code-list code-span panel panel-danger">--gkno-arguments (-ga)</span> and <span class="code-list code-span panel panel-danger">--help (-h)</span> are all used for displaying help information. These arguments are discussed in the <a href="/how-to/help.html">help</a> section.
+  </div>
+
+  <!-- Stop execution -->
+  <div class='section-subtitle'>Disable automatic execution</div>
+  <div class='description'>
+    When <i>gkno</i> is executed, (one) or more makefiles are generated (see the <a href="/how-to/overview.html">overview</a> for a more detailed description of how <i>gkno</i> works). By default, if only a single makefile is generated, <i>gkno</i> will immediately begin execution of the pipeline. There are number of occasions in which this is not desired behaviour and so the <span class="code-list code-span panel panel-danger">--do-not-execute (-dne)</span> argument can be used to disable execution. If execution was disabled in order to inspect the makefile, it can then be executed using the following command:
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>make -k -j N -f &lt;MAKEFILE&gt;</li>
+    </ul>
+  </div>
+  <div class='description'>
+    In the above, <span class="code-list code-span panel panel-danger">-k</span> will cause the pipeline to keep going for as long as possible after an error. If the makefile is performing many tasks, even if one task fails, other unrelated tasks can still be successfully run prior to terminating execution. The <span class="code-list code-span panel panel-danger">-j N</span> argument specifies the maximum number of parallel jobs that can be run. Finally, the <span class="code-list code-span panel panel-danger">-f</span> defines the name of the makefile to be executed.
+  </div>
+
+  <!-- Parameter sets -->
+  <div class='section-subtitle'>Parameter sets</div>
+  <div class='description'>
+    Parameter sets are used to minimise the number of parameters that need to be included on the pipeline by collecting commonly used parameters into named parameter sets. These are discussed in more detail <a href="/how-to/parameter-sets.html">here</a>. The command <span class="code-list code-span panel panel-danger">--export-parameter-set (-ep)</span> allows a parameter set to be created, <span class="code-list code-span panel panel-danger">--parameter-set (-ps)</span> invokes a parameter set for a pipeline, and <span class="code-list code-span panel panel-danger">--remove-parameter-set (-rp)</span> removes a previously defined parameter set (only user-defined parameter sets can be removed).
+  </div>
+
+  <!-- Multiple makefiles -->
+  <div class='section-subtitle'>Generate multiple makefiles (cluster usage)</div>
+  <div class='description'>
+    In normal usage, on execution <i>gkno</i> will generate a single makefile and begin execution. The execution can be parallelized (see below), but there are times where it is preferable to generate multiple makefiles and distribute execution of these makefiles across different resources, e.g. a cluster. See the dedicated <a href="/how-to/coming-soon.html">tutorial</a> for more information on performing this kind of execution, but this begins by setting the <span class="code-list code-span panel panel-danger">--multiple-makefiles (-m)</span> argument.
+  </div>
+
+  <!-- Parallelizing -->
+  <div class='section-subtitle'>Parallelising execution</div>
+  <div class='description'>
+    Depending on the pipeline and arguments supplied to it, the pipeline can consist of multiple tasks that are performed independently of each other. If this is the case, there is no reason to execute all the tasks sequentially. Instead, we can use the <span class="code-list code-span panel panel-danger">--number-jobs (-nj)</span> to specify the number of tasks that can be executed in parallel.
+  </div>
+
+  <!-- List of arguments -->
+  <div class='section-subtitle'>List of all <i>gkno</i> arguments</div>
+  {% for gknoArgument in site.data.gkno-web-content.gknoArguments %}
+  {% assign argumentInfo = gknoArgument[1] %}
+    <ul style="list-style-type: none; padding-top: 8px; padding-bottom: 0px; margin-bottom: 0px;">
+      <li class="description" style="display:table-cell; width: 300px" href="#{{ gknoArgument[0] }}">{{ gknoArgument[0] }}</li>
+      <li class="description" style="display:table-cell; width: 100px;">{{ argumentInfo.shortForm }}</li>
+      <li class="description" style="display:table-cell; width: 100px;">{{ argumentInfo.dataType }}</li>
+      <li class="description" style="display:table-cell">{{ argumentInfo.description }}</li>
+    </ul>
+  {% endfor %}
+  </div>
+</div>

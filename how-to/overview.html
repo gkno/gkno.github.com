@@ -1,0 +1,56 @@
+---
+layout: page
+permalink: overview.html
+---
+
+<!-- -->
+<div class='section'>
+  <div class='section-title'>Overview</div>
+  <div class='description'>
+    <i>gkno</i> is a system for building and executing bioinformatics pipelines using a range of different tools. <a href="/how-to/install.html">Installation</a> generates a copy of the source code and also pulls in the source code of all of the constituent tools. Building <i>gkno</i> is really compiling all of the tools that are contained with the package, rather than compiling <i>gkno</i> itself. In addition, <i>gkno</i> provides a set of resource files that can be used in conjunction with the pipelines. The overall aim of the project is to simplify the identification and execution of bioinformatics pipelines and provide a community resource which allows pipelines and analysis specific parameters to be easily shared and reused by the community at large.
+  </div>
+
+  <!-- General -->
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-info">
+      <div class="panel-heading" role="tab" id="fileStructureHeading">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#fileStructure" aria-expanded="false" aria-controls="fileStructure">
+            Detailed description of file structure
+          </a>
+        </h4>
+      </div>
+      <div id="fileStructure" class="panel-collapse collapse" style="padding-left: 10px; padding-right: 10px;" role="tabpanel" aria-labelledby="fileStructureHeading">
+        <div class='section-title'>File structure</div>
+        <div class='description'>
+          In the initial set-up, <i>gkno</i> creates a file structure so that all files are available and in a known location. <strong>This file structure should never be modified or removed</strong>. Many of the functions within <i>gkno</i> make use of the known file structure, so any changes could cause a total failure. The directory structure is as follows:
+        </div>
+        <div style="text-align: center"><img src="/public/images/how-to/directory_structure.png" style="width: 750px"></div>
+        <div class='description'>
+          From left to right, the file structure contains the following elements:
+        </div>
+        <div class='section-subtitle'>Configuration files</div>
+        <div class='description'>
+          The 'config_files' directory contains the configuration file <span class="code-list code-span panel panel-danger">gknoConfiguration.json</span> which contains information describing the arguments that are not specific to a pipeline, but perform general high level functions. These arguments are discussed in more detail <a href="/how-to/gkno-arguments.html">here</a>. All of the tools that can be built into pipelines are described in their own configuration files stored in the 'tools' directory and the 'pipes' directory contains all the pipeline descriptions. There are additional resources to describe the contents of these <a href="/how-to/tool-required.html">tool</a> and <a href="/how-to/coming-soon.html">pipeline</a> configuration files.
+        </div>
+        <div class='section-subtitle'>Executable</div>
+        <div class='description'>
+          The gkno executable can be executed as soon as <i>gkno</i> has been built and allows you to manage version, the resources, and run any of the available pipelines.
+        </div>
+        <div class='section-subtitle'>Resources</div>
+        <div class='description'>
+          When cloned, <i>gkno</i> comes with a set of 'tutorial' resources. These are generally small files that allow pipelines to be tested rapidly. Additional resources can be added, updated or removed and when they are, they will be stored in their own directory under the resources directory. See the <a href="/how-to/coming-soon.html">resources</a> tutorial to understand how to manage <i>gkno</i> resource files. These files should not be manually removed, as some <a href="/how-to/parameter-sets.html">parameter sets</a> may expect these files to exist.
+        </div>
+        <div class='section-subtitle'>Source files</div>
+        <div class='description'>
+          All of the source files for making <i>gkno</i> run are stored here and should be left alone.
+        </div>
+        <div class='section-subtitle'>Tools</div>
+        <div class='description'>
+          All of the tools available in <i>gkno</i> are stored in the 'tools' directory. Within this directory, the 'R' directory contains scripts for running 'R' analyses and 'scripts' contains scripts that have been wrapped as <i>gkno</i> tools. It is possible to include your own tools in <i>gkno</i> by creating a configuration file to describe it and creating a directory for your tool in the 'tools' directory and either keeping your tool there, or providing a soft link to your tool executable. Including your own tools in <i>gkno</i> is described in more detail <a href="/how-to/coming-soon.html">here</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='section-title'>Overview</div>
+</div>

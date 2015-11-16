@@ -19,7 +19,7 @@ permalink: getting-started.html
   <!-- Execute a pipeline -->
   <div class='section-title'><i>gkno</i> arguments</div>
   <div class='description'>
-    There is a set of arguments that can be applied to any pipeline that perform functions that are pipeline independent. This includes functions such as selecting or creating parameter sets, allowing parallel execution of tasks etc. To see a list of these commands, use the <code>--gkno-arguments (-ga)</code> argument. Click below to see all of the available commands, or a more detailed description is provided <a href="/how-to/coming-soon.html">here</a>.
+    There is a set of arguments that can be applied to any pipeline that perform functions that are pipeline independent. This includes functions such as selecting or creating parameter sets, allowing parallel execution of tasks etc. To see a list of these commands, use the <code>--gkno-arguments (-ga)</code> argument. Click below to see all of the available commands, or a more detailed description is provided <a href="/how-to/gkno-arguments.html">here</a>.
   </div>
 
   <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -36,8 +36,9 @@ permalink: getting-started.html
       <div id="gknoArguments" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panelHeading">
       {% for gknoArgument in site.data.gkno-web-content.gknoArguments %}
       {% assign argumentInfo = gknoArgument[1] %}
-        <ul style="list-style-type: none; padding-top: 8px; padding-bottom: 0px; margin-bottom: 0px;">
+        <ul style="list-style-type: none; padding-top: 8px; padding-bottom: 0px; padding-right: 10px; margin-bottom: 0px;">
           <li class="description" style="display:table-cell; width: 300px" href="#{{ gknoArgument[0] }}">{{ gknoArgument[0] }}</li>
+          <li class="description" style="display:table-cell; width: 100px;">{{ argumentInfo.shortForm }}</li>
           <li class="description" style="display:table-cell; width: 100px;">{{ argumentInfo.dataType }}</li>
           <li class="description" style="display:table-cell">{{ argumentInfo.description }}</li>
         </ul>
