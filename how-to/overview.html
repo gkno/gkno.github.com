@@ -11,6 +11,27 @@ permalink: overview.html
   </div>
 
   <!-- General -->
+  <div class='section-title'>General architecture</div>
+  <div class='description'>
+    When running a <i>gkno</i> pipeline, a pipeline configuration file is used to create a graph representation of the Python using functionality provided by the Python <a href="https://networkx.github.io/">networkx</a> library. Tool configuration files are then used to define all the executables and understand expected file formats, required arguments, and detailed behaviour including the handling of streams etc. Defined <a href="/how-to/parameter-sets.html">parameter sets</a> and user supplied arguments are parsed and all values added to the graph. Where possible, <i>gkno</i> will fill in all missing required arguments (for example, by creating output filenames, where none are defined). All detailes are then checked to ensure that all supplied information is consistent with tool requirements.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    Before creating makefiles for execution, <i>gkno</i> identifies dependent tasks in the pipeline and creates <i>phases</i> and <i>subphases</i> to allow parallelisation of execution. In the figure below, the task <i>generate reference index</i> needs to be completed before anything else in the pipeline can run. This task ends up in <i>phase 1</i> and until this is finished, no other tasks can run. Once completed, <i>phase 2</i> has to be executed next. No variant calling (<i>phase 3</i>) can occur until the alignments are complete. Within <i>phase 2</i>, there may be multiple alignments, and all of these are independent, so the run of tasks 'align' and 'sort', for each set of files can occur in parallel. Finally, <i>phase 3</i> will not be started until all <i>subphases</i> in <i>phase 2</i> are complete. If running on a cluster, running the pipeline shown in the figure below, would result in a single makefile for <i>phase 1</i>, n makefiles for <i>phase 2</i> and a single makefile for <i>phase 3</i>.
+  </div>
+  <div style="text-align: center"><img src="/public/images/how-to/execution_structure.png" style="width: 750px"></div>
+  <div class='description'>
+    For more information on parallelising execution of <i>gkno</i>, see the <a href="/how-to/parallel.html">tutorial</a> here.
+  </div>
+
+  <!-- File structure -->
+  <div class='section-title'>File structure</div>
+  <div class='description'>
+    In the initial set-up, <i>gkno</i> creates a file structure so that all files are available and in a known location. <strong>This file structure should never be modified or removed</strong>. Many of the functions within <i>gkno</i> make use of the known file structure, so any changes could cause a total failure. The directory structure is as follows:
+  </div>
+  <div style="text-align: center"><img src="/public/images/how-to/directory_structure.png" style="width: 750px"></div>
+  <div class='description'>
+    More detail about the contents of this file structure can be found by expanding the panel below.
+  </div>
   <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-info">
       <div class="panel-heading" role="tab" id="fileStructureHeading">
@@ -21,11 +42,6 @@ permalink: overview.html
         </h4>
       </div>
       <div id="fileStructure" class="panel-collapse collapse" style="padding-left: 10px; padding-right: 10px;" role="tabpanel" aria-labelledby="fileStructureHeading">
-        <div class='section-title'>File structure</div>
-        <div class='description'>
-          In the initial set-up, <i>gkno</i> creates a file structure so that all files are available and in a known location. <strong>This file structure should never be modified or removed</strong>. Many of the functions within <i>gkno</i> make use of the known file structure, so any changes could cause a total failure. The directory structure is as follows:
-        </div>
-        <div style="text-align: center"><img src="/public/images/how-to/directory_structure.png" style="width: 750px"></div>
         <div class='description'>
           From left to right, the file structure contains the following elements:
         </div>
@@ -52,5 +68,22 @@ permalink: overview.html
       </div>
     </div>
   </div>
-  <div class='section-title'>Overview</div>
+
+  <!-- Resources -->
+  <div class='section-title'>Resources</div>
+  <div class='description'>
+    Details coming soon.
+  </div>
+
+  <!-- Tool configuration files -->
+  <div class='section-title'>Tool configuration files</div>
+  <div class='description'>
+    Every tool, script or 'R' script that can be used by <i>gkno</i> has to be described using a configuration file. These are <i>json</i> format files that identify the tools location, executable commands and command line arguments. Any idiosyncracies of the tool are also described in this file, for example, modifying the tool behaviour or arguments if the tool is accepting or outputting a stream rather than a file. Details on all aspects of tool configuration files, including writing them for your own tools can be found under the 'Tool configuration files' heading on the <a href="/how-to.html">how-to</a> page.
+  </div>
+
+  <!-- Pipeline configuration files -->
+  <div class='section-title'>Pipeline configuration files</div>
+  <div class='description'>
+    Similarly to tools, every pipeline in <i>gkno</i> has to be described using a <i>json</i> format configuration file. This file defines all of the tasks in a pipeline and the tools used to execute each task. It is also possible to use another <i>gkno</i> pipeline to execute tasks, so the pipelines can, in fact, be pipelines of pipelines. There is a lot of information that can be used to define pipelines and all the details, including how to create files for own pipelines can be found under the 'Pipeline configuration files' heading on the <a href="/how-to.html">how-to</a> page.
+  </div>
 </div>
