@@ -1,0 +1,28 @@
+---
+layout: page
+permalink: pipeline-config.html
+---
+
+<!-- -->
+<div class='section'>
+  <div class='section-title'>Pipeline configuration files</div>
+  <div class='description'>
+    The pipeline configuration file provides all of the information on how to build a pipeline and what tools or pipelines should be used to achieve the desired analysis. This page describes the overall content of one of these pipeline configuration files, but more detail on a number of aspects is provided in companion pages. Finally, a <a href="build-pipeline.html">tutorial</a> is provided to help in constructing your own pipeline configuration file.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    Following is a list of the fields that can be included in the pipeline configuration file.
+  </div>
+  <div class='section-title'>Required fields</div>
+  <div class='section-subtitle'>id</div>
+  <div class='description'>
+    Each pipeline is given a unique id, which is usually just the name of the pipeline.
+  </div>
+  <div class='section-subtitle'>configuration type</div>
+  <div class='description'>
+    <i>gkno</i> recognises two types of configuration files; tool and pipeline. The contents of these two files are different and are subject to different checks by <i>gkno</i> and so the type needs to be specified as <i>pipeline</i> for all pipeline configuration files.
+  </div>
+  <div class='section-subtitle'>description</div>
+  <div class='description'>
+    A pipeline description must be supplied and should be as descriptive as possible. This description will appear in the pipeline help message, but also on the website help page.
+  </div>
+</div>
