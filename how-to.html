@@ -6,7 +6,39 @@ group: "navigation"
 order: 3
 ---
 
+<script>
+  $(document).ready(function(){
+    function scrollToAnchor(aid){
+      var aTag = $("#"+ aid);
+      $('html, body').animate({
+        scrollTop: aTag.offset().top -90
+      }, 1000);
+    }
+
+    $("#scGeneral").click(function() {scrollToAnchor('general');});
+    $("#scParam").click(function() {scrollToAnchor('param');});
+    $("#scBest").click(function() {scrollToAnchor('bestPractice');});
+    $("#scToolConf").click(function() {scrollToAnchor('toolConf');});
+    $("#scPipeConf").click(function() {scrollToAnchor('pipelineConf');});
+    $("#scOtherHelp").click(function() {scrollToAnchor('otherHelp');});
+  });
+</script>
+
+
 <div class="row">
+  <div class="col-md-3" style="padding-left: 0px; padding-top: 15px;" role="complementary">
+    <nav class=bs-docs-sidebar affix>
+      <ul class="nav bs-docs-sidenav affix">
+        <li><a id="scGeneral" class="description" style="text-decoration: none;" href="#">General gkno usage</a></li>
+        <li><a id="scParam" class="description" style="text-decoration: none;" href="#">Parameter sets</a></li>
+        <li><a id="scBest" class="description" style="text-decoration: none;" href="#">Best practice</a></li>
+        <li><a id="scToolConf" class="description" style="text-decoration: none;" href="#">Tool configuration files</a></li>
+        <li><a id="scPipeConf" class="description" style="text-decoration: none;" href="#">Pipeline configuration files</a></li>
+        <li><a id="scOtherHelp" class="description" style="text-decoration: none;" href="#">Other help</a></li>
+      <ul>
+    </nav>
+  </div>
+
   <div class="col-md-9" role="main">
     <div class="section">
       <h1 class="section-title">How to use gkno</h1>
@@ -69,7 +101,7 @@ order: 3
       </p>
     
       <!-- Pipeline configuration files -->
-      <div id="general" class="section-subtitle">Pipeline configuration files</div>
+      <div id="pipelineConf" class="section-subtitle">Pipeline configuration files</div>
       <p class="description" id="indent"><a href="/how-to/pipeline-config.html">Describe a pipeline:</a>
         How to describe a gkno pipeline
       </p>
@@ -78,7 +110,7 @@ order: 3
       </p>
     
       <!-- Other useful links -->
-      <div id="general" class="section-subtitle">Other help</div>
+      <div id="otherHelp" class="section-subtitle">Other help</div>
       <p class="description" id="indent"><a href="/how-to/cshl.html">CSHL BAM tutorial:</a>
         How to manipulate BAM files
       </p>
@@ -87,17 +119,4 @@ order: 3
       </p>
     </div>
   </div>
-  
-  <!--
-  <div class="col-md-3" role="complementary">
-    <nav class=bs-docs-sidebar affix>
-      <ul class="nav bs-docs-sidenav affix">
-        <li><a style="font-family:Helvetica Neue; font-size: 16px; color: #333; text-indent:40px; text-decoration:none;" href="#general">General gkno usage</a></li>
-        <li><a style="font-family:Helvetica Neue; font-size: 16px; color: #333; text-indent:40px; text-decoration:none;" href="#param">Parameter sets</a></li>
-        <li><a style="font-family:Helvetica Neue; font-size: 16px; color: #333; text-indent:40px; text-decoration:none;" href="#toolConf">Tool configuration files</a></li>
-        <li><a style="font-family:Helvetica Neue; font-size: 16px; color: #333; text-indent:40px; text-decoration:none;" href="#pipeConf">Pipeline configuration files</a></li>
-      <ul>
-    </nav>
-  </div>
-  -->
 </div>
