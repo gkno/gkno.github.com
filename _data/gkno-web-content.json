@@ -1,14 +1,18 @@
 {
   "__gkno__": {
-    "commit": "7303fe02d8f26ed73f8de5b156b6b3a94b8808e3", 
+    "commit": "8beaccf554074d4f0b4047a043ebf40bec8bd6ef", 
     "date": "November 2015", 
-    "version": "2.41.1"
+    "version": "2.47.1"
   }, 
   "categories": {
     "Alignment": [
       "bwa-se", 
       "bwa", 
       "mosaik"
+    ], 
+    "Annotation": [
+      "snpeff-download", 
+      "snpeff"
     ], 
     "BAM-processing": [
       "add-read-group", 
@@ -45,6 +49,7 @@
       "index-vcf", 
       "merge-vcf", 
       "simplify-vcf", 
+      "snpeff", 
       "standardize-vcf", 
       "subset-vcf", 
       "vcf-extract", 
@@ -1946,6 +1951,46 @@
       ], 
       "description": "Break up all complex alleles into their primitive components, e.g. SNPs and indels. Normalize and compress the resulting VCF file."
     }, 
+    "snpeff": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "The snpEff annotation database. This must have been downloaded (using snpeff-download) and be present in <path>/gkno_launcher/tools/snpEff/data.", 
+          "long form argument": "--database", 
+          "short form argument": "-d"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The output filtered and compressed VCF file.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The input VCF file.", 
+          "long form argument": "--in", 
+          "short form argument": "-i"
+        }
+      ], 
+      "description": "Annotate a VCF file using SnpEff."
+    }, 
+    "snpeff-download": {
+      "arguments": [
+        {
+          "data type": "string", 
+          "description": "The output database.", 
+          "long form argument": "--out", 
+          "short form argument": "-o"
+        }, 
+        {
+          "data type": "string", 
+          "description": "The SnpEff database name.", 
+          "long form argument": "--database", 
+          "short form argument": "-d"
+        }
+      ], 
+      "description": "Download a SnpEff database."
+    }, 
     "standardize-vcf": {
       "arguments": [
         {
@@ -2203,7 +2248,7 @@
       "commit": "ec95090fc35b616ec3aae8fa4fb18336b56d2411"
     }, 
     "tutorial": {
-      "commit": "e91fff213ebda541c537526c67fbd28fe1cdbd26"
+      "commit": "22ec82af869349ec60fdd4752a2a6ea7ce804491"
     }
   }, 
   "tools": {
@@ -2266,6 +2311,21 @@
       ], 
       "web_pages": [
         "http://csg.sph.umich.edu/chaolong/LASER/"
+      ]
+    }, 
+    "snpeff": {
+      "authors": [
+        "Pablo Cingolani"
+      ], 
+      "commit": "bb165c389e3d33d224443f7b4472c411bb1722f4", 
+      "emails": [
+        "pcingola@users.sourceforge.net"
+      ], 
+      "papers": [
+        "'A program for annotating and predicting the effects of single nucleotide polymorphisms, SnpEff: SNPs in the genome of Drosophila melanogaster strain w1118; iso-2; iso-3.', Cingolani P, Platts A, Wang le L, Coon M, Nguyen T, Wang L, Land SJ, Lu X, Ruden DM. Fly (Austin). 2012 Apr-Jun;6(2):80-92. PMID: 22728672"
+      ], 
+      "web_pages": [
+        "http://snpeff.sourceforge.net/index.html"
       ]
     }, 
     "vt": {

@@ -20,13 +20,14 @@ order: 3
     $("#scBest").click(function() {scrollToAnchor('bestPractice');});
     $("#scToolConf").click(function() {scrollToAnchor('toolConf');});
     $("#scPipeConf").click(function() {scrollToAnchor('pipelineConf');});
+    $("#scExamples").click(function() {scrollToAnchor('examples');});
     $("#scOtherHelp").click(function() {scrollToAnchor('otherHelp');});
   });
 </script>
 
 
 <div class="row">
-  <div class="col-md-3" style="padding-left: 0px; padding-top: 15px;" role="complementary">
+  <div class="col-md-3" style="padding-left: 0px; padding-top: 25px;" role="complementary">
     <nav class=bs-docs-sidebar affix>
       <ul class="nav bs-docs-sidenav affix">
         <li><a id="scGeneral" class="description" style="text-decoration: none;" href="#">General gkno usage</a></li>
@@ -34,6 +35,7 @@ order: 3
         <li><a id="scBest" class="description" style="text-decoration: none;" href="#">Best practice</a></li>
         <li><a id="scToolConf" class="description" style="text-decoration: none;" href="#">Tool configuration files</a></li>
         <li><a id="scPipeConf" class="description" style="text-decoration: none;" href="#">Pipeline configuration files</a></li>
+        <li><a id="scExamples" class="description" style="text-decoration: none;" href="#">Execution examples</a></li>
         <li><a id="scOtherHelp" class="description" style="text-decoration: none;" href="#">Other help</a></li>
       <ul>
     </nav>
@@ -109,6 +111,12 @@ order: 3
         A tutorial on creating a pipeline configuration file for your own tool
       </p>
     
+      <!-- Examples -->
+      <div id="examples" class="section-subtitle">Execution examples</div>
+      <p class="description" id="indent"><a href="/how-to/examples.html">Examples:</a>
+        How to manipulate BAM files
+      </p>
+
       <!-- Other useful links -->
       <div id="otherHelp" class="section-subtitle">Other help</div>
       <p class="description" id="indent"><a href="/how-to/cshl.html">CSHL BAM tutorial:</a>
