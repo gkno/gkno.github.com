@@ -7,20 +7,20 @@ permalink: overview.html
 <div class='section'>
   <div class='section-title'>Overview</div>
   <div class='description'>
-    <i>gkno</i> is a system for building and executing bioinformatics pipelines using a range of different tools. <a href="/how-to/install.html">Installation</a> generates a copy of the source code and also pulls in the source code of all of the constituent tools. Building <i>gkno</i> is really compiling all of the tools that are contained with the package, rather than compiling <i>gkno</i> itself. In addition, <i>gkno</i> provides a set of resource files that can be used in conjunction with the pipelines. The overall aim of the project is to simplify the identification and execution of bioinformatics pipelines and provide a community resource which allows pipelines and analysis specific parameters to be easily shared and reused by the community at large.
+    <i>gkno</i> is a system for building and executing bioinformatics pipelines using a range of different tools. <a href="/install.html">Installation</a> generates a copy of the source code and also pulls in the source code of all of the constituent tools. Building <i>gkno</i> is really compiling all of the tools that are contained with the package, rather than compiling <i>gkno</i> itself. In addition, <i>gkno</i> provides a set of resource files that can be used in conjunction with the pipelines. The overall aim of the project is to simplify the identification and execution of bioinformatics pipelines and provide a community resource which allows pipelines and analysis specific parameters to be easily shared and reused by the community at large.
   </div>
 
   <!-- General -->
   <div class='section-title'>General architecture</div>
   <div class='description'>
-    When running a <i>gkno</i> pipeline, a pipeline configuration file is used to create a graph representation of the Python using functionality provided by the Python <a href="https://networkx.github.io/">networkx</a> library. Tool configuration files are then used to define all the executables and understand expected file formats, required arguments, and detailed behaviour including the handling of streams etc. Defined <a href="/how-to/parameter-sets.html">parameter sets</a> and user supplied arguments are parsed and all values added to the graph. Where possible, <i>gkno</i> will fill in all missing required arguments (for example, by creating output filenames, where none are defined). All detailes are then checked to ensure that all supplied information is consistent with tool requirements.
+    When running a <i>gkno</i> pipeline, a pipeline configuration file is used to create a graph representation of the Python using functionality provided by the Python <a href="https://networkx.github.io/">networkx</a> library. Tool configuration files are then used to define all the executables and understand expected file formats, required arguments, and detailed behaviour including the handling of streams etc. Defined <a href="/parameter-sets.html">parameter sets</a> and user supplied arguments are parsed and all values added to the graph. Where possible, <i>gkno</i> will fill in all missing required arguments (for example, by creating output filenames, where none are defined). All detailes are then checked to ensure that all supplied information is consistent with tool requirements.
   </div>
   <div class='description' style="padding-top: 15px;">
     Before creating makefiles for execution, <i>gkno</i> identifies dependent tasks in the pipeline and creates <i>phases</i> and <i>subphases</i> to allow parallelisation of execution. In the figure below, the task <i>generate reference index</i> needs to be completed before anything else in the pipeline can run. This task ends up in <i>phase 1</i> and until this is finished, no other tasks can run. Once completed, <i>phase 2</i> has to be executed next. No variant calling (<i>phase 3</i>) can occur until the alignments are complete. Within <i>phase 2</i>, there may be multiple alignments, and all of these are independent, so the run of tasks 'align' and 'sort', for each set of files can occur in parallel. Finally, <i>phase 3</i> will not be started until all <i>subphases</i> in <i>phase 2</i> are complete. If running on a cluster, running the pipeline shown in the figure below, would result in a single makefile for <i>phase 1</i>, n makefiles for <i>phase 2</i> and a single makefile for <i>phase 3</i>.
   </div>
-  <div style="text-align: center"><img src="/public/images/how-to/execution_structure.png" style="width: 750px"></div>
+  <div style="text-align: center"><img src="/public/images/execution_structure.png" style="width: 750px"></div>
   <div class='description'>
-    For more information on parallelising execution of <i>gkno</i>, see the <a href="/how-to/parallel.html">tutorial</a> here.
+    For more information on parallelising execution of <i>gkno</i>, see the <a href="/parallel.html">tutorial</a> here.
   </div>
 
   <!-- File structure -->
@@ -28,7 +28,7 @@ permalink: overview.html
   <div class='description'>
     In the initial set-up, <i>gkno</i> creates a file structure so that all files are available and in a known location. <strong>This file structure should never be modified or removed</strong>. Many of the functions within <i>gkno</i> make use of the known file structure, so any changes could cause a total failure. The directory structure is as follows:
   </div>
-  <div style="text-align: center"><img src="/public/images/how-to/directory_structure.png" style="width: 750px"></div>
+  <div style="text-align: center"><img src="/public/images/directory_structure.png" style="width: 750px"></div>
   <div class='description'>
     More detail about the contents of this file structure can be found by expanding the panel below.
   </div>
@@ -47,7 +47,7 @@ permalink: overview.html
         </div>
         <div class='section-subtitle'>Configuration files</div>
         <div class='description'>
-          The 'config_files' directory contains the configuration file <span class="code-list code-span panel panel-danger">gknoConfiguration.json</span> which contains information describing the arguments that are not specific to a pipeline, but perform general high level functions. These arguments are discussed in more detail <a href="/how-to/gkno-arguments.html">here</a>. All of the tools that can be built into pipelines are described in their own configuration files stored in the 'tools' directory and the 'pipes' directory contains all the pipeline descriptions. There are additional resources to describe the contents of these <a href="/how-to/tool-required.html">tool</a> and <a href="/how-to/coming-soon.html">pipeline</a> configuration files.
+          The 'config_files' directory contains the configuration file <span class="code-list code-span panel panel-danger">gknoConfiguration.json</span> which contains information describing the arguments that are not specific to a pipeline, but perform general high level functions. These arguments are discussed in more detail <a href="/gkno-arguments.html">here</a>. All of the tools that can be built into pipelines are described in their own configuration files stored in the 'tools' directory and the 'pipes' directory contains all the pipeline descriptions. There are additional resources to describe the contents of these <a href="/tool-required.html">tool</a> and <a href="/coming-soon.html">pipeline</a> configuration files.
         </div>
         <div class='section-subtitle'>Executable</div>
         <div class='description'>
@@ -55,7 +55,7 @@ permalink: overview.html
         </div>
         <div class='section-subtitle'>Resources</div>
         <div class='description'>
-          When cloned, <i>gkno</i> comes with a set of 'tutorial' resources. These are generally small files that allow pipelines to be tested rapidly. Additional resources can be added, updated or removed and when they are, they will be stored in their own directory under the resources directory. See the <a href="/how-to/coming-soon.html">resources</a> tutorial to understand how to manage <i>gkno</i> resource files. These files should not be manually removed, as some <a href="/how-to/parameter-sets.html">parameter sets</a> may expect these files to exist.
+          When cloned, <i>gkno</i> comes with a set of 'tutorial' resources. These are generally small files that allow pipelines to be tested rapidly. Additional resources can be added, updated or removed and when they are, they will be stored in their own directory under the resources directory. See the <a href="/coming-soon.html">resources</a> tutorial to understand how to manage <i>gkno</i> resource files. These files should not be manually removed, as some <a href="/parameter-sets.html">parameter sets</a> may expect these files to exist.
         </div>
         <div class='section-subtitle'>Source files</div>
         <div class='description'>
@@ -63,7 +63,7 @@ permalink: overview.html
         </div>
         <div class='section-subtitle'>Tools</div>
         <div class='description'>
-          All of the tools available in <i>gkno</i> are stored in the 'tools' directory. Within this directory, the 'R' directory contains scripts for running 'R' analyses and 'scripts' contains scripts that have been wrapped as <i>gkno</i> tools. It is possible to include your own tools in <i>gkno</i> by creating a configuration file to describe it and creating a directory for your tool in the 'tools' directory and either keeping your tool there, or providing a soft link to your tool executable. Including your own tools in <i>gkno</i> is described in more detail <a href="/how-to/coming-soon.html">here</a>.
+          All of the tools available in <i>gkno</i> are stored in the 'tools' directory. Within this directory, the 'R' directory contains scripts for running 'R' analyses and 'scripts' contains scripts that have been wrapped as <i>gkno</i> tools. It is possible to include your own tools in <i>gkno</i> by creating a configuration file to describe it and creating a directory for your tool in the 'tools' directory and either keeping your tool there, or providing a soft link to your tool executable. Including your own tools in <i>gkno</i> is described in more detail <a href="/coming-soon.html">here</a>.
         </div>
       </div>
     </div>
