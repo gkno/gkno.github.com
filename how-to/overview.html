@@ -18,7 +18,7 @@ permalink: overview.html
   <div class='description' style="padding-top: 15px;">
     Before creating makefiles for execution, <i>gkno</i> identifies dependent tasks in the pipeline and creates <i>phases</i> and <i>subphases</i> to allow parallelisation of execution. In the figure below, the task <i>generate reference index</i> needs to be completed before anything else in the pipeline can run. This task ends up in <i>phase 1</i> and until this is finished, no other tasks can run. Once completed, <i>phase 2</i> has to be executed next. No variant calling (<i>phase 3</i>) can occur until the alignments are complete. Within <i>phase 2</i>, there may be multiple alignments, and all of these are independent, so the run of tasks 'align' and 'sort', for each set of files can occur in parallel. Finally, <i>phase 3</i> will not be started until all <i>subphases</i> in <i>phase 2</i> are complete. If running on a cluster, running the pipeline shown in the figure below, would result in a single makefile for <i>phase 1</i>, n makefiles for <i>phase 2</i> and a single makefile for <i>phase 3</i>.
   </div>
-  <div style="text-align: center"><img src="/public/images/execution_structure.png" style="width: 750px"></div>
+  <div style="text-align: center"><img src="/public/images/how-to/execution_structure.png" style="width: 750px"></div>
   <div class='description'>
     For more information on parallelising execution of <i>gkno</i>, see the <a href="/parallel.html">tutorial</a> here.
   </div>
@@ -28,7 +28,7 @@ permalink: overview.html
   <div class='description'>
     In the initial set-up, <i>gkno</i> creates a file structure so that all files are available and in a known location. <strong>This file structure should never be modified or removed</strong>. Many of the functions within <i>gkno</i> make use of the known file structure, so any changes could cause a total failure. The directory structure is as follows:
   </div>
-  <div style="text-align: center"><img src="/public/images/directory_structure.png" style="width: 750px"></div>
+  <div style="text-align: center"><img src="/public/images/how-to/directory_structure.png" style="width: 750px"></div>
   <div class='description'>
     More detail about the contents of this file structure can be found by expanding the panel below.
   </div>
