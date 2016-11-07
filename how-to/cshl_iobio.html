@@ -1,0 +1,38 @@
+---
+layout: page
+permalink: cshl_iobio.html
+---
+
+<!-- -->
+<div class='section'>
+  <div class='section-title'>Advanced Sequencing Technologies and Applications: iobio tutorial</div>
+  <div class='description'>
+    The goal of this page is to highlight the iobio real-time analysis and visualization suite.
+  </div>
+
+  <!-- Preparation -->
+  <div class='section-subtitle'>Set up</div>
+  <div class='description'>
+    To begin, create a new directory call 'bam-demo' and copy <i>gkno</i> resource files across to this directory. We will also use some bash magic to store the path to our installation of <i>gkno</i> so we don't need to keep typing the whole path.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>mkdir bam-demo</li>
+      <li>GKNO=&lt;gkno_launcher path&gt;</li>
+      <li>cp $GKNO/resources/tutorial/current/sample.bam bam-demo</li>
+      <li>cp $GKNO/resources/tutorial/current/chr20_fragment.fa bam-demo</li>
+      <li>cd bam-demo</li>
+    </ul>
+  </div>
+  <div class='description'>
+    The command <span class="code-list code-span panel panel-danger">NAME=VALUE</span> means that we have created an environment variable with the name <span class="code-list code-span panel panel-danger">NAME</span> which contains the value <span class="code-list code-span panel panel-danger">VALUE</span>. Whenever we use the variable, we need to prepend <span class="code-list code-span panel panel-danger">$</span> to it and it will assume the value we gave to it. From now on, every time we need to access the directory where <i>gkno</i> is installed, we will just use the environment variable <span class="code-list code-span panel panel-danger">$GKNO</span>. User-defined environment variables like this only exist for the duration of the session. If you log out and log in again, the environment variable will no longer exist. There are ways to make them permanent, but that is beyond the scope of this tutorial.
+  <div class='description'>
+    Next, we will use the bash 'alias' command to define some simple commands on the command line. This command lets us assign an operation to a command of our choice. In this case, we will link the command <i>samtools</i> to the <i>samtools</i> tool executable and, similarly, use the <i>bamtools</i> command to link to the <i>bamtools</i> tool executable.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>alias samtools="$GKNO/tools/samtools/samtools"</li>
+      <li>alias bamtools="$GKNO/tools/bamtools/bin/bamtools"</li>
+    </ul>
+  </div>
+</div>
