@@ -17,14 +17,15 @@ permalink: cshl_practical.html
   </div>
   <div class="panel panel-danger">
     <ul class="code-list">
+      <li>cd workspace</li>
       <li>mkdir cshl-practical</li>
       <li>cd cshl-practical</li>
       <li>mkdir fastq</li>
       <li>mkdir reference</li>
       <li>mkdir analysis</li>
-      <li>GKNO=&lt;gkno_launcher path&gt;</li>
-      <li>REF=$GKNO/resources/homo_sapiens/current/human_reference_v37_decoys.fa</li>
-      <li>alias gkno="$GKNO/gkno"
+      <li>GKNO=/home/ubuntu/tools/gkno_launcher</li>
+      <li>REF=/home/ubuntu/workspace/data/fasta/GRCh37/Homo_sapiens.GRCh37.75.dna_sm.primary_assembly</li>
+      <li>alias gkno="$GKNO/gkno"</li>
       <li>cp $GKNO/resources/tutorial/current/N*fastq fastq</li>
       <li>cp $GKNO/resources/tutorial/current/chr20_fragment.fa reference</li>
       <li>cd reference</li>
@@ -109,7 +110,7 @@ permalink: cshl_practical.html
   </div>
   <div class="panel panel-danger">
     <ul class="code-list">
-      <li>gkno bwa -ps human -p ILLUMINA -s NA12878 -id NA12878 -q ../fastq/NA12878_1_sample.fastq -q2 ../fastq/NA12878_2_sample.fastq</li>
+      <li>gkno bwa -r $REF -p ILLUMINA -s NA12878 -id NA12878 -q ../fastq/NA12878_1_sample.fastq -q2 ../fastq/NA12878_2_sample.fastq</li>
     </ul>
   </div>
   <div class='description'>
@@ -121,7 +122,7 @@ permalink: cshl_practical.html
   <div class="panel panel-danger">
     <ul class="code-list">
       <li>rm -f *</li>
-      <li>gkno bwa -ps human -p ILLUMINA -s NA12878 -id NA12878 -q ../fastq/NA12878_1_sample.fastq -q2 ../fastq/NA12878_2_sample.fastq -o NA12878.bam</li>
+      <li>gkno bwa -r $REF -p ILLUMINA -s NA12878 -id NA12878 -q ../fastq/NA12878_1_sample.fastq -q2 ../fastq/NA12878_2_sample.fastq -o NA12878.bam</li>
     </ul>
   </div>
   <div class='description'>
@@ -130,7 +131,7 @@ permalink: cshl_practical.html
   <div class="panel panel-danger">
     <ul class="code-list">
       <li>for NAME in NA12891 NA12892; do</li>
-      <li>gkno bwa -ps human -p ILLUMINA -s $NAME -id $NAME -q ../fastq/$NAME\_1_sample.fastq -q2 ../fastq/$NAME\_2_sample.fastq -o $NAME.bam</li>
+      <li>gkno bwa -r $REF -p ILLUMINA -s $NAME -id $NAME -q ../fastq/$NAME\_1_sample.fastq -q2 ../fastq/$NAME\_2_sample.fastq -o $NAME.bam</li>
       <li>done</li>
     </ul>
   </div>
@@ -204,7 +205,7 @@ permalink: cshl_practical.html
   </div>
   <div class="panel panel-danger">
     <ul class="code-list">
-      <li>gkno freebayes -ps human -i *bam -o all.vcf.gz</li>
+      <li>gkno freebayes -r $REF.fa -i *bam -o all.vcf.gz</li>
     </ul>
   </div>
   <div class='description'>
@@ -214,7 +215,7 @@ permalink: cshl_practical.html
     <ul class="code-list">
       <li>rm -f f*</li>
       <li>rm -f all*</li>
-      <li>gkno freebayes -ps human -i *bam -o all.vcf.gz -rg 17 -rg 20 -rg 21 -rg 22 -nj 4</li>
+      <li>gkno freebayes -r $REF.fa -i *bam -o all.vcf.gz -rg 17 -rg 20 -rg 21 -rg 22 -nj 4</li>
     </ul>
   </div>
   <div class='description'>
@@ -361,11 +362,11 @@ permalink: cshl_practical.html
   </div>
   <div class="panel panel-danger">
     <ul class="code-list">
-      <li>vt normalize -r $REF decomposed.vcf.gz 2&gt;/dev/null | less -S</li>
+      <li>vt normalize -r $REF.fa decomposed.vcf.gz 2&gt;/dev/null | less -S</li>
     </ul>
   </div>
   <div class='description'>
-    The <span class="code-list code-span panel panel-danger">2&gt;/dev/null</span> is to stop the summary from the tool being written to screen. Now we have a simple deletion and two normal looking SNPs!Normalizing variants is an important step that should not be forgotten!
+    The <span class="code-list code-span panel panel-danger">2&gt;/dev/null</span> is to stop the summary from the tool being written to screen. Now we have a simple deletion and two normal looking SNPs! Normalizing variants is an important step that should not be forgotten!
   </div>
 
   <!-- gene.iobio -->
