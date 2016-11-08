@@ -368,7 +368,55 @@ permalink: cshl_practical.html
   <div class='description'>
     The <span class="code-list code-span panel panel-danger">2&gt;/dev/null</span> is to stop the summary from the tool being written to screen. Now we have a simple deletion and two normal looking SNPs! Normalizing variants is an important step that should not be forgotten!
   </div>
-
+    
+  <!-- Subsetting on samples -->
+  <div class='section-subtitle'>Subsetting on samples</div>
+  <div class='description'>
+    If we perform joint calling with a large population of samples, we will often have a VCF file that contains hundreds or thousands of samples. But what if we're only interested in one or two of these samples?
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    There are two useful tools that we might want to use here, depending on our ultimate goal. The first tool, vcflib, will just keep the samples that we want, but not change the number of variant records in the file.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>$VCFLIB/vcfkeepsamples all.vcf.gz NA12878 > NA12878.vcf</li>
+      <li>gkno compress-vcf -i NA12878.vcf</li>
+    </ul>
+  </div>    
+  <div class='description'>
+    We have generated the new VCF file, NA12878.vcf.gz, which is exactly the same as all.vcf.gz, except that there is only one sample column: that for the sample NA12878. We could have listed as many samples as we liked in the command line, and each of those would have been kept.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    What is the problem with this? The main problem here, is that we often want a VCF file that contains information about the requested samples, but only keeps variants that are polymorphic in those samples. For example, let's take a look at this new file in a bit more detail.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>less NA12878.vcf.gz | grep "0/0" | less -S</li>
+    </ul>
+  </div> 
+  <div class='description'>
+    Every one of these lines is a variant that the sample NA12878 does not have - the genotype is 0/0, or homozygous reference. So what if we want to only keep the sample information for NA12878, but additionally, remove all homozygous reference variants? 
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>echo "NA12878" > samples.txt"</li>
+      <li>vt subset -s samples.txt all.vcf.gz -o NA12878_only.vcf.gz</li>
+      <li>less NA12878.vcf.gz | grep -v "^#" | wc -l</li>
+      <li>less NA12878_only.vcf.gz | grep -v "^#" | wc -l</li>
+    </ul>
+  </div> 
+  <div class='description'>
+    With those last bash commands, we can see that the NA12878_only.vcf.gz file has 119 less variants than NA12878.vcf.gz. Let's just check that that makes sense.
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>less NA12878.vcf.gz | grep "0/0" | wc -l</li>
+    </ul>
+  </div>
+  <div class='description'>
+    Exactly 119 variants kept in NA12878.vcf.gz were homozygous reference and were removed by using the vt subset command. Again, we can subset on multiple samples by adding more sample IDs to the samples.txt file.
+  </div>
+    
   <!-- gene.iobio -->
   <div class='section-subtitle'>Trio analysis</div>
   <div class='description'>
