@@ -7,32 +7,82 @@ permalink: cshl_iobio.html
 <div class='section'>
   <div class='section-title'>Advanced Sequencing Technologies and Applications: iobio tutorial</div>
   <div class='description'>
-    The goal of this page is to highlight the iobio real-time analysis and visualization suite.
+    The goal of this page is to highlight the iobio real-time analysis and visualization suite. We will discuss the philosophy of the project and showcase (interactively) the available iobio apps.
+  </div>
+  
+  <!-- What is iobio? -->
+  <div class='section-title'>What is iobio?</div>
+  <div class='description'>
+    iobio is a platform on which web-based genomic analysis apps can be built. Analysis is built on providing real-time visually driven analysis of data. This helps us promote an exploratory approach to data analysis.
   </div>
 
-  <!-- Preparation -->
-  <div class='section-subtitle'>Set up</div>
+  <!-- Data visualization -->
+  <div class='section-title'>Data visualization</div>
   <div class='description'>
-    To begin, create a new directory call 'bam-demo' and copy <i>gkno</i> resource files across to this directory. We will also use some bash magic to store the path to our installation of <i>gkno</i> so we don't need to keep typing the whole path.
+    Humans are very visual animals. We are very good at spotting patterns in data, and quickly developing questions and theories about data, if we can only see the data presented in an intuitive manner. With iobio, we are trying to provide such visualizations for a broad set of genomic analysis problems. As we proceed through this tutorial, we will see the different iobio apps and how we present and interact with our data.
+  </div>
+  
+  <!-- Real-time analysis -->
+  <div class='section-title'>Real-time analysis</div>
+  <div class='description'>
+    To truly explore our data, we need to be able to visualize our data very quickly. In fact, our goal is to visualize data immediately after data selection. We then want to have an analysis loop where we can form questions about the data, then ask questions, change analysis parameters etc. and immediately see the results of these changes. With such quick turnaround of analyses, we can really dig into and understand our data very quickly.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    Genomic data is big though, so how can we do this? We use two different methods depending on the analysis being performed. Traditionaly methods perform a "global" analysis.
+  </div>
+  <img src="/public/images/cshl15/global_analysis.png" style="width: 1050px; padding-left: 10px; padding-right: 10px;">
+  <div class='description' style="padding-top: 15px;">
+    Our first analysis method is to sample data. Rather than look at everything, for some tasks, we can estimate statistics by sampling across the genome.
+  </div>
+  <img src="/public/images/cshl15/sampling_analysis.png" style="width: 1050px; padding-left: 10px; padding-right: 10px;">
+  <div class='description' style="padding-top: 15px;">
+    These sampling methods are well suited to checking the quality of data, for example, asking whether we believe that a BAM file consists of high-quality data, or whether we believe that there were problems with the sequencing experiment. Currently, the <i>bam.iobio</i>, <i>vcf.iobio</i>, and <i>taxonomer.iobio</i> apps are based on a sampling approach.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    The next method is to read all data, but in a small region.
+  </div>
+  <img src="/public/images/cshl15/regional_analysis.png" style="width: 1050px; padding-left: 10px; padding-right: 10px;">
+  
+  <!-- gene.iobio -->
+  <div class='section-subtitle'>Trio analysis</div>
+  <div class='description'>
+    The three BAM files that we have created are actually a family trio. NA12878 is the child, NA12891 is the mother and NA12892, the father. In generating a family trio like this, we can interrogate the variants in the child in an attempt to determine if there are any mutations that could be deleterious to their health. The tool that we are going to use to look into this is called <a href="http://gene.iobio.io" target="_blank"><i>gene.iobio</i></a>.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    There are a number of resources available for understanding <a href="http://gene.iobio.io"><i>gene.iobio</i></a>, in particular, some <a href="http://gene.iobio.io/videos.html"><i>screencasts</i></a> and <a href="http://gene.iobio.io/usecases.html"><i>use cases</i></a>. We will quickly run through some of the more important functions here though.
+  </div>
+
+  <!-- sample cards -->
+  <div class='section-subtitle'>Sample data</div>
+  <div class='description'>
+    In your web browser, open <a href="http://gene.iobio.io" target="_blank"><i>gene.iobio</i></a>. Type and select the gene name 'RAI1' in the gene selection box at the top of the page. We are immediately presented with the canonical gene transcript and a data entry window. Select 'Trio' and then input the BAM and VCF files that we just created for each of the samples. As with the previous applications, be sure to select both the file and its index together.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    We will be selecting the same VCF file for all three samples, <span class="code-list code-span panel panel-danger">all.vcf.gz</span>, since we joint called variants on all three samples simultaneously. When you select the file, you will be prompted to select the sample from the VCF file to be used, so select the correct sample for each member of the trio. Click 'Load' once all the files have been selected.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    Once loaded, we have three cards showing all the data for three samples. These cards show all the variants, with the shapes representing the variant type and the colour, the annotated impact. We can also see the sequencing coverage which will help give us confidence in whether a call could be made.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    The 'Rank Variants' table provides a simple ranking of the Proband's variants, with the furthest left being the most likely to have a functional impact. This ranking is based on membership of ClinVar, the annotated impact from VEP and SnpEff, the inheritance mode, and population allele frequency. We can use the 'Filter' card to filter out variants that we are not interested in. In this gene, we can see that the highest ranked variant is a recessive SNP, annotated by SnpEff as being of high impact. If we click on the variants column in the 'Rank Variants' table, the variant in question is highlighted. We can then hover over the variant to understand more about it.
+  </div>
+  <div class='section-subtitle'>Exome data</div>
+  <div class='description'>
+    Finally, we can look at a <a href="http://gene.iobio.io/?rel0=proband&rel1=mother&rel2=father&gene=BRCA2&name0=NA19240&bam0=https://s3.amazonaws.com/iobio/1000gSV/NA19240.mapped.ILLUMINA.bwa.YRI.exome.20130415.bam&name1=NA19238&bam1=https://s3.amazonaws.com/iobio/1000gSV/NA19238.mapped.ILLUMINA.bwa.YRI.exome.20130415.bam&name2=NA19239&bam2=https://s3.amazonaws.com/iobio/1000gSV/NA19239.mapped.ILLUMINA.bwa.YRI.exome.20130415.bam&vcf0=https://s3.amazonaws.com/iobio/1000gSV/exome-trio.vcf.gz&sample0=NA19240&vcf1=https://s3.amazonaws.com/iobio/1000gSV/exome-trio.vcf.gz&sample1=NA19238&vcf2=https://s3.amazonaws.com/iobio/1000gSV/exome-trio.vcf.gz&sample2=NA19239" target="_blank">trio exome study</a>. It is clear that this is an exome study as you can see the coverage spiking in all of the exomes. Feel free to play with the tools and look at some of the help resources.
+  </div>
+
+  <!-- Clean up -->
+  <div class='section-subtitle'>Clean up</div>
+  <div class='description'>
+    Having completed the tutorial, we can clean up all the files we created.
   </div>
   <div class="panel panel-danger">
     <ul class="code-list">
-      <li>mkdir bam-demo</li>
-      <li>GKNO=&lt;gkno_launcher path&gt;</li>
-      <li>cp $GKNO/resources/tutorial/current/sample.bam bam-demo</li>
-      <li>cp $GKNO/resources/tutorial/current/chr20_fragment.fa bam-demo</li>
-      <li>cd bam-demo</li>
+      <li>cd ../..</li>
+      <li>rm -fr cshl-practical</li>
     </ul>
   </div>
   <div class='description'>
-    The command <span class="code-list code-span panel panel-danger">NAME=VALUE</span> means that we have created an environment variable with the name <span class="code-list code-span panel panel-danger">NAME</span> which contains the value <span class="code-list code-span panel panel-danger">VALUE</span>. Whenever we use the variable, we need to prepend <span class="code-list code-span panel panel-danger">$</span> to it and it will assume the value we gave to it. From now on, every time we need to access the directory where <i>gkno</i> is installed, we will just use the environment variable <span class="code-list code-span panel panel-danger">$GKNO</span>. User-defined environment variables like this only exist for the duration of the session. If you log out and log in again, the environment variable will no longer exist. There are ways to make them permanent, but that is beyond the scope of this tutorial.
-  <div class='description'>
-    Next, we will use the bash 'alias' command to define some simple commands on the command line. This command lets us assign an operation to a command of our choice. In this case, we will link the command <i>samtools</i> to the <i>samtools</i> tool executable and, similarly, use the <i>bamtools</i> command to link to the <i>bamtools</i> tool executable.
-  </div>
-  <div class="panel panel-danger">
-    <ul class="code-list">
-      <li>alias samtools="$GKNO/tools/samtools/samtools"</li>
-      <li>alias bamtools="$GKNO/tools/bamtools/bin/bamtools"</li>
-    </ul>
+    The flag <span class="code-list code-span panel panel-danger">-r</span> performs a recursive delete which is required for deleting directories.
   </div>
 </div>
