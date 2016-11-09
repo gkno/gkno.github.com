@@ -72,7 +72,7 @@ permalink: cshl_iobio.html
     </div>
   </div>
   <div class='description'>
-    We can see a few important statistics about this bam file.
+    This is what we are looking at.
     <div class='description' style="padding-top: 15px;">
       <li> A chromosome selector,</li>
       <li>The average coverage across the genome,</li>
@@ -82,13 +82,19 @@ permalink: cshl_iobio.html
     </div>
   </div>
   <div class='description' style="padding-top: 15px;">
-    Is there anything about this file that doesn't look as you might expect?
+    Is there anything about this file that doesn't look as you might expect? For this bam file, the read coverage distribution appears to be Poisson distributed as expected, and has and average coverage of ~20X. This is always a good place to start to check that the file is expected.
   </div>
   <div class='description' style="padding-top: 15px;">
-    For this bam file, the read coverage distribution appears to be Poisson distributed as expected, and has and average coverage of ~20X. This is always a good place to start to check that the file is expected.
-  </div>
-  <div class='description' style="padding-top: 15px;">
-    Does the mapping rate seem to be as expected?
+    Does the mapping rate seem to be as expected?  
     What could cause the value to be this low?
+  </div>
+  
+  <!-- taxonomer.iobio -->
+  <div class='section-subtitle'>taxonomer.iobio</div>
+  <div class='description'>
+    If so many reads do not appear to come from the human genome, where do they come from? We can use the metagenomics algorithm, Taxonomer, to identify what was present in this DNA sample, using <i>taxonomer.iobio</i>. (Note that there is a commercial version of this tool available at <a href="http://taxonomer.com" target="_blank">taxonomer.com</a>.) This tool takes the raw fastq files as input and then, since a fastq file is unordered, is essentially sampling reads by reading through the file.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    Open the app <a href="http://taxonomer.iobio.io" target="_blank">here</a>, choose "Enter URL for FASTQ/FASTA(s)" and then enter the URL <span class="code-list code-span panel panel-danger">https://s3.amazonaws.com/iobio/samples/fastq/unmapped_fragment.fastq</span>
   </div>
 </div>
