@@ -49,11 +49,9 @@ permalink: cshl_iobio.html
   <!-- bam.iobio -->
   <div class='section-title'>Using iobio tools</div>
   <div class='description'>
-    For the remainder of this tutorial, we will work with some examples together, using iobio tools to understand the data. We will begin by checking sequencing quality using the <i>bam.iobio</i> tool.
+    For the remainder of this tutorial, we will work with some examples together, using iobio tools to understand the data. As we step through this tutorial, open up and play with the data with the relevant iobio and see if you notice anything interesting about the datasets.
   </div>
-  <div class='description' style="padding-top: 15px;">
-    There are a number of resources available for understanding <a href="http://gene.iobio.io"><i>gene.iobio</i></a>, in particular, some <a href="http://gene.iobio.io/videos.html"><i>screencasts</i></a> and <a href="http://gene.iobio.io/usecases.html"><i>use cases</i></a>. We will quickly run through some of the more important functions here though.
-  </div>
+  <div class='section-subtitle'>bam.iobio</div>
   <div class='description' style="padding-top: 15px;">
     Let's start by looking at a BAM file hosted on AWS. Follow this <a href="http://bam.iobio.io" target="_blank">link</a> to <i>bam.iobio</i> and click "choose bam url", then enter the following url <span class="code-list code-span panel panel-danger">https://s3.amazonaws.com/iobio/samples/bam/Sample12.bam</span>.
   </div>
@@ -72,5 +70,14 @@ permalink: cshl_iobio.html
         <img src="/public/images/cshl15/bam.iobio.example.png" style="width: 1050px; padding-left: 10px; padding-right: 10px;">
       </div>
     </div>
+  </div>
+  <div class='description'>
+    We can see a few important statistics about this bam file.
+    <li>A chromosome selector,</li>
+    <li>The average coverage across the genome,</li>
+    <li>The read coverage distribution,</li>
+    <li>The fragment length distribution,</li>
+    <li>A host of other other useful statistics</li>
+    Is there anything about this file that doesn't look as you might expect?
   </div>
 </div>
