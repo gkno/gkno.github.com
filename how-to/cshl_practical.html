@@ -416,47 +416,4 @@ permalink: cshl_practical.html
   <div class='description'>
     Exactly 119 variants kept in NA12878.vcf.gz were homozygous reference and were removed by using the vt subset command. Again, we can subset on multiple samples by adding more sample IDs to the samples.txt file.
   </div>
-    
-  <!-- gene.iobio -->
-  <div class='section-subtitle'>Trio analysis</div>
-  <div class='description'>
-    The three BAM files that we have created are actually a family trio. NA12878 is the child, NA12891 is the mother and NA12892, the father. In generating a family trio like this, we can interrogate the variants in the child in an attempt to determine if there are any mutations that could be deleterious to their health. The tool that we are going to use to look into this is called <a href="http://gene.iobio.io" target="_blank"><i>gene.iobio</i></a>.
-  </div>
-  <div class='description' style="padding-top: 15px;">
-    There are a number of resources available for understanding <a href="http://gene.iobio.io"><i>gene.iobio</i></a>, in particular, some <a href="http://gene.iobio.io/videos.html"><i>screencasts</i></a> and <a href="http://gene.iobio.io/usecases.html"><i>use cases</i></a>. We will quickly run through some of the more important functions here though.
-  </div>
-
-  <!-- sample cards -->
-  <div class='section-subtitle'>Sample data</div>
-  <div class='description'>
-    In your web browser, open <a href="http://gene.iobio.io" target="_blank"><i>gene.iobio</i></a>. Type and select the gene name 'RAI1' in the gene selection box at the top of the page. We are immediately presented with the canonical gene transcript and a data entry window. Select 'Trio' and then input the BAM and VCF files that we just created for each of the samples. As with the previous applications, be sure to select both the file and its index together.
-  </div>
-  <div class='description' style="padding-top: 15px;">
-    We will be selecting the same VCF file for all three samples, <span class="code-list code-span panel panel-danger">all.vcf.gz</span>, since we joint called variants on all three samples simultaneously. When you select the file, you will be prompted to select the sample from the VCF file to be used, so select the correct sample for each member of the trio. Click 'Load' once all the files have been selected.
-  </div>
-  <div class='description' style="padding-top: 15px;">
-    Once loaded, we have three cards showing all the data for three samples. These cards show all the variants, with the shapes representing the variant type and the colour, the annotated impact. We can also see the sequencing coverage which will help give us confidence in whether a call could be made.
-  </div>
-  <div class='description' style="padding-top: 15px;">
-    The 'Rank Variants' table provides a simple ranking of the Proband's variants, with the furthest left being the most likely to have a functional impact. This ranking is based on membership of ClinVar, the annotated impact from VEP and SnpEff, the inheritance mode, and population allele frequency. We can use the 'Filter' card to filter out variants that we are not interested in. In this gene, we can see that the highest ranked variant is a recessive SNP, annotated by SnpEff as being of high impact. If we click on the variants column in the 'Rank Variants' table, the variant in question is highlighted. We can then hover over the variant to understand more about it.
-  </div>
-  <div class='section-subtitle'>Exome data</div>
-  <div class='description'>
-    Finally, we can look at a <a href="http://gene.iobio.io/?rel0=proband&rel1=mother&rel2=father&gene=BRCA2&name0=NA19240&bam0=https://s3.amazonaws.com/iobio/1000gSV/NA19240.mapped.ILLUMINA.bwa.YRI.exome.20130415.bam&name1=NA19238&bam1=https://s3.amazonaws.com/iobio/1000gSV/NA19238.mapped.ILLUMINA.bwa.YRI.exome.20130415.bam&name2=NA19239&bam2=https://s3.amazonaws.com/iobio/1000gSV/NA19239.mapped.ILLUMINA.bwa.YRI.exome.20130415.bam&vcf0=https://s3.amazonaws.com/iobio/1000gSV/exome-trio.vcf.gz&sample0=NA19240&vcf1=https://s3.amazonaws.com/iobio/1000gSV/exome-trio.vcf.gz&sample1=NA19238&vcf2=https://s3.amazonaws.com/iobio/1000gSV/exome-trio.vcf.gz&sample2=NA19239" target="_blank">trio exome study</a>. It is clear that this is an exome study as you can see the coverage spiking in all of the exomes. Feel free to play with the tools and look at some of the help resources.
-  </div>
-
-  <!-- Clean up -->
-  <div class='section-subtitle'>Clean up</div>
-  <div class='description'>
-    Having completed the tutorial, we can clean up all the files we created.
-  </div>
-  <div class="panel panel-danger">
-    <ul class="code-list">
-      <li>cd ../..</li>
-      <li>rm -fr cshl-practical</li>
-    </ul>
-  </div>
-  <div class='description'>
-    The flag <span class="code-list code-span panel panel-danger">-r</span> performs a recursive delete which is required for deleting directories.
-  </div>
 </div>
