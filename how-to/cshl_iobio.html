@@ -95,16 +95,54 @@ permalink: cshl_iobio.html
     If so many reads do not appear to come from the human genome, where do they come from? We can use the metagenomics algorithm, Taxonomer, to identify what was present in this DNA sample, using <i>taxonomer.iobio</i>. (Note that there is a commercial version of this tool available at <a href="http://taxonomer.com" target="_blank">taxonomer.com</a>.) This tool takes the raw fastq files as input and then, since a fastq file is unordered, is essentially sampling reads by reading through the file.
   </div>
   <div class='description' style="padding-top: 15px;">
-    Open the taxonomer.iobio app using <a href="http://taxonomer.iobio.io" target="_blank">this</a> link, choose "Enter URL for FASTQ/FASTA(s)" and then enter the URL <span class="code-list code-span panel panel-danger">https://s3.amazonaws.com/iobio/samples/fastq/unmapped_fragment.fastq</span>, then click on "Bacteria" - the orange portion of the pie chart.
+    Open the taxonomer.iobio app using <a href="http://taxonomer.iobio.io" target="_blank">this</a> link, then choose "Enter URL for FASTQ/FASTA(s)" and finally copy and paste the following URL <span class="code-list code-span panel panel-danger">https://s3.amazonaws.com/iobio/samples/fastq/unmapped_fragment.fastq</span>. When the pie chart appears, click on "Bacteria" - the orange portion of the pie chart.
   </div>
   <div class='description' style="padding-top: 15px;">
     What can we conclude about this sample?
   </div>
   
+  <!-- Optional taxonomer.iobio screenshot -->
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-info">
+      <div class="panel-heading" role="tab" id="panelHeading">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#taxonomerExample" aria-expanded="false" aria-controls="taxonomerExample">
+            taxonomer.iobio screenshot
+          </a>
+        </h4>
+      </div>
+      <div id="taxonomerExample" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panelHeading">
+        <img src="/public/images/cshl15/taxonomer.iobio.example.png" style="width: 1050px; padding-left: 10px; padding-right: 10px;">
+      </div>
+    </div>
+  </div>
+  
   <!-- vcf.iobio -->
   <div class='section-subtitle'>vcf.iobio</div>
   <div class='description'>
-    Now we have determined the origin of this DNA sample (a spit sample, rather than a blood draw), we can look at statistics associated with the variants in the vcf file.
+    Now we have determined the origin of this DNA sample (a spit sample, rather than a blood draw), we can look at statistics associated with the variants in the vcf file. To do this, we can use the <a href="http://vcf.iobio.io" target="_blank">vcf.iobio</a> tool. Open this link and paste in the following URL:
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    <span class="code-list code-span panel panel-danger">https://s3.amazonaws.com/iobio/samples/vcf/Sample12_combined_filtered_normalized.vcf.gz</span>
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    We can now see statistics for the sample under study.
+  </div>
+  
+  <!-- Optional vcf.iobio screenshot -->
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-info">
+      <div class="panel-heading" role="tab" id="panelHeading">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#vcfExample" aria-expanded="false" aria-controls="vcfExample">
+            vcf.iobio screenshot
+          </a>
+        </h4>
+      </div>
+      <div id="vcfExample" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panelHeading">
+        <img src="/public/images/cshl15/vcf.iobio_example.png" style="width: 1050px; padding-left: 10px; padding-right: 10px;">
+      </div>
+    </div>
   </div>
   
   <!-- gene.iobio -->
