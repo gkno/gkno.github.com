@@ -1,0 +1,275 @@
+---
+layout: page
+permalink: build-bwa-multi2.html
+---
+
+<!-- -->
+<div class='section'>
+  <div class='section-title'>Build a pipeline that contains another pipeline</div>
+  <div class='description'>
+    In this tutorial, we are going to build an extension of the already existing <i>bwa</i> pipeline. This is going to be the same pipeline we built in the <a href='build-bwa-multi.html'>previous tutorial</a>. I recommend that you run through the previous pipeline first, as you will need to understand that content before moving to the content here. Also, the <a href="build-bwa-multi.html">previous tutorial</a> has some more general <i>gkno</i> information on running pipelines.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    The <i>bwa</i> pipeline takes an arbitrary number of pairs of <i>fastq</i> files and aligns them as paired end reads using <i>bwa mem</i>. If <i>n</i> pairs of <i>fastq</i> files are supplied, then <i>n bam</i> files will be produced by the pipeline. The assumption is that each pair of <i>fastq</i> files corresponds to a single sample. If the <i>n</i> pairs of files correspond to different lanes for a single sample, then we want each pair to be aligned separately, but once complete, all the individual <i>bam</i> files need to be merged into a single file. Here, we will create a new pipeline to perform this function.
+  </div>
+  
+  <!-- Initial setup -->
+  <div class='section-subtitle'>Initial setup</div>
+  <div class='description'>
+    Before we build the new pipeline, we need to set up some paths and executables. From a suitable working directory, type the following:
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>mkdir gkno_dev</li>
+      <li>cd gkno_dev</li>
+      <li>GKNO=&ltpath to gkno&gt</li>
+      <li>RES=$GKNO/resources/tutorial/current</li>
+      <li>gkno=$GKNO/gkno</li>
+    </ul>
+  </div>
+  <div class='description'>
+    Just check that everything is working fine by typing <span class="code-list code-span panel panel-danger">gkno</span> and observing that <i>gkno</i> successfully runs.
+  </div>
+
+  <!-- Start building -->
+  <div class='section-subtitle'>Start building a new pipeline</div>
+  <div class='description'>
+    Let's build a new pipeline. We want this to do almost the same thing as <i>bwa</i>, but merge the three <i>bam</i> files together at the end. In this tutorial, instead of defining all the steps in the pipeline, we are going to include the <i>bwa</i> pipeline explicitly as a task. To begin, let's copy the pipeline template configuration file over to a working directory:
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>mkdir config</li>
+      <li>cp $GKNO/config_files/template_pipeline.json config/new-bwa2.json</li>
+    </ul>
+  </div>
+  <div class='description'>
+  
+  <!-- Add the original pipeline -->
+  <div class='section-subtitle'>Add the original <i>bwa</i> pipeline</div>
+  <div class='description'>
+    First of all, give the pipeline the name <i>new-bwa2</i> in the "id" field at the top of the configuration file. If you are building a real pipeline for sharing with others, make sure that you also add a description and define the help categories with which the pipeline is associated. Now, we need to add the original <i>bwa</i> pipeline as the first task in our new pipeline. Inside the "pipeline tasks" section, include the following code:
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>{</li>
+      <li>&nbsp&nbsp"task" : "align",</li>
+      <li>&nbsp&nbsp"pipeline" : "bwa"</li>
+      <li>}</li>
+    </ul>
+  </div>
+  <div class='description'>
+    This should look familiar from adding tasks in the previous tutorial, with the exception that we are now defining the task as a <i>pipeline</i> and not a <i>tool</i>. As we add more content to the configuration file, we can run the new pipeline with the following command:
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno new-bwa2 -cp config</li>
+    </ul>
+  </div>
+  <div class='description'>
+    The <span class="code-list code-span panel panel-danger">-cp</span> argument tells <i>gkno</i> to look for the configuration file in the <span class="code-list code-span panel panel-danger">config</span> directory. The pipeline runs, and is asking for you to enter some required arguments. We never built any arguments into our new pipeline, so <i>gkno</i> just assumes that we should pull in the arguments from the contained pipeline. If we ask for help on the pipeline:
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno new-bwa2 -cp config -h</li>
+    </ul>
+  </div>
+  <div class='description'>
+    Now compare this with the help from the original <i>bwa</i> pipeline. Things look pretty much the same. The pipeline name and description are different, as is <i>parameter set</i> information, since we haven't added any parameters sets to the pipeline yet. The "Workflow" for our new pipeline has each task prepended with <i>align.</i> when compared with the <i>bwa</i> pipeline. This is because our new pipeline is running a pipeline that we have called <i>align</i> as the first task. Within this task, are all the tasks that this pipeline (the <i>bwa</i> pipeline) performs. But all the arguments are the same, so we can run our new pipeline in the same way we would run <i>bwa</i>.
+  </div>
+
+  <!-- Add a task -->
+  <div class='section-subtitle'>Adding tasks to the pipeline</div>
+  <div class='description'>
+    Now we need to add some additional tasks to our pipeline. We will follow the same process as with the previous tutorial:
+  </div>
+  <ul>
+    <li>Add a task to the "pipeline tasks" section,</li>
+    <li>Create "unique graph nodes" as needed,</li>
+    <li>Connect necessary files and tasks together.</li>
+  </ul>
+  <div class='description'>
+    So, the first step is to add a new task. We will start by adding the <i>header</i> task to generate files containing the header from each created <i>bam</i> file. We do this by adding the following code to the "pipeline tasks":
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>{</li>
+      <li>&nbsp&nbsp"task" : "header",</li>
+      <li>&nbsp&nbsp"tool" : "samtools-header"</li>
+      <li>}</li>
+    </ul>
+  </div>
+  <div class='description'>
+    Now we just need to connect the created <i>bam</i> files to the input argument of this new task. This is a little different to before though, since we don't have any defined graph nodes in this pipeline. We can look in the <i>bwa</i> pipeline configuration file to see which node in that pipeline we want to attach to the <i>header</i> task. This is the <i>output</i> node (the same as in the previous tutorial). If we add this connection in the "connect nodes" section:
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>{</li>
+      <li>&nbsp&nbsp"source" : "output",</li>
+      <li>&nbsp&nbsp"target" : "header",</li>
+      <li>&nbsp&nbsp"argument" : "--in"</li>
+      <li>}</li>
+    </ul>
+  </div>
+  <div class='description'>and then try and run the pipeline:</div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno new-bwa2 -cp config</li>
+    </ul>
+  </div>
+  <div class='description'>
+    Then the pipeline predictably fails. <i>gkno</i> informs us that the source node, e.g. <i>output</i> is invalid. This makes sense because there are no defined nodes in this pipeline. What we really wanted to do, was connect this to the <i>output</i> node in the contained <i>bwa</i> pipeline - defined as the <i>align</i> task. We can modify the source node to <span class="code-list code-span panel panel-danger">"source" : "align.output",</span>. This tells <i>gkno</i> that instead of looking for the node in it's own "unique graph nodes" section, is should look in the pipeline configuration file associated with the <i>align</i> task. Since the <i>output</i> does exist in this (<i>bwa</i>) pipeline, the connection is valid, and the pipeline should now run.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    To really check that the pipeline is running, we need to give it some files. Rather than type out all the files on the command line, we'll just add a <i>test</i> parameter set to the pipeline. I recommend that every pipeline you create has a <i>test</i> parameter set which uses only files contained in the <i>tutorial</i> resources directory. This will mean that every pipeline can be quickly tested to make sure it works. Copy the <i>test</i> parameter set from the end of the file <span class="code-list code-span panel panel-danger">$GKNO/config_files/pipes/bwa-multi.json</span> and copy it into the "parameter sets" section of our <i>new-bwa2</i> configuration file, then try running with this set:
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno new-bwa2 -cp config -ps test -nj 3</li>
+    </ul>
+  </div>
+  <div class='description'>
+    Where we have used the <span class="code-list code-span panel panel-danger">-nj 3</span> argument to parallelize and speed up execution. This command fails, and as before, the problem is that we are pointing to nodes that don't exist in this pipeline. So, for each node, e.g. <span class="code-list code-span panel panel-danger">"node" : "fastq"</span>, we need to tell <i>gkno</i> to look in the <i>align</i> task pipeline. This node needs to become <span class="code-list code-span panel panel-danger">"node" : "align.fastq"</span>. Make this change for every node in the <i>test</i> parameter set, and the pipeline should then run, creating all the header files we asked for.
+  </div>
+
+  <!-- Add a task -->
+  <div class='section-subtitle'>Adding the remaining tasks</div>
+  <div class='description'>
+    We now need to finish adding all the tasks to the pipeline, along with adding necessary nodes and connecting everything together. This follows the exact steps of the <a href="build-bwa-multi.html">previous</a> tutorial. I will just provide the instructions here, but if you need more explanation, please refer back to the previous tutorial.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    Add the tasks to merge the header files, merge the <i>bam</i> files, and finally index and generate stats on the final <i>bam</i> file. The code to be added to the "pipeline tasks" is:
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>{</li>
+      <li>&nbsp&nbsp"task" : "merge-headers",</li>
+      <li>&nbsp&nbsp"tool" : "merge-bam-headers",</li>
+      <li>&nbsp&nbsp"greedy task" : true,</li>
+      <li>&nbsp&nbsp"greedy argument" : "--in"</li>
+      <li>},</li>
+      <li>{</li>
+      <li>&nbsp&nbsp"task" : "final-merge",</li>
+      <li>&nbsp&nbsp"tool" : "samtools-merge",</li>
+      <li>&nbsp&nbsp"greedy task" : true,</li>
+      <li>&nbsp&nbsp"greedy argument" : "--in"</li>
+      <li>},</li>
+      <li>{</li>
+      <li>&nbsp&nbsp"task" : "final-index",</li>
+      <li>&nbsp&nbsp"tool" : "bamtools-index"</li>
+      <li>},</li>
+      <li>{</li>
+      <li>&nbsp&nbsp"task" : "final-stats",</li>
+      <li>&nbsp&nbsp"tool" : "bamtools-stats"</li>
+      <li>}</li>
+    </ul>
+  </div>
+  <div class='description'>
+    Next, add nodes to the "unique graph nodes" section. We only need to add nodes that we want to interact with, e.g. delete associated files, link a command line argument to, or pass on to other tasks. Here, we need to add the following nodes:
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>{</li>
+      <li>&nbsp&nbsp"id" : "hdr",</li>
+      <li>&nbsp&nbsp"task" : "header",</li>
+      <li>&nbsp&nbsp"task argument" : "--out"</li>
+      <li>},</li>
+      <li>{</li>
+      <li>&nbsp&nbsp"id" : "header-file",</li>
+      <li>&nbsp&nbsp"task" : "merge-headers",</li>
+      <li>&nbsp&nbsp"task argument" : "--out"</li>
+      <li>},</li>
+      <li>{</li>
+      <li>&nbsp&nbsp"id" : "final-bam",</li>
+      <li>&nbsp&nbsp"task" : "final-merge",</li>
+      <li>&nbsp&nbsp"task argument" : "--out"</li>
+      <li>}</li>
+    </ul>
+  </div>
+  <div class='description'>
+    And finally, connect the nodes together with the following additions to the "connect nodes" section:
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>{</li>
+      <li>&nbsp&nbsp"source" : "hdr",</li>
+      <li>&nbsp&nbsp"target" : "merge-headers",</li>
+      <li>&nbsp&nbsp"argument" : "--in"</li>
+      <li>},</li>
+      <li>{</li>
+      <li>&nbsp&nbsp"source" : "header-file",</li>
+      <li>&nbsp&nbsp"target" : "final-merge",</li>
+      <li>&nbsp&nbsp"argument" : "--header"</li>
+      <li>},</li>
+      <li>{</li>
+      <li>&nbsp&nbsp"source" : "align.output",</li>
+      <li>&nbsp&nbsp"target" : "final-merge",</li>
+      <li>&nbsp&nbsp"argument" : "--in"</li>
+      <li>},</li>
+      <li>{</li>
+      <li>&nbsp&nbsp"source" : "final-bam",</li>
+      <li>&nbsp&nbsp"target" : "final-index",</li>
+      <li>&nbsp&nbsp"argument" : "--in"</li>
+      <li>},</li>
+      <li>{</li>
+      <li>&nbsp&nbsp"source" : "final-bam",</li>
+      <li>&nbsp&nbsp"target" : "final-stats",</li>
+      <li>&nbsp&nbsp"argument" : "--in"</li>
+      <li>}</li>
+    </ul>
+  </div>
+
+  <!-- Add a new output argument -->
+  <div class='section-subtitle'>Update output argument</div>
+  <div class='description'>
+    Our configuration file will now run the pipeline and generate the required merged <i>bam</i> file. The problem we have is that the name of the final file is <span class="code-list code-span panel panel-danger">mutated_genome_1_samblaster_sorted.bam</span>, since <i>gkno</i> constructed the filename itself. This is not the name that we want, and we don't have a command line argument to change the name. You can try using the <span class="code-list code-span panel panel-danger">--out</span> argument to set the name of the output file:
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>gkno new-bwa2 -cp config -ps test -nj 3 -o all.bam</li>
+    </ul>
+  </div>
+  <div class='description'>
+    The pipeline fails because the <span class="code-list code-span panel panel-danger">--out</span> argument is still as defined in the original <i>bwa</i> pipeline, and so is trying to set the outputs of that pipeline, not the final merged output. Since we are performing three independent alignments here, we would need to provide three output filenames to the argument. So, let's update the pipeline to address this. We have already defined a node associated with the final output: <i>final-bam</i>. So all we need to do is add an argument in the <i>Outputs</i> section of <i>arguments</i>. We will give this the value <span class="code-list code-span panel panel-danger">--out</span>, and it will overwrite any arguments of the same name in the contained pipeline. So add the following to the <i>Outputs</i>:
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>{</li>
+      <li>&nbsp&nbsp"description" : "The output BAM file.",</li>
+      <li>&nbsp&nbsp"long form argument" : "--out",</li>
+      <li>&nbsp&nbsp"short form argument" : "-o",</li>
+      <li>&nbsp&nbsp"node id" : "final-bam"</li>
+      <li>}</li>
+    </ul>
+  </div>
+
+  <!-- Cleaning up -->
+  <div class='section-subtitle'>Clear up intermediate files</div>
+  <div class='description'>
+    Just like in the previous tutorial, we want to delete all the intermediate files. Getting rid of all the header files is straightforward since we created the nodes associated with them: namely <i>hdr</i> and <i>header-file</i>. For both of these nodes, add the line <span class="code-list code-span panel panel-danger">"delete files" : true</span> in the node description (e.g. after the <span class="code-list code-span panel panel-danger">"task argument"</span> line.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    Next we will delete the <i>bai</i> and <i>stats</i> file for the intermediate <i>bam</i> files. In the original <i>bwa</i> pipeline, no nodes were created for the files, so we create the nodes in this pipeline and delete the associated files. We can do that by adding the following to the <i>unique graph nodes</i>:
+  </div>
+  <div class="panel panel-danger">
+    <ul class="code-list">
+      <li>{</li></li>
+      <li>&nbsp&nbsp"id" : "int-index",</li>
+      <li>&nbsp&nbsp"task" : "align.index",</li>
+      <li>&nbsp&nbsp"task argument" : "--out",</li>
+      <li>&nbsp&nbsp"delete files" : true</li>
+      <li>},</li>
+      <li>{</li>
+      <li>&nbsp&nbsp"id" : "int-stats",</i>
+      <li>&nbsp&nbsp"task" : "align.stats",</li></li>
+      <li>&nbsp&nbsp"task argument" : "--out",</li>
+      <li>&nbsp&nbsp"delete files" : true</li>
+      <li>}</li>
+    </ul>
+  </div>
+  <div class='description'>
+    Remember that, since the task we want to work with is in the contained <i>bwa</i> pipeline, we need to define the task with the prepending <i>"align."</i>.
+  </div>
+  <div class='description' style="padding-top: 15px;">
+    Finally, we want to remove the intermediate <i>bam</i> files. The contained <i>bwa</i> pipeline already has a node called <i>output</i> defined which points to these files, so we can't define the nodes like we did for the <i>bai</i> and <i>stats</i> files. We are not allowed to define the same node twice. We can build the node in this configuration file, however, and just point to the node in the contained pipeline. In practice, this means that we add essentially the same information, but the <i>task</i> is just set to <i>align</i>. Since this task is an entire pipeline, it doesn't make sense to include a <i>task argument</i> as we did above, so instead of that, we can define the <i>node id</i> in the <i>align</i> task.
+  </div>
+</div>
