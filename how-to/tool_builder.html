@@ -1,0 +1,387 @@
+---
+layout: page
+permalink: tool_builder.html
+---
+
+<script>
+  $(document).ready(function() {
+    $("#argGroupDropdown li a").click(function(){
+      $("#argGroup").text($(this).text());
+      $("#argGroup").val($(this).text());
+      $("#argGroupError").addClass('hide');
+    });
+
+    // Add a new option to the argument groups.
+    $("#newArgGroupButton").on("click", function() {
+      var argDropdown = $("#argGroupDropdown");
+      var newValue = $("#newArgGroup").val();
+      if (newValue) {
+        argDropdown.append('<li><a class="dropdown-item" role="button">' + newValue + '</a></li>');
+      };
+    });
+  });
+
+  function outputToJson(){
+    name = document.getElementById("toolName").value;
+    desc = document.getElementById("toolDescription").value;
+    exec = document.getElementById("executable").value;
+    path = document.getElementById("path").value;
+    precommand = document.getElementById("precommand").value;
+    modifier = document.getElementById("modifier").value;
+
+    document.getElementById("modalToolName").innerHTML = "&nbsp&nbsp\"id\" : \"" + name + "\",";
+    document.getElementById("modalDescription").innerHTML = "&nbsp&nbsp\"description\" : \"" + desc + "\",";
+    document.getElementById("modalExecutable").innerHTML = "&nbsp&nbsp\"executable\" : \"" + exec + "\",";
+    document.getElementById("modalPath").innerHTML = "&nbsp&nbsp\"path\" : \"" + path + "\",";
+
+    // Only include precommand and modifier if set.
+    if (precommand != "") {
+      document.getElementById("modalPrecommand").innerHTML = "&nbsp&nbsp\"precommand\" : \"" + precommand + "\",";
+    }
+    if (modifier != "") {
+      document.getElementById("modalModifier").innerHTML = "&nbsp&nbsp\"modifier\" : \"" + modifier + "\",";
+    }
+
+    var argTable = document.getElementById("argumentTable");
+    var groupId;
+
+    // Loop over the arguments and determine which argument groups exist.
+    for (var i = 1, row; row = argTable.rows[i]; i++){
+
+      // Determine the argument group for this argument.
+      argGroup = row.cells[0].innerHTML;
+      if (argGroup == 'Input') {groupId = 'inputArgs';}
+      else if (argGroup == 'Output') {groupId = 'outputArgs';}
+      else if (argGroup == 'Option') {groupId = 'optionArgs';}
+
+      var newDiv = document.createElement('div');
+      newDiv.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{';
+      document.getElementById(groupId).appendChild(newDiv);
+
+      var argDesc = row.cells[1].innerHTML;
+      var newDiv = document.createElement('div');
+      newDiv.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"description" : "' + argDesc + '",';
+      document.getElementById(groupId).appendChild(newDiv);
+
+      var argLong = row.cells[2].innerHTML;
+      var newDiv = document.createElement('div');
+      newDiv.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"long form argument" : "' + argLong + '",';
+      document.getElementById(groupId).appendChild(newDiv);
+
+      var argShort = row.cells[3].innerHTML;
+      var newDiv = document.createElement('div');
+      newDiv.innerHTML = '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"short form argument" : "' + argShort + '",';
+      document.getElementById(groupId).appendChild(newDiv);
+    }
+  }
+
+  function setDropdown(dropdownId, dropdownValue) {
+    //document.getElementById(dropdownId).innerHTML = dropdownValue;
+    document.getElementById(dropdownId).value = dropdownValue;
+
+    // Don't remove elements. Create the elements in the main area and then class 'hide' is either
+    // there or not. Bootstrap class.
+
+    //class = 'some'
+    //var d = element
+    //d.class
+    $(".output").addClass("hide");
+
+    // If this is an input or output, reveal the options to add extensions.
+    if (dropdownValue == 'Input' || dropdownValue == 'Output') {
+      document.getElementById('addExtensions').innerHTML = 'Add allowed extensions for the files.';
+
+      // Create new form element.
+      var extForm = document.createElement('input');
+      extForm.type = 'text';
+      extForm.class = 'form-control';
+      extForm.id = 'extForm';
+      document.getElementById('extensionsDiv').appendChild(extForm);
+
+      var extAdd = document.createElement('button');
+      extAdd.innerHTML = 'Add extension';
+      extAdd.id = 'extButton';
+      document.getElementById('extensionsDiv').appendChild(extAdd);
+    } else {
+      document.getElementById('addExtensions').innerHTML = '';
+      var extDiv = document.getElementById('extensionsDiv');
+      var extForm = document.getElementById('extForm');
+      var extButton = document.getElementById('extButton');
+      //extDiv.removeChild(extForm);
+      //extDiv.removeChild(extButton);
+    }
+  }
+
+  // Add a new argument to the table
+  function addArgument() {
+
+    // If an argument group has not been selected, unhide the warning text.
+    var argGroup = $("#argGroup").val();
+    if (!argGroup) {
+      $("#argGroupError").removeClass("hide");
+    }
+
+    // Get data.
+    //var table = document.getElementById("argumentTable");
+    //var group = document.getElementById("dropdownMenuButton").value;
+    //var desc = document.getElementById("argumentDescription").value;
+    //var longForm = document.getElementById("longForm").value;
+    //var shortForm = document.getElementById("shortForm").value;
+    //var argType = document.getElementById("argumentTypeButton").value;
+    //var isRequired = document.getElementById("requiredRadio").checked;
+    //var isMultiple = document.getElementById("multipleRadio").checked;
+
+    // Check if argument group is set.
+    //var isFail = false;
+    //if (group == 'Argument group') {
+      //document.getElementById('dropdownMenuButtonLabel').innerHTML = 'Please select argument group.';
+      //document.getElementById('dropdownMenuButtonLabel').style.color = 'red';
+      //isFail = true;
+    //} else {}//document.getElementById('dropdownMenuButtonLabel').innerHTML = '';}
+    //if (argType == '') {
+      //document.getElementById('argumentTypeButtonLabel').innerHTML = 'Please select argument type.';
+      //document.getElementById('argumentTypeButtonLabel').style.color = 'red';
+      //isFail = true;
+    //} else {}//document.getElementById('argumentTypeButtonLabel').innerHTML = '';}
+    //if (isFail) {return false;}
+
+    // Add new row.
+    //var row = table.insertRow(-1);
+
+    // Add cells.
+    //var groupCell = row.insertCell(0);
+    //var descCell = row.insertCell(1);
+    //var longCell = row.insertCell(2);
+    //var shortCell = row.insertCell(3);
+    //var commandCell = row.insertCell(4);
+    //var typeCell = row.insertCell(5);
+    //var requiredCell = row.insertCell(6);
+    //var multipleCell = row.insertCell(7);
+
+    // Give values to cells.
+    //groupCell.innerHTML = group;
+    //descCell.innerHTML = desc;
+    //longCell.innerHTML = longForm;
+    //shortCell.innerHTML = shortForm;
+    //typeCell.innerHTML = argType;
+    //requiredCell.innerHTML = isRequired;
+    //multipleCell.innerHTML = isMultiple;
+
+    // Dismiss the modal.
+    //$('#argumentModal').modal('hide');
+  }
+</script>
+
+<!-- General tool information -->
+<div class='section'>
+  <div class='section-title'>Build a tool configuration file</div>
+  <div class='section-subtitle'>General tool information</div>
+  <div class="form-group">
+    <label for="usr">Name:</label>
+    <input type="text" class="form-control" id="toolName">
+  </div>
+  <div class="form-group">
+    <label for="usr">Description</label>
+    <div class='description'>Include a brief description of the tool to be displayed in <i>gkno</i> help:</div>
+    <input type="text" class="form-control" id="toolDescription">
+  </div>
+  <div class='description'></div>
+  <div class="form-group">
+    <label for="usr">Compiled tools</label>
+    <div class='description'>Type the names of all required compiled tools:</div>
+    <input type="text" class="form-control" id="compiledTools">
+  </div>
+  <div class="form-group">
+    <label for="usr">Executable</label>
+    <div class='description'>Type the name of the executable file:</div>
+    <input type="text" class="form-control" id="executable">
+  </div>
+  <div class="form-group">
+    <label for="usr">Path</label>
+    <div class='description'>Include the path to the executable. This path is relative to the <i>gkno_launcher/tools</i> directory. If your tool is compiled elsewhere, generate a directory within <i>gkno_launcher/tools</i> containing a soft link to the actual executable location.</div>
+    <input type="text" class="form-control" id="path">
+  </div>
+  <div class="form-group">
+    <label for="usr">Precommand</label>
+    <div class='description'>If the executable file has text prior to the executable file, enter it here. For example, a Python executable file, test.py would require <i>python</i> on the command line prior to the executable. In this case, the precommand would be <i>python</i>.</div>
+    <input type="text" class="form-control" id="precommand">
+  </div>
+  <div class="form-group">
+    <label for="usr">Modifier</label>
+    <div class='description'>In a similar manner, if the tool requires text appearing after the executable file, enter it here. For example, to view <i>bam</i> files using <i>samtools</i>, the executable <i>samtools</i> requires the modified <i>view</i>.</div>
+    <input type="text" class="form-control" id="modifier">
+  </div>
+
+  <!-- Arguments -->
+  <div class='section-title'>Add arguments</div>
+    <div class='description'>
+      Arguments can be separated into <i>Inputs</i>, <i>Outputs</i>, and then any user defined groupings. Any argument that refers to an input file, must be in <i>Inputs</i>, likewise, all output files must be in <i>Outputs</i>. You can create any other groupings for arguments, but usually, other arguments can added to <i>Options</i>.
+    </div>
+
+    <!-- Table of set arguments -->
+    <table class="table" id="argumentTable" style="font-size:14px;">
+      <thead>
+        <tr>
+          <th>Argument group</th>
+          <th>Description</th>
+          <th>Long Form</th>
+          <th>Short Form</th>
+          <th>Command line</th>
+          <th>Type</th>
+          <th>Is required?</th>
+          <th>Multiple values?</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#argumentModal">Add new argument</button>
+  </div>
+
+  <!-- Button to show config file in modal -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" onclick="outputToJson()" data-target="#modal">Done</button>
+</div>
+
+<!-- Argument modal -->
+<div id="argumentModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="argumentModal">&times;</button>
+        <h4 class="modal-title">Generate argument</h4>
+      </div>
+
+      <!-- Argument modal body -->
+      <div class="modal-body" style="font-size:14px;" id="argumentModalBody">
+        <div class="form-group">
+
+          <!-- Argument type dropdown -->
+          <label>Argument group:</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="newArgGroup" placeholder="New argument group">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" id="newArgGroupButton">Add</button>
+            </span>
+          </div>
+
+          <!-- Split button -->
+          <div class="btn-group">
+            <button id="argGroup" type="button" class="btn btn-default" style="margin-top:10px;">Argument group</button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-top:10px;">
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="argGroupDropdown" id="argGroupDropdown">
+              <li><a class="dropdown-item" role="button">Input</a></li>
+              <li><a class="dropdown-item" role="button">Output</a></li>
+              <li><a class="dropdown-item" role="button">Option</a></li>
+            </ul>
+            <label class="hide" style="padding-left:10px; color:red;" id="argGroupError">Please select argument group</label>
+          </div>
+
+          <!-- General parameters -->
+          <div>
+            <label for="usr" style="padding-top:10px;">Description</label>
+            <input type="text" class="form-control output input" id="argumentDescription">
+            <label for="usr" style="padding-top:10px;">Long form argument (e.g. --in)</label>
+            <input type="text" class="form-control" id="longForm">
+            <label for="usr"  style="padding-top:10px;">Short form argument (e.g. -i)</label>
+            <input type="text" class="form-control" id="shortForm">
+            <label for="usr"  style="padding-top:10px;">Tool argument</label>
+            <div class='description'>The above long and short form arguments are for use with <i>gkno</i>, this is the argument that the tool itself expects on the command line. For example, the <span class="code-list code-span panel panel-danger">--in</span> is used to define the input <i>bam</i> files for <i>Freebayes</i>, but it expects the argument <span class="code-list code-span panel panel-danger">--bam</span>. On this form we would define the <i>gkno</i> long and short form arguments as <span class="code-list code-span panel panel-danger">--in</span> and <span class="code-list code-span panel panel-danger">-i</span>, but this argument would be set to <span class="code-list code-span panel panel-danger">--bam</span>.</div>
+            <input type="text" class="form-control" id="commandLine">
+          </div>
+
+          <!-- Argument type -->
+          <label style="margin-top:5px;">Argument type</label>
+          <div class="dropdown" style="display:inline-block">
+            <button class="btn btn-default btn-secondary dropdown-toggle" type="button" id="argumentTypeButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-top:10px;">
+              Argument type
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="argumentTypeButton" id="argumentTypeButton">
+              <li><a class="dropdown-item" onclick="setDropdown('argumentTypeButton', 'string')">string</a></li>
+              <li><a class="dropdown-item" onclick="setDropdown('argumentTypeButton', 'integer')">integer</a></li>
+              <li><a class="dropdown-item" onclick="setDropdown('argumentTypeButton', 'float')">float</a></li>
+              <li><a class="dropdown-item" onclick="setDropdown('argumentTypeButton', 'flag')">flag</a></li>
+              <li><a class="dropdown-item" onclick="setDropdown('argumentTypeButton', 'bool')">bool</a></li>
+            </ul>
+          </div>
+          <label id='argumentTypeButtonLabel'></label>
+
+          <!-- Is the argument required to be set?-->
+          <div style='margin-top:15px;'>
+            <label for="usr">Argument must be set?</label>
+            <div class="radio-inline">
+              <label style="margin-left:40px;"><input type="radio" name="requiredRadio" id='requiredRadio' checked=''>Yes</label>
+            </div>
+            <div class="radio-inline">
+              <label><input type="radio" name="requiredRadio">No</label>
+            </div>
+          </div>
+  
+          <!-- Does the argument allow multiple values?-->
+          <label for="usr" style='margin-top:15px;'>Argument can have multiple values?</label>
+          <div class="radio-inline">
+            <label style="margin-left:40px;"><input type="radio" name="multipleRadio" id='multipleRadio'>Yes</label>
+          </div>
+          <div class="radio-inline">
+            <label><input type="radio" name="multipleRadio" checked=''>No</label>
+          </div>
+    
+          <!-- Permitted extenions -->
+          <div class = 'hide' style='margin-top:15px;' id='extensionsDiv'>
+            <label for="usr" id='addExtensions'></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add argument -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" onclick=addArgument()>Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Tool configuration file</h4>
+      </div>
+      <div class="modal-body" style="font-size:14px;" id="modalBody">
+        <div>{</div>
+        <div id="modalToolName"></div>
+        <div id="modalDescription"></div>
+        <div>&nbsp&nbsp"configuration type" : "tool",</div>
+        <div id="modalExecutable"></div>
+        <div id="modalPath"></div>
+        <div id="modalPrecommand"></div>
+        <div id="modalModifier"></div>
+        <div>&nbsp</div>
+        <div>&nbsp&nbsp"arguments" : {</div>
+        <div>&nbsp&nbsp&nbsp&nbsp"Inputs" : [</div>
+        <div id="inputArgs"></div>
+        <div>&nbsp&nbsp&nbsp&nbsp],</div>
+        <div>&nbsp</div>
+        <div>&nbsp&nbsp&nbsp&nbsp"Outputs" : [</div>
+        <div id="outputArgs"></div>
+        <div>&nbsp&nbsp&nbsp&nbsp],</div>
+        <div>&nbsp&nbsp}</div>
+        <div>}</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div
+    </div>
+
+  </div>
+</div>

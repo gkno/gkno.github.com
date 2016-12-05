@@ -36,6 +36,10 @@ b { color:rgb(110,110,110); text-decoration: none; }
  * Super small header above the content for site name and short description.
  */
 
+.dropdown-item {
+  text-decoration:none;
+}
+
 .masthead {  
   position: fixed;
   /*background: #005422;*/
