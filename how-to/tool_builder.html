@@ -5,11 +5,7 @@ permalink: tool_builder.html
 
 <script>
   $(document).ready(function() {
-    $("#argGroupDropdown li a").click(function(){
-      $("#argGroup").text($(this).text());
-      $("#argGroup").val($(this).text());
-      $("#argGroupError").addClass('hide');
-    });
+    addArgGroupListener();
 
     // Add a new option to the argument groups.
     $("#newArgGroupButton").on("click", function() {
@@ -17,9 +13,18 @@ permalink: tool_builder.html
       var newValue = $("#newArgGroup").val();
       if (newValue) {
         argDropdown.append('<li><a class="dropdown-item" role="button">' + newValue + '</a></li>');
+        addArgGroupListener();
       };
     });
   });
+
+
+  function addArgGroupListener() {
+    $("#argGroupDropdown li a").click(function(){
+      $("#argGroupButtonLabel").text($(this).text());
+      $("#argGroupError").addClass('hide');
+    });
+  }
 
   function outputToJson(){
     name = document.getElementById("toolName").value;
@@ -76,9 +81,8 @@ permalink: tool_builder.html
   }
 
   function setDropdown(dropdownId, dropdownValue) {
-    //document.getElementById(dropdownId).innerHTML = dropdownValue;
-    document.getElementById(dropdownId).value = dropdownValue;
-
+    document.getElementById(dropdownId).innerHTML = dropdownValue;
+    
     // Don't remove elements. Create the elements in the main area and then class 'hide' is either
     // there or not. Bootstrap class.
 
@@ -268,11 +272,10 @@ permalink: tool_builder.html
           </div>
 
           <!-- Split button -->
-          <div class="btn-group">
-            <button id="argGroup" type="button" class="btn btn-default" style="margin-top:10px;">Argument group</button>
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-top:10px;">
+          <div class="dropdown">
+            <button id="argGroupButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-top:10px;">
+              <span id="argGroupButtonLabel">Argument group</span>
               <span class="caret"></span>
-              <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="argGroupDropdown" id="argGroupDropdown">
               <li><a class="dropdown-item" role="button">Input</a></li>
@@ -299,15 +302,15 @@ permalink: tool_builder.html
           <label style="margin-top:5px;">Argument type</label>
           <div class="dropdown" style="display:inline-block">
             <button class="btn btn-default btn-secondary dropdown-toggle" type="button" id="argumentTypeButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-top:10px;">
-              Argument type
+              <span id="argTypeButtonLabel">Argument type</span>
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="argumentTypeButton" id="argumentTypeButton">
-              <li><a class="dropdown-item" onclick="setDropdown('argumentTypeButton', 'string')">string</a></li>
-              <li><a class="dropdown-item" onclick="setDropdown('argumentTypeButton', 'integer')">integer</a></li>
-              <li><a class="dropdown-item" onclick="setDropdown('argumentTypeButton', 'float')">float</a></li>
-              <li><a class="dropdown-item" onclick="setDropdown('argumentTypeButton', 'flag')">flag</a></li>
-              <li><a class="dropdown-item" onclick="setDropdown('argumentTypeButton', 'bool')">bool</a></li>
+              <li><a class="dropdown-item" onclick="setDropdown('argTypeButtonLabel', 'string')">string</a></li>
+              <li><a class="dropdown-item" onclick="setDropdown('argTypeButtonLabel', 'integer')">integer</a></li>
+              <li><a class="dropdown-item" onclick="setDropdown('argTypeButtonLabel', 'float')">float</a></li>
+              <li><a class="dropdown-item" onclick="setDropdown('argTypeButtonLabel', 'flag')">flag</a></li>
+              <li><a class="dropdown-item" onclick="setDropdown('argTypeButtonLabel', 'bool')">bool</a></li>
             </ul>
           </div>
           <label id='argumentTypeButtonLabel'></label>

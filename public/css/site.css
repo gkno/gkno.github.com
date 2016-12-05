@@ -38,6 +38,7 @@ b { color:rgb(110,110,110); text-decoration: none; }
 
 .dropdown-item {
   text-decoration:none;
+  cursor: pointer;
 }
 
 .masthead {  
